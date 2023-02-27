@@ -1,0 +1,28 @@
+name: Exemplo de envio de arquivo para Azure
+
+on:
+  workflow_dispatch:
+jobs:
+  extrair-transformar-enviar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Azure CLI script file
+        uses: azure/CLI@v1
+        with:
+          azcliversion: 2.30.0
+          inlineScript: |
+            chmod +x $GITHUB_WORKSPACE/upload_file.sh
+            $GITHUB_WORKSPACE/upload_file.sh \
+            ${{ secrets.ACCOUNT_NAME }} \
+            ${{ secrets.ACCOUNT_KEY }} \
+            ${{ secrets.CONTAINER_NAME }} \
+            exemplo-arquivo-upload.yml \
+            sia-pa/exemplo-arquivo-upload-no-container.yml
