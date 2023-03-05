@@ -38,7 +38,12 @@ Para executar o workflow manualmente, siga as [instruções da documentação of
 Para executar o script em seu ambiente de desenvolvimento, siga os passos abaixo:
 
 1. Configure o R em sua máquina;
-2. Na raiz do projeto, execute o comando `R.exe extrair-transformar-enviar-siasus.R 2022-12 DF`;
+2. Na raiz do projeto, execute o comando:
+
+   1. Para SIASUS: `Rscript.exe extrair-transformar-enviar-siasus.R 2022-12 DF`;
+
+   2. Para CNES: `Rscript.exe extrair-transformar-enviar-cnes.R 2022 all`
+
 3. Um arquivo .parquet será gerado na raiz do projeto. Note que ele não é adicionado ao controle de versão.
 
 ## Enviando arquivos para o storage da Azure
