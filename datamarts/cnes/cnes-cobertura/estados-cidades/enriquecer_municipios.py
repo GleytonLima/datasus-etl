@@ -1,0 +1,35 @@
+import pandas as pd
+
+
+def enriquecer_municipios():
+    # Carregue os arquivos CSV e parquet em dataframes pandas
+    df_municipios = pd.read_csv("municipios-originais.csv")
+    df_municipios['codigo_ibge'] = df_municipios['codigo_ibge'].astype(str).str[:-1]
+    df_municipios = df_municipios.rename(columns={'codigo_ibge': 'CODUFMUN'})
+
+    df_municipios_com_regionais_saude = pd.read_csv('municipios-com-nome-regiao-saude.csv',
+                                                    dtype={'Município': object,
+                                                           'Nome da Região de Saúde': object,
+                                                           'Cód IBGE': object})
+
+
+    # Renomeie as colunas para que correspondam
+    df_municipios_com_regionais_saude.rename(
+        columns={
+            'Município': 'munResNome',
+            'Nome da Região de Saúde': 'NOME_REGIAO_SAUDE',
+            'Cód Região de Saúde': 'COD_REGIAO_SAUDE',
+            'Cód IBGE': 'CODUFMUN'},
+        inplace=True)
+
+    df_municipios = pd.merge(df_municipios,
+                             df_municipios_com_regionais_saude[['CODUFMUN', 'COD_REGIAO_SAUDE', 'NOME_REGIAO_SAUDE']],
+                             on='CODUFMUN',
+                             how='left')
+
+    # Escreva o dataframe no arquivo csv
+    df_municipios.to_csv('municipios.csv', index=False)
+
+
+if __name__ == "__main__":
+    enriquecer_municipios()
