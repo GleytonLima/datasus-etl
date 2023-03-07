@@ -2,5 +2,4 @@ venv
 .idea
 *.csv
 *.parquet
-*.pbix
 *.xls
