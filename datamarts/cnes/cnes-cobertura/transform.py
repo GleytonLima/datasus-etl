@@ -179,12 +179,12 @@ def criar_datamart_com_indices_cobertura_caps_por_estados():
 def criar_datamart_com_indices_cobertura_caps_por_regiao_saude():
     # Carrega o arquivo CSV em um DataFrame do Pandas
     df_cnes_enriquecido = pd.read_csv('2018-2022-cnes-enriquecido.csv')
-
+    df_cnes_enriquecido = df_cnes_enriquecido.rename(columns={"CO_ESTADO_GESTOR": "codigo_uf"})
     df_cnes_enriquecido['TIPO'].fillna('Não informado', inplace=True)
 
     # Agrupa as linhas e conta o número de linhas em cada grupo
     cols = ['munResUf', "COD_REGIAO_SAUDE", "NOME_REGIAO_SAUDE", 'ANO', 'MES', 'POPULACAO_REGIAO_SAUDE',
-            'TIPO']
+            'TIPO', 'codigo_uf']
     df_grouped = df_cnes_enriquecido.groupby(cols).size().reset_index(name="TOTAL_POR_TIPO_CAPS")
     df_grouped = df_grouped[cols + ["TOTAL_POR_TIPO_CAPS"]]
     # Imprime o DataFrame resultante
@@ -199,6 +199,6 @@ if __name__ == "__main__":
     pd.set_option('display.max_columns', None)
     #combinar_cnes_filtrados()
     #enriquecer_parquet()
-    criar_datamart_com_indices_cobertura_caps_por_estados()
-    criar_datamart_com_indices_cobertura_caps_por_municipio()
+    #criar_datamart_com_indices_cobertura_caps_por_estados()
+    #criar_datamart_com_indices_cobertura_caps_por_municipio()
     criar_datamart_com_indices_cobertura_caps_por_regiao_saude()
