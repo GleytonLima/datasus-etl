@@ -169,7 +169,8 @@ class Subtipo:
             arquivo_tipo_subtipo = pd.read_csv(self.gerar_nome_original(ano),
                                                sep=";",
                                                dtype=self.gerar_dtype())
-            arquivo_tipo_subtipo = arquivo_tipo_subtipo[arquivo_tipo_subtipo[self.colunas.CO_TIPO_UNIDADE.nome] == self.codigo_caps]
+            arquivo_tipo_subtipo = arquivo_tipo_subtipo[
+                arquivo_tipo_subtipo[self.colunas.CO_TIPO_UNIDADE.nome] == self.codigo_caps]
 
             arquivo_tipo_subtipo.to_csv(self.gerar_nome_saida(ano),
                                         sep=";",
@@ -404,12 +405,12 @@ class CombinadoEnriquecido:
                                                      })
 
         municipios_com_soma_populacao_regiao_saude = municipios_enriquecidos.groupby(
-            ['ESTADO_SIGLA', 'REGIAO_SAUDE_CODIGO', 'REGIAO_SAUDE_NOME']).agg(
+            ['ESTADO_CODIGO', 'ESTADO_SIGLA', 'ESTADO_NOME', 'REGIAO_SAUDE_CODIGO', 'REGIAO_SAUDE_NOME']).agg(
             {'MUNICIPIO_POPULACAO': 'sum'}).reset_index()
         municipios_com_soma_populacao_regiao_saude.rename(
             columns={'MUNICIPIO_POPULACAO': 'REGIAO_SAUDE_POPULACAO'}, inplace=True)
         municipios_com_soma_populacao_regiao_saude = municipios_com_soma_populacao_regiao_saude[
-            ['ESTADO_SIGLA', 'REGIAO_SAUDE_CODIGO', 'REGIAO_SAUDE_NOME', "REGIAO_SAUDE_POPULACAO"]]
+            ['ESTADO_CODIGO', 'ESTADO_SIGLA', 'ESTADO_NOME', 'REGIAO_SAUDE_CODIGO', 'REGIAO_SAUDE_NOME', "REGIAO_SAUDE_POPULACAO"]]
         municipios_com_soma_populacao_regiao_saude = municipios_com_soma_populacao_regiao_saude.drop_duplicates()
         municipios_com_soma_populacao_regiao_saude.to_csv("estados-cidades/regioes-saude-enriquecido.csv",
                                                           sep=";",
@@ -417,9 +418,9 @@ class CombinadoEnriquecido:
 
         municipios_enriquecidos = pd.merge(municipios_enriquecidos,
                                            municipios_com_soma_populacao_regiao_saude[
-                                               ['ESTADO_SIGLA', 'REGIAO_SAUDE_CODIGO', 'REGIAO_SAUDE_NOME',
+                                               ['ESTADO_CODIGO', 'ESTADO_SIGLA', 'ESTADO_NOME', 'REGIAO_SAUDE_CODIGO', 'REGIAO_SAUDE_NOME',
                                                 "REGIAO_SAUDE_POPULACAO"]],
-                                           on=["ESTADO_SIGLA", "REGIAO_SAUDE_CODIGO", "REGIAO_SAUDE_NOME"],
+                                           on=['ESTADO_CODIGO', 'ESTADO_SIGLA', 'ESTADO_NOME', "REGIAO_SAUDE_CODIGO", "REGIAO_SAUDE_NOME"],
                                            how="left")
 
         df_merge = pd.merge(df_arquivos_caps_original,
@@ -428,7 +429,12 @@ class CombinadoEnriquecido:
                             how='left')
 
         df_merge = pd.merge(df_merge, municipios_enriquecidos[
-            ['MUNICIPIO_CODIGO', "MUNICIPIO_NOME", "MUNICIPIO_POPULACAO", 'REGIAO_SAUDE_CODIGO', 'REGIAO_SAUDE_NOME',
+            ['MUNICIPIO_CODIGO',
+             "MUNICIPIO_NOME",
+             "MUNICIPIO_POPULACAO",
+             'ESTADO_SIGLA',
+             'REGIAO_SAUDE_CODIGO',
+             'REGIAO_SAUDE_NOME',
              'REGIAO_SAUDE_POPULACAO']],
                             on='MUNICIPIO_CODIGO',
                             how='left')
@@ -449,21 +455,21 @@ if __name__ == "__main__":
         anos=ANOS_CONSIDERADOS,
         mes=MES_COMPETENCIA_CONSIDERADO
     )
-    relacao.filtrar_caps()
+    #relacao.filtrar_caps()
 
     estabelecimento = Estabelecimento(
         pasta=PASTA_CNES_DADOS_BRUTOS,
         anos=ANOS_CONSIDERADOS,
         mes=MES_COMPETENCIA_CONSIDERADO
     )
-    estabelecimento.filtrar_caps()
+    #estabelecimento.filtrar_caps()
 
     subtipo = Subtipo(
         pasta=PASTA_CNES_DADOS_BRUTOS,
         anos=ANOS_CONSIDERADOS,
         mes=MES_COMPETENCIA_CONSIDERADO
     )
-    subtipo.filtrar_caps()
+    #subtipo.filtrar_caps()
 
     combinado = Combinado(
         pasta=PASTA_CNES_DADOS_BRUTOS,
@@ -473,8 +479,8 @@ if __name__ == "__main__":
         tabela_subtipo=subtipo,
         tabela_estabelecimentos=estabelecimento
     )
-    combinado.combinar_estabelecimento_subtipo()
-    combinado.combinar_arquivos_ano()
+    #combinado.combinar_estabelecimento_subtipo()
+    #combinado.combinar_arquivos_ano()
 
     combinado = CombinadoEnriquecido(
         combinado=combinado

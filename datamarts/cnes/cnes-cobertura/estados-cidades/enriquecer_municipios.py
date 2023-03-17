@@ -3,13 +3,14 @@ import pandas as pd
 
 def enriquecer_estados():
     estados_com_codigo = pd.read_csv("estados-originais.csv")
-    estados_com_codigo = estados_com_codigo.rename(
-        columns={"codigo_uf": "ESTADO_CODIGO", "nome": "ESTADO_NOME", "regiao": "ESTADO_REGIAO"})
+    estados_com_codigo.rename(
+        columns={"codigo_uf": "ESTADO_CODIGO", "uf": "ESTADO_SIGLA", "nome": "ESTADO_NOME", "regiao": "ESTADO_REGIAO"},
+        inplace=True)
     estados_somente_nome_populacao = pd.read_csv('populacao/POP2022_Brasil_e_UFs.csv',
                                                  sep=";",
-                                                 dtype={'ESTADO_NOME': object, 'ESTADO_POPULACAO': object})
+                                                 dtype={'ESTADO_NOME': object, 'ESTADO_POPULACAO': int})
     combinacao = pd.merge(estados_somente_nome_populacao,
-                          estados_com_codigo[["ESTADO_CODIGO", "ESTADO_NOME"]],
+                          estados_com_codigo[["ESTADO_CODIGO", "ESTADO_SIGLA", "ESTADO_NOME"]],
                           on="ESTADO_NOME",
                           how="left")
     combinacao.dropna(subset=["ESTADO_CODIGO"], inplace=True)
@@ -23,10 +24,11 @@ def enriquecer_municipios():
     # Carregue os arquivos CSV e parquet em dataframes pandas
     df_municipios = pd.read_csv("municipios-originais.csv")
     df_municipios['codigo_ibge'] = df_municipios['codigo_ibge'].astype(str).str[:-1]
-    df_municipios.rename(columns={'codigo_ibge': 'MUNICIPIO_CODIGO', 'nome': 'MUNICIPIO_NOME'}, inplace=True)
+    df_municipios.rename(
+        columns={'codigo_ibge': 'MUNICIPIO_CODIGO', 'nome': 'MUNICIPIO_NOME', 'codigo_uf': "ESTADO_CODIGO"},
+        inplace=True)
 
-    df_estados = pd.read_csv("estados.csv")
-    df_estados.rename(columns={"uf": "ESTADO_SIGLA", "nome": "ESTADO_NOME"}, inplace=True)
+    df_estados = pd.read_csv("estados.csv", sep=";")
 
     df_populacao_municipio = pd.read_csv("populacao/POP2022_Municipios.csv",
                                          sep=";",
@@ -48,13 +50,16 @@ def enriquecer_municipios():
         inplace=True)
     df_municipios_com_regionais_saude = pd.merge(df_municipios_com_regionais_saude,
                                                  df_estados[
-                                                     ["ESTADO_SIGLA", 'ESTADO_NOME']],
+                                                     ["ESTADO_CODIGO", "ESTADO_SIGLA", 'ESTADO_NOME']],
                                                  on='ESTADO_SIGLA',
                                                  how='left')
 
     df_municipios = pd.merge(df_municipios,
                              df_municipios_com_regionais_saude[
-                                 ['MUNICIPIO_CODIGO', "ESTADO_SIGLA", 'REGIAO_SAUDE_CODIGO', 'REGIAO_SAUDE_NOME',
+                                 ['MUNICIPIO_CODIGO',
+                                  "ESTADO_SIGLA",
+                                  'REGIAO_SAUDE_CODIGO',
+                                  'REGIAO_SAUDE_NOME',
                                   'ESTADO_NOME']],
                              on='MUNICIPIO_CODIGO',
                              how='left')
@@ -70,4 +75,4 @@ def enriquecer_municipios():
 
 if __name__ == "__main__":
     enriquecer_estados()
-    # enriquecer_municipios()
+    enriquecer_municipios()
