@@ -43,11 +43,17 @@ def obter_detalhes_populacao_por_estado():
                                                        "Distrito Federal"
                                                        ])]
 
-    df.rename(columns={'BRASIL E UNIDADES DA FEDERAÇÃO': 'ESTADO_NOME'}, inplace=True)
-    df.rename(columns={'POPULAÇÃO': 'POPULACAO_UF', "munResUf": "ESTADO_NOME"}, inplace=True)
+    df.rename(
+        columns={
+            'BRASIL E UNIDADES DA FEDERAÇÃO': 'ESTADO_NOME',
+            'POPULAÇÃO': 'ESTADO_POPULACAO'
+        },
+        inplace=True)
 
     # Salva o DataFrame resultante em um arquivo CSV
-    df.to_csv('POP2022_Brasil_e_UFs.csv', index=False)
+    df.to_csv('POP2022_Brasil_e_UFs.csv',
+              sep=";",
+              index=False)
 
 
 def obter_detalhes_populacao_por_municipio():
@@ -56,14 +62,15 @@ def obter_detalhes_populacao_por_municipio():
     df = df.dropna(subset=[df.columns[0]])
     df = df[df['UF'].str.len() == 2]
 
-    df['CODUFMUN'] = df['COD. UF'].astype(str) + df['COD. MUNIC'].astype(str).str[:-1]
-    df['CODUFMUN'] = df['CODUFMUN'].astype(str)
+    df['MUNICIPIO_CODIGO'] = df['COD. UF'].astype(str) + df['COD. MUNIC'].astype(str).str[:-1]
+    df['MUNICIPIO_CODIGO'] = df['MUNICIPIO_CODIGO'].astype(str)
     df = df.drop(columns=['COD. UF', 'COD. MUNIC'])
 
-    df.rename(columns={'POPULAÇÃO': 'POPULACAO'}, inplace=True)
-    df['POPULACAO'] = df['POPULACAO'].astype(str).replace(r'\s*\([^)]*\)\s*', '', regex=True)
-    df['POPULACAO'] = df['POPULACAO'].str.replace('.', '', regex=False)
-    df.rename(columns={"NOME DO MUNICÍPIO": "MUNICIPIO_NOME"})
+    df.rename(
+        columns={'POPULAÇÃO': 'MUNICIPIO_POPULACAO', "NOME DO MUNICÍPIO": "MUNICIPIO_NOME", "UF": "ESTADO_SIGLA"},
+        inplace=True)
+    df['MUNICIPIO_POPULACAO'] = df['MUNICIPIO_POPULACAO'].astype(str).replace(r'\s*\([^)]*\)\s*', '', regex=True)
+    df['MUNICIPIO_POPULACAO'] = df['MUNICIPIO_POPULACAO'].str.replace('.', '', regex=False)
     df.to_csv('POP2022_Municipios.csv',
               sep=";",
               index=False)
@@ -71,3 +78,4 @@ def obter_detalhes_populacao_por_municipio():
 
 if __name__ == "__main__":
     obter_detalhes_populacao_por_estado()
+    obter_detalhes_populacao_por_municipio()

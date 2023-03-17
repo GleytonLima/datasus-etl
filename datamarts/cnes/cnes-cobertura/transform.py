@@ -1,30 +1,5 @@
 import pandas as pd
 
-
-def verifica_faltantes_entre_bases(df_parquet):
-    df_parquet = df_parquet.drop_duplicates(subset=['FANTASIA'])
-
-    # Carregue os arquivos CSV e parquet em dataframes pandas
-    df_csv = pd.read_csv('caps-por-tipo/caps-por-tipo.csv')
-
-    # Renomeie as colunas para que correspondam
-    df_csv.rename(columns={'Estabelecimento': 'FANTASIA', 'Tipo': 'TIPO'}, inplace=True)
-
-    # Use o método merge para combinar os dataframes com base na coluna 'FANTASIA'
-    df_merge = pd.merge(df_csv, df_parquet, on='FANTASIA', how='outer', indicator=True)
-
-    # Separe os registros faltantes em cada arquivo
-    df_only_csv = df_merge.loc[df_merge['_merge'] == 'left_only']
-    df_only_parquet = df_merge.loc[df_merge['_merge'] == 'right_only']
-
-    # Imprima os resultados
-    print('Registros apenas no CSV:\n', df_only_csv["FANTASIA"])
-    print('Registros apenas no parquet:\n', df_only_parquet["FANTASIA"])
-
-
-
-
-# define o multiplicador para cada TIPO_CAPS
 multiplicador = {
     "CAPS I": 0.5,
     "CAPS II": 1,
@@ -40,16 +15,16 @@ multiplicador = {
 
 # define a função personalizada para calcular o valor
 def calcular_valor_municipio(row):
-    return row['TOTAL_POR_TIPO_CAPS'] * 100000.00 * multiplicador[row['TIPO']] / row['POPULACAO']
+    return row['TOTAL_POR_TIPO_CAPS'] * 100000.00 * multiplicador[row['TIPO']] / row['MUNICIPIO_POPULACAO']
 
 
 # define a função personalizada para calcular o valor
 def calcular_valor_estado(row):
-    return row['TOTAL_POR_TIPO_CAPS'] * 100000.00 * multiplicador[row['TIPO']] / row['POPULACAO_UF']
+    return row['TOTAL_POR_TIPO_CAPS'] * 100000.00 * multiplicador[row['TIPO']] / row['ESTADO_POPULACAO']
 
 
 def calcular_valor_regiao_saude(row):
-    return row['TOTAL_POR_TIPO_CAPS'] * 100000.00 * multiplicador[row['TIPO']] / row['POPULACAO_REGIAO_SAUDE']
+    return row['TOTAL_POR_TIPO_CAPS'] * 100000.00 * multiplicador[row['TIPO']] / row['REGIAO_SAUDE_POPULACAO']
 
 
 def criar_datamart_com_indices_cobertura_caps_por_municipio():
@@ -60,7 +35,7 @@ def criar_datamart_com_indices_cobertura_caps_por_municipio():
 
     # Agrupa as linhas e conta o número de linhas em cada grupo
     df_grouped = df_cnes_enriquecido.groupby(
-        ['CODUFMUN', 'MUNICIPIO_NOME', 'ESTADO_NOME', 'ANO', 'MES', 'POPULACAO',
+        ['MUNICIPIO_CODIGO', 'MUNICIPIO_NOME', 'ESTADO_NOME', 'ANO', 'MES', 'MUNICIPIO_POPULACAO',
          'TIPO']).size().reset_index(name="TOTAL_POR_TIPO_CAPS")
 
     # Imprime o DataFrame resultante
@@ -79,7 +54,7 @@ def criar_datamart_com_indices_cobertura_caps_por_estados():
 
     # Agrupa as linhas e conta o número de linhas em cada grupo
     df_grouped = df_cnes_enriquecido.groupby(
-        ['ESTADO_NOME', 'ANO', 'MES', 'POPULACAO_UF',
+        ['ESTADO_NOME', 'ANO', 'MES', 'ESTADO_POPULACAO',
          'TIPO']).size().reset_index(name="TOTAL_POR_TIPO_CAPS")
 
     # Imprime o DataFrame resultante
@@ -97,7 +72,7 @@ def criar_datamart_com_indices_cobertura_caps_por_regiao_saude():
     df_cnes_enriquecido['TIPO'].fillna('Não informado', inplace=True)
 
     # Agrupa as linhas e conta o número de linhas em cada grupo
-    cols = ['ESTADO_NOME', "COD_REGIAO_SAUDE", "NOME_REGIAO_SAUDE", 'ANO', 'MES', 'POPULACAO_REGIAO_SAUDE',
+    cols = ['ESTADO_NOME', "REGIAO_SAUDE_CODIGO", "REGIAO_SAUDE_NOME", 'ANO', 'MES', 'REGIAO_SAUDE_POPULACAO',
             'TIPO', 'codigo_uf']
     df_grouped = df_cnes_enriquecido.groupby(cols).size().reset_index(name="TOTAL_POR_TIPO_CAPS")
     df_grouped = df_grouped[cols + ["TOTAL_POR_TIPO_CAPS"]]
@@ -111,7 +86,6 @@ def criar_datamart_com_indices_cobertura_caps_por_regiao_saude():
 
 if __name__ == "__main__":
     pd.set_option('display.max_columns', None)
-    enriquecer_cnes()
     # criar_datamart_com_indices_cobertura_caps_por_estados()
     # criar_datamart_com_indices_cobertura_caps_por_municipio()
     criar_datamart_com_indices_cobertura_caps_por_regiao_saude()

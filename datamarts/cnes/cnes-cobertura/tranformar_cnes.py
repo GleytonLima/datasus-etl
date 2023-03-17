@@ -129,11 +129,11 @@ class Estabelecimento:
 class SubtipoColuna:
     CO_SUB_TIPO = Coluna(
         nome="CO_SUB_TIPO",
-        tipo="object"
+        tipo="int"
     )
     CO_TIPO_UNIDADE = Coluna(
         nome="CO_TIPO_UNIDADE",
-        tipo="object"
+        tipo="int32"
     )
     DS_SUB_TIPO = Coluna(
         nome="DS_SUB_TIPO",
@@ -169,8 +169,7 @@ class Subtipo:
             arquivo_tipo_subtipo = pd.read_csv(self.gerar_nome_original(ano),
                                                sep=";",
                                                dtype=self.gerar_dtype())
-            arquivo_tipo_subtipo = arquivo_tipo_subtipo[
-                (arquivo_tipo_subtipo[self.colunas.CO_TIPO_UNIDADE.nome] == f'{self.codigo_caps}')]
+            arquivo_tipo_subtipo = arquivo_tipo_subtipo[arquivo_tipo_subtipo[self.colunas.CO_TIPO_UNIDADE.nome] == self.codigo_caps]
 
             arquivo_tipo_subtipo.to_csv(self.gerar_nome_saida(ano),
                                         sep=";",
@@ -180,7 +179,7 @@ class Subtipo:
 class EstabelecimentoSubtipoColuna:
     CO_TIPO_UNIDADE = Coluna(
         nome="CO_TIPO_UNIDADE",
-        tipo="object"
+        tipo="int32"
     )
     CO_UNIDADE = Coluna(
         nome="CO_UNIDADE",
@@ -192,7 +191,7 @@ class EstabelecimentoSubtipoColuna:
     )
     CO_SUB_TIPO_UNIDADE = Coluna(
         nome="CO_SUB_TIPO_UNIDADE",
-        tipo="object"
+        tipo="int32"
     )
 
 
@@ -226,20 +225,16 @@ class EstabelecimentoSubtipo:
 
     def filtrar_caps(self):
         for ano in self.anos:
-            reader = pd.read_csv(self.gerar_nome_original(ano),
-                                 dtype=self.gerar_dtype(),
-                                 sep=";",
-                                 chunksize=self.chunksize)
+            df = pd.read_csv(self.gerar_nome_original(ano),
+                             dtype=self.gerar_dtype(),
+                             sep=";")
 
-            writer = pd.DataFrame(columns=reader.get_chunk().columns)
+            filtered_df = df[df[self.colunas.CO_TIPO_UNIDADE.nome] == self.codigo_caps]
 
-            for chunk in reader:
-                filtered_chunk = chunk[chunk[self.colunas.CO_TIPO_UNIDADE.nome] == f'{self.codigo_caps}']
-                writer = pd.concat([writer, filtered_chunk])
+            filtered_df.to_csv(self.gerar_nome_saida(ano),
+                               sep=';',
+                               index=False)
 
-            writer.to_csv(self.gerar_nome_saida(ano),
-                          sep=';',
-                          index=False)
 
 class PopulacaoMunicipioColunas:
     UF = Coluna(
@@ -258,6 +253,8 @@ class PopulacaoMunicipioColunas:
         nome="CO_CEP",
         tipo="str"
     )
+
+
 class CombinadoColunas:
     CO_UNIDADE = Coluna(
         nome="CO_UNIDADE",
@@ -314,6 +311,9 @@ class Combinado:
     anos: List[int]
     mes: str
     pasta: str
+    tabela_estabelecimentos: Estabelecimento
+    tabela_relacao: EstabelecimentoSubtipo
+    tabela_subtipo: Subtipo
     colunas = CombinadoColunas()
 
     def gerar_dtype(self):
@@ -324,57 +324,41 @@ class Combinado:
 
     def combinar_estabelecimento_subtipo(self):
         for ano in self.anos:
-            tabela_estabelecimentos = Estabelecimento(
-                pasta=self.pasta,
-                anos=self.anos,
-                mes=self.mes
-            )
-            tabela_relacao = EstabelecimentoSubtipo(
-                pasta=self.pasta,
-                anos=self.anos,
-                mes=self.mes
-            )
-            tabela_subtipo = Subtipo(
-                pasta=self.pasta,
-                anos=self.anos,
-                mes=self.mes
-            )
-
-            arquivo_caps = pd.read_csv(tabela_estabelecimentos.gerar_nome_saida(ano),
+            arquivo_caps = pd.read_csv(self.tabela_estabelecimentos.gerar_nome_saida(ano),
                                        sep=";",
-                                       dtype=tabela_estabelecimentos.gerar_dtype())
-            arquivo_tipo_subtipo = pd.read_csv(tabela_subtipo.gerar_nome_saida(ano),
+                                       dtype=self.tabela_estabelecimentos.gerar_dtype())
+            arquivo_tipo_subtipo = pd.read_csv(self.tabela_subtipo.gerar_nome_saida(ano),
                                                sep=";",
-                                               dtype=tabela_subtipo.gerar_dtype())
-            arquivo_relacao = pd.read_csv(tabela_relacao.gerar_nome_saida(ano),
+                                               dtype=self.tabela_subtipo.gerar_dtype())
+            arquivo_relacao = pd.read_csv(self.tabela_relacao.gerar_nome_saida(ano),
                                           sep=";",
-                                          dtype=tabela_relacao.gerar_dtype())
+                                          dtype=self.tabela_relacao.gerar_dtype())
 
-            arquivo_tipo_subtipo = arquivo_tipo_subtipo.rename(columns={
-                tabela_subtipo.colunas.CO_SUB_TIPO.nome: tabela_relacao.colunas.CO_SUB_TIPO_UNIDADE.nome
-            })
+            arquivo_tipo_subtipo.rename(columns={
+                self.tabela_subtipo.colunas.CO_SUB_TIPO.nome: self.tabela_relacao.colunas.CO_SUB_TIPO_UNIDADE.nome
+            }, inplace=True)
             arquivo_relacao = pd.merge(arquivo_relacao,
                                        arquivo_tipo_subtipo[[
-                                           tabela_subtipo.colunas.CO_TIPO_UNIDADE.nome,
-                                           tabela_relacao.colunas.CO_SUB_TIPO_UNIDADE.nome,
-                                           tabela_subtipo.colunas.DS_SUB_TIPO.nome
+                                           self.tabela_subtipo.colunas.CO_TIPO_UNIDADE.nome,
+                                           self.tabela_relacao.colunas.CO_SUB_TIPO_UNIDADE.nome,
+                                           self.tabela_subtipo.colunas.DS_SUB_TIPO.nome
                                        ]],
                                        on=[
-                                           tabela_subtipo.colunas.CO_TIPO_UNIDADE.nome,
-                                           tabela_relacao.colunas.CO_SUB_TIPO_UNIDADE.nome
+                                           self.tabela_subtipo.colunas.CO_TIPO_UNIDADE.nome,
+                                           self.tabela_relacao.colunas.CO_SUB_TIPO_UNIDADE.nome
                                        ],
                                        how="left")
 
             df_merge = pd.merge(arquivo_caps,
                                 arquivo_relacao[[
-                                    tabela_relacao.colunas.CO_UNIDADE.nome,
-                                    tabela_relacao.colunas.CO_SUB_TIPO_UNIDADE.nome,
-                                    tabela_subtipo.colunas.DS_SUB_TIPO.nome
+                                    self.tabela_relacao.colunas.CO_UNIDADE.nome,
+                                    self.tabela_relacao.colunas.CO_SUB_TIPO_UNIDADE.nome,
+                                    self.tabela_subtipo.colunas.DS_SUB_TIPO.nome
                                 ]],
-                                on=tabela_relacao.colunas.CO_UNIDADE.nome,
+                                on=self.tabela_relacao.colunas.CO_UNIDADE.nome,
                                 how='left')
-            df_merge[tabela_relacao.colunas.CO_SUB_TIPO_UNIDADE.nome] = df_merge[
-                tabela_relacao.colunas.CO_SUB_TIPO_UNIDADE.nome].fillna(
+            df_merge[self.tabela_relacao.colunas.CO_SUB_TIPO_UNIDADE.nome] = df_merge[
+                self.tabela_relacao.colunas.CO_SUB_TIPO_UNIDADE.nome].fillna(
                 0).astype(int)
             df_merge = df_merge.drop_duplicates()
             df_merge.to_csv(self.gerar_nome_saida(ano),
@@ -403,78 +387,60 @@ class CombinadoEnriquecido:
     combinado: Combinado
 
     def enriquecer_cnes(self):
-        df_parquet = pd.read_csv(self.combinado.gerar_nome_arquivos_caps_combinados(),
-                                 dtype=self.combinado.gerar_dtype())
-        df_parquet = df_parquet.rename(columns={"CO_MUNICIPIO_GESTOR": "CODUFMUN", "DS_SUB_TIPO": "TIPO"})
+        df_arquivos_caps_original = pd.read_csv(self.combinado.gerar_nome_arquivos_caps_combinados(),
+                                                sep=";",
+                                                dtype=self.combinado.gerar_dtype())
+        df_arquivos_caps_original.rename(columns={"CO_MUNICIPIO_GESTOR": "MUNICIPIO_CODIGO",
+                                                  "DS_SUB_TIPO": "TIPO",
+                                                  "CO_ESTADO_GESTOR": "ESTADO_CODIGO"},
+                                         inplace=True)
 
-        df_municipios_com_regionais_saude = pd.read_csv('estados-cidades/municipios-com-nome-regiao-saude.csv',
-                                                        dtype={'Município': object, 'Nome da Região de Saúde': object,
-                                                               'Cód IBGE': object})
-        df_populacao_municipio_csv = pd.read_csv('populacao/POP2022_Municipios.csv',
-                                                 dtype={'CODUFMUN': object, 'POPULACAO': object})
-        df_estados = pd.read_csv('estados-cidades/estados.csv',
-                                 dtype={'ESTADO_NOME': object, 'POPULACAO_UF': object})
-        df_estados = df_estados.rename(columns={"codigo_uf": "CO_ESTADO_GESTOR", "nome": "ESTADO_NOME"})
-        df_populacao_estado_csv = pd.read_csv('populacao/POP2022_Brasil_e_UFs.csv',
-                                              dtype={'ESTADO_NOME': object, 'POPULACAO_UF': object})
-        df_populacao_estado_csv = pd.merge(df_populacao_estado_csv, df_estados, on="ESTADO_NOME", how="left")
+        estados_com_codigo = pd.read_csv('estados-cidades/estados.csv', sep=";")
 
-        # Renomeie as colunas para que correspondam
-        df_municipios_com_regionais_saude.rename(
-            columns={
-                'Município': 'MUNICIPIO_NOME',
-                'Nome da Região de Saúde': 'NOME_REGIAO_SAUDE',
-                'Cód Região de Saúde': 'COD_REGIAO_SAUDE',
-                'Cód IBGE': 'CODUFMUN'},
-            inplace=True)
-        df_municipios_com_regionais_saude = pd.merge(df_municipios_com_regionais_saude,
-                                                     df_populacao_municipio_csv[['CODUFMUN', 'POPULACAO']],
-                                                     on='CODUFMUN',
-                                                     how='left')
+        municipios_enriquecidos = pd.read_csv('estados-cidades/municipios.csv',
+                                              sep=";",
+                                              dtype={'MUNICIPIO_CODIGO': object,
+                                                     'MUNICIPIO_POPULACAO': int
+                                                     })
 
-        # Converter a coluna "POPULACAO" em um tipo numérico
-        df_municipios_com_regionais_saude["POPULACAO"] = pd.to_numeric(df_municipios_com_regionais_saude["POPULACAO"])
+        municipios_com_soma_populacao_regiao_saude = municipios_enriquecidos.groupby(
+            ['ESTADO_SIGLA', 'REGIAO_SAUDE_CODIGO', 'REGIAO_SAUDE_NOME']).agg(
+            {'MUNICIPIO_POPULACAO': 'sum'}).reset_index()
+        municipios_com_soma_populacao_regiao_saude.rename(
+            columns={'MUNICIPIO_POPULACAO': 'REGIAO_SAUDE_POPULACAO'}, inplace=True)
+        municipios_com_soma_populacao_regiao_saude = municipios_com_soma_populacao_regiao_saude[
+            ['ESTADO_SIGLA', 'REGIAO_SAUDE_CODIGO', 'REGIAO_SAUDE_NOME', "REGIAO_SAUDE_POPULACAO"]]
+        municipios_com_soma_populacao_regiao_saude = municipios_com_soma_populacao_regiao_saude.drop_duplicates()
+        municipios_com_soma_populacao_regiao_saude.to_csv("estados-cidades/regioes-saude-enriquecido.csv",
+                                                          sep=";",
+                                                          index=False)
 
-        # Agrupar por NOME_REGIAO_SAUDE, ANO, MES e TIPO e calcular a soma de POPULACAO
-        df_grouped = df_municipios_com_regionais_saude.groupby(['UF', 'COD_REGIAO_SAUDE', 'NOME_REGIAO_SAUDE']).agg(
-            {'POPULACAO': 'sum'}).reset_index()
+        municipios_enriquecidos = pd.merge(municipios_enriquecidos,
+                                           municipios_com_soma_populacao_regiao_saude[
+                                               ['ESTADO_SIGLA', 'REGIAO_SAUDE_CODIGO', 'REGIAO_SAUDE_NOME',
+                                                "REGIAO_SAUDE_POPULACAO"]],
+                                           on=["ESTADO_SIGLA", "REGIAO_SAUDE_CODIGO", "REGIAO_SAUDE_NOME"],
+                                           how="left")
 
-        # Renomear a coluna POPULACAO para POPULACAO_REGIAO_SAUDE
-        df_grouped = df_grouped.rename(columns={'POPULACAO': 'POPULACAO_REGIAO_SAUDE'})
-
-        df_regioes_saude_enriquecido = df_grouped[
-            ['UF', 'COD_REGIAO_SAUDE', 'NOME_REGIAO_SAUDE', "POPULACAO_REGIAO_SAUDE"]]
-        df_regioes_saude_enriquecido = df_regioes_saude_enriquecido.drop_duplicates()
-        df_regioes_saude_enriquecido.to_csv("estados-cidades/regioes-saude-enriquecido.csv", index=False)
-
-        # Selecionar as colunas desejadas
-        df_municipios_com_regionais_saude = pd.merge(df_municipios_com_regionais_saude,
-                                                     df_regioes_saude_enriquecido[
-                                                         ['UF', 'COD_REGIAO_SAUDE', 'NOME_REGIAO_SAUDE',
-                                                          "POPULACAO_REGIAO_SAUDE"]],
-                                                     on=["UF", "COD_REGIAO_SAUDE", "NOME_REGIAO_SAUDE"],
-                                                     how="left")
-
-        # Use o método merge para combinar os dataframes com base na coluna 'CODUFMUN'
-        df_merge = pd.merge(df_parquet, df_populacao_municipio_csv[['CODUFMUN', 'POPULACAO']], on='CODUFMUN',
+        df_merge = pd.merge(df_arquivos_caps_original,
+                            estados_com_codigo[['ESTADO_CODIGO', 'ESTADO_NOME', 'ESTADO_POPULACAO']],
+                            on='ESTADO_CODIGO',
                             how='left')
 
-        # Use o método merge para combinar os dataframes com base na coluna 'ESTADO_NOME'
-        df_merge = pd.merge(df_merge,
-                            df_populacao_estado_csv[['CO_ESTADO_GESTOR', 'ESTADO_NOME', 'POPULACAO_UF']],
-                            on='CO_ESTADO_GESTOR',
+        df_merge = pd.merge(df_merge, municipios_enriquecidos[
+            ['MUNICIPIO_CODIGO', "MUNICIPIO_NOME", "MUNICIPIO_POPULACAO", 'REGIAO_SAUDE_CODIGO', 'REGIAO_SAUDE_NOME',
+             'REGIAO_SAUDE_POPULACAO']],
+                            on='MUNICIPIO_CODIGO',
                             how='left')
-
-        # Use o método merge para combinar os dataframes com base na coluna 'ESTADO_NOME'
-        df_merge = pd.merge(df_merge, df_municipios_com_regionais_saude[
-            ['CODUFMUN', "MUNICIPIO_NOME", 'COD_REGIAO_SAUDE', 'NOME_REGIAO_SAUDE', 'POPULACAO_REGIAO_SAUDE']],
-                            on='CODUFMUN', how='left')
 
         # Remover linhas duplicadas em todas as colunas
         df_merge = df_merge.drop_duplicates()
 
         # Escreva o dataframe no arquivo parquet
-        df_merge.to_csv('2018-2022-cnes-enriquecido.csv', index=False)
+        df_merge.to_csv('2018-2022-cnes-enriquecido.csv',
+                        sep=";",
+                        index=False,
+                        float_format='%.0f')
 
 
 if __name__ == "__main__":
@@ -502,11 +468,15 @@ if __name__ == "__main__":
     combinado = Combinado(
         pasta=PASTA_CNES_DADOS_BRUTOS,
         anos=ANOS_CONSIDERADOS,
-        mes=MES_COMPETENCIA_CONSIDERADO
+        mes=MES_COMPETENCIA_CONSIDERADO,
+        tabela_relacao=relacao,
+        tabela_subtipo=subtipo,
+        tabela_estabelecimentos=estabelecimento
     )
     combinado.combinar_estabelecimento_subtipo()
     combinado.combinar_arquivos_ano()
 
-    CombinadoEnriquecido(
+    combinado = CombinadoEnriquecido(
         combinado=combinado
     )
+    combinado.enriquecer_cnes()
