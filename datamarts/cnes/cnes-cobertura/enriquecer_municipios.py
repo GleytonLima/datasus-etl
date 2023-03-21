@@ -2,11 +2,11 @@ import pandas as pd
 
 
 def enriquecer_estados():
-    estados_com_codigo = pd.read_csv("estados-originais.csv")
+    estados_com_codigo = pd.read_csv("estados-cidades/estados-originais.csv")
     estados_com_codigo.rename(
         columns={"codigo_uf": "ESTADO_CODIGO", "uf": "ESTADO_SIGLA", "nome": "ESTADO_NOME", "regiao": "ESTADO_REGIAO"},
         inplace=True)
-    estados_somente_nome_populacao = pd.read_csv('populacao/POP2022_Brasil_e_UFs.csv',
+    estados_somente_nome_populacao = pd.read_csv('estados-cidades/populacao/POP2022_Brasil_e_UFs.csv',
                                                  sep=";",
                                                  dtype={'ESTADO_NOME': object, 'ESTADO_POPULACAO': int})
     combinacao = pd.merge(estados_somente_nome_populacao,
@@ -14,7 +14,7 @@ def enriquecer_estados():
                           on="ESTADO_NOME",
                           how="left")
     combinacao.dropna(subset=["ESTADO_CODIGO"], inplace=True)
-    combinacao.to_csv("estados.csv",
+    combinacao.to_csv("gold/estados.csv",
                       sep=";",
                       index=False,
                       float_format='%.0f')
@@ -22,19 +22,19 @@ def enriquecer_estados():
 
 def enriquecer_municipios():
     # Carregue os arquivos CSV e parquet em dataframes pandas
-    df_municipios = pd.read_csv("municipios-originais.csv")
+    df_municipios = pd.read_csv("estados-cidades/municipios-originais.csv")
     df_municipios['codigo_ibge'] = df_municipios['codigo_ibge'].astype(str).str[:-1]
     df_municipios.rename(
         columns={'codigo_ibge': 'MUNICIPIO_CODIGO', 'nome': 'MUNICIPIO_NOME', 'codigo_uf': "ESTADO_CODIGO"},
         inplace=True)
 
-    df_estados = pd.read_csv("estados.csv", sep=";")
+    df_estados = pd.read_csv("estados-cidades/estados.csv", sep=";")
 
-    df_populacao_municipio = pd.read_csv("populacao/POP2022_Municipios.csv",
+    df_populacao_municipio = pd.read_csv("estados-cidades/populacao/POP2022_Municipios.csv",
                                          sep=";",
                                          dtype={"MUNICIPIO_CODIGO": object})
 
-    df_municipios_com_regionais_saude = pd.read_csv('municipios-com-nome-regiao-saude.csv',
+    df_municipios_com_regionais_saude = pd.read_csv('estados-cidades/municipios-com-nome-regiao-saude.csv',
                                                     dtype={'Município': object,
                                                            'Nome da Região de Saúde': object,
                                                            'Cód IBGE': object})
@@ -68,7 +68,7 @@ def enriquecer_municipios():
                              on="MUNICIPIO_CODIGO",
                              how="left")
 
-    df_municipios.to_csv('municipios.csv',
+    df_municipios.to_csv('gold/municipios.csv',
                          sep=";",
                          index=False)
 

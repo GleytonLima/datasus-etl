@@ -1,0 +1,38 @@
+CNES - Recursos Físicos - Hospitalar - Leitos de internação - Brasil
+Quantidade SUS por Unidade da Federação
+Tipo de Estabelecimento: HOSPITAL GERAL
+Leitos clínicos: Saude Mental
+Período:Dez/2016
+"Unidade da Federação";"Quantidade_SUS"
+"11 Rondônia";12
+"12 Acre";18
+"15 Pará";6
+"17 Tocantins";21
+"21 Maranhão";6
+"22 Piauí";16
+"23 Ceará";18
+"25 Paraíba";20
+"26 Pernambuco";37
+"27 Alagoas";15
+"28 Sergipe";30
+"29 Bahia";2
+"31 Minas Gerais";233
+"33 Rio de Janeiro";131
+"35 São Paulo";52
+"41 Paraná";90
+"42 Santa Catarina";49
+"43 Rio Grande do Sul";349
+"52 Goiás";13
+"53 Distrito Federal";40
+"Total";1158
+ A partir da competência de Janeiro 2010 os dados referentes
+ a leitos Complementares foram retirados da consulta referente
+ a leitos de Internação, passando a constituir uma consulta específica conforme descrito na Nota Técnica.
+ Fonte: Ministério da Saúde - Cadastro Nacional dos Estabelecimentos de Saúde do Brasil - CNES
+ Nota:
+ A partir do processamento de junho de 2012, houve mudança na classificação da natureza e esfera dos estabelecimentos. Com isso, temos que:
+ 
+ Até maio de 2012 estas informações estão disponíveis como "Natureza" e "Esfera Administrativa".
+ De junho de 2012 a outubro de 2015, estão disponíveis tanto como "Natureza" e "Esfera Administrativa", como "Natureza Jurídica" e "Esfera Jurídica".
+ A partir de novembro de 2015, estão disponíveis como "Natureza Jurídica" e "Esfera Jurídica".
+ 

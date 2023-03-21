@@ -387,6 +387,27 @@ class Combinado:
 class CombinadoEnriquecido:
     combinado: Combinado
 
+    def gerar_nome_arquivo_saida(self):
+        return f'gold/{ANOS_CONSIDERADOS[0]}-{ANOS_CONSIDERADOS[-1]}-cnes-enriquecido.csv'
+
+    def gerar_nome_arquivo_saida_regioes_saude_enriquecida(self):
+        return "gold/regioes-saude-enriquecido.csv"
+
+    def gerar_regioes_saude_enriquecido(self, municipios_enriquecidos):
+        municipios_com_soma_populacao_regiao_saude = municipios_enriquecidos.groupby(
+            ['ESTADO_CODIGO', 'ESTADO_SIGLA', 'ESTADO_NOME', 'REGIAO_SAUDE_CODIGO', 'REGIAO_SAUDE_NOME']).agg(
+            {'MUNICIPIO_POPULACAO': 'sum'}).reset_index()
+        municipios_com_soma_populacao_regiao_saude.rename(
+            columns={'MUNICIPIO_POPULACAO': 'REGIAO_SAUDE_POPULACAO'}, inplace=True)
+        municipios_com_soma_populacao_regiao_saude = municipios_com_soma_populacao_regiao_saude[
+            ['ESTADO_CODIGO', 'ESTADO_SIGLA', 'ESTADO_NOME', 'REGIAO_SAUDE_CODIGO', 'REGIAO_SAUDE_NOME',
+             "REGIAO_SAUDE_POPULACAO"]]
+        municipios_com_soma_populacao_regiao_saude = municipios_com_soma_populacao_regiao_saude.drop_duplicates()
+        municipios_com_soma_populacao_regiao_saude.to_csv(self.gerar_nome_arquivo_saida_regioes_saude_enriquecida(),
+                                                          sep=";",
+                                                          index=False)
+        return municipios_com_soma_populacao_regiao_saude
+
     def enriquecer_cnes(self):
         df_arquivos_caps_original = pd.read_csv(self.combinado.gerar_nome_arquivos_caps_combinados(),
                                                 sep=";",
@@ -396,31 +417,23 @@ class CombinadoEnriquecido:
                                                   "CO_ESTADO_GESTOR": "ESTADO_CODIGO"},
                                          inplace=True)
 
-        estados_com_codigo = pd.read_csv('estados-cidades/estados.csv', sep=";")
+        estados_com_codigo = pd.read_csv('gold/estados.csv', sep=";")
 
-        municipios_enriquecidos = pd.read_csv('estados-cidades/municipios.csv',
+        municipios_enriquecidos = pd.read_csv('gold/municipios.csv',
                                               sep=";",
                                               dtype={'MUNICIPIO_CODIGO': object,
                                                      'MUNICIPIO_POPULACAO': int
                                                      })
 
-        municipios_com_soma_populacao_regiao_saude = municipios_enriquecidos.groupby(
-            ['ESTADO_CODIGO', 'ESTADO_SIGLA', 'ESTADO_NOME', 'REGIAO_SAUDE_CODIGO', 'REGIAO_SAUDE_NOME']).agg(
-            {'MUNICIPIO_POPULACAO': 'sum'}).reset_index()
-        municipios_com_soma_populacao_regiao_saude.rename(
-            columns={'MUNICIPIO_POPULACAO': 'REGIAO_SAUDE_POPULACAO'}, inplace=True)
-        municipios_com_soma_populacao_regiao_saude = municipios_com_soma_populacao_regiao_saude[
-            ['ESTADO_CODIGO', 'ESTADO_SIGLA', 'ESTADO_NOME', 'REGIAO_SAUDE_CODIGO', 'REGIAO_SAUDE_NOME', "REGIAO_SAUDE_POPULACAO"]]
-        municipios_com_soma_populacao_regiao_saude = municipios_com_soma_populacao_regiao_saude.drop_duplicates()
-        municipios_com_soma_populacao_regiao_saude.to_csv("estados-cidades/regioes-saude-enriquecido.csv",
-                                                          sep=";",
-                                                          index=False)
+        municipios_com_soma_populacao_regiao_saude = self.gerar_regioes_saude_enriquecido(municipios_enriquecidos)
 
         municipios_enriquecidos = pd.merge(municipios_enriquecidos,
                                            municipios_com_soma_populacao_regiao_saude[
-                                               ['ESTADO_CODIGO', 'ESTADO_SIGLA', 'ESTADO_NOME', 'REGIAO_SAUDE_CODIGO', 'REGIAO_SAUDE_NOME',
+                                               ['ESTADO_CODIGO', 'ESTADO_SIGLA', 'ESTADO_NOME', 'REGIAO_SAUDE_CODIGO',
+                                                'REGIAO_SAUDE_NOME',
                                                 "REGIAO_SAUDE_POPULACAO"]],
-                                           on=['ESTADO_CODIGO', 'ESTADO_SIGLA', 'ESTADO_NOME', "REGIAO_SAUDE_CODIGO", "REGIAO_SAUDE_NOME"],
+                                           on=['ESTADO_CODIGO', 'ESTADO_SIGLA', 'ESTADO_NOME', "REGIAO_SAUDE_CODIGO",
+                                               "REGIAO_SAUDE_NOME"],
                                            how="left")
 
         df_merge = pd.merge(df_arquivos_caps_original,
@@ -443,33 +456,72 @@ class CombinadoEnriquecido:
         df_merge = df_merge.drop_duplicates()
 
         # Escreva o dataframe no arquivo parquet
-        df_merge.to_csv('2018-2022-cnes-enriquecido.csv',
+        df_merge.to_csv(self.gerar_nome_arquivo_saida(),
                         sep=";",
                         index=False,
                         float_format='%.0f')
 
 
+def criar_arquivo_lista_tipo_caps():
+    data = {
+        'TIPO': [
+            'CAPS AD IV',
+            'CAPS ALCOOL E DROGA',
+            'CAPS ALCOOL E DROGAS III - MUNICIPAL',
+            'CAPS ALCOOL E DROGAS III - REGIONAL',
+            'CAPS I',
+            'CAPS II',
+            'CAPS III',
+            'CAPS INFANTO/JUVENIL'
+        ],
+        'Descrição': [
+            'CAPS AD IV',
+            'CAPS ALCOOL E DROGA',
+            'CAPS ALCOOL E DROGAS III - MUNICIPAL',
+            'CAPS ALCOOL E DROGAS III - REGIONAL',
+            'CAPS I', 'CAPS II',
+            'CAPS III',
+            'CAPS INFANTO/JUVENIL'
+        ]
+    }
+
+    df = pd.DataFrame(data)
+
+    df.to_csv('gold/caps-tipos.csv', sep=";", index=False)
+
+
+def criar_arquivo_lista_anos():
+    data = {'ANO': ANOS_CONSIDERADOS}
+
+    df = pd.DataFrame(data)
+
+    df.to_csv('gold/anos.csv', sep=";", index=False)
+
+
 if __name__ == "__main__":
+    criar_arquivo_lista_tipo_caps()
+    criar_arquivo_lista_anos()
+
     relacao = EstabelecimentoSubtipo(
         pasta=PASTA_CNES_DADOS_BRUTOS,
         anos=ANOS_CONSIDERADOS,
         mes=MES_COMPETENCIA_CONSIDERADO
     )
-    #relacao.filtrar_caps()
+    # relacao.filtrar_caps()
 
     estabelecimento = Estabelecimento(
         pasta=PASTA_CNES_DADOS_BRUTOS,
         anos=ANOS_CONSIDERADOS,
         mes=MES_COMPETENCIA_CONSIDERADO
     )
-    #estabelecimento.filtrar_caps()
+    # estabelecimento.filtrar_caps()
 
     subtipo = Subtipo(
         pasta=PASTA_CNES_DADOS_BRUTOS,
         anos=ANOS_CONSIDERADOS,
         mes=MES_COMPETENCIA_CONSIDERADO
     )
-    #subtipo.filtrar_caps()
+    # subtipo.filtrar_caps()
 
     combinado = Combinado(
         pasta=PASTA_CNES_DADOS_BRUTOS,
@@ -479,8 +531,8 @@ if __name__ == "__main__":
         tabela_subtipo=subtipo,
         tabela_estabelecimentos=estabelecimento
     )
-    #combinado.combinar_estabelecimento_subtipo()
-    #combinado.combinar_arquivos_ano()
+    # combinado.combinar_estabelecimento_subtipo()
+    # combinado.combinar_arquivos_ano()
 
     combinado = CombinadoEnriquecido(
         combinado=combinado

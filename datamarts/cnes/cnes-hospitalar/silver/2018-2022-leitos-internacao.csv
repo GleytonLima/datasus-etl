@@ -1,0 +1,209 @@
+ESTADO_CODIGO;ESTADO_NOME;QUANTIDADE_LEITOS;ANO;MES
+11;Rondônia;6;2014;12
+12;Acre;18;2014;12
+22;Piauí;10;2014;12
+23;Ceará;6;2014;12
+24;Rio Grande do Norte;6;2014;12
+26;Pernambuco;7;2014;12
+27;Alagoas;6;2014;12
+28;Sergipe;30;2014;12
+29;Bahia;2;2014;12
+31;Minas Gerais;131;2014;12
+33;Rio de Janeiro;111;2014;12
+35;São Paulo;20;2014;12
+41;Paraná;90;2014;12
+42;Santa Catarina;21;2014;12
+43;Rio Grande do Sul;344;2014;12
+53;Distrito Federal;40;2014;12
+11;Rondônia;12;2015;12
+12;Acre;18;2015;12
+15;Pará;9;2015;12
+17;Tocantins;21;2015;12
+21;Maranhão;101;2015;12
+22;Piauí;35;2015;12
+23;Ceará;43;2015;12
+24;Rio Grande do Norte;49;2015;12
+25;Paraíba;43;2015;12
+26;Pernambuco;55;2015;12
+27;Alagoas;16;2015;12
+28;Sergipe;30;2015;12
+29;Bahia;2;2015;12
+31;Minas Gerais;230;2015;12
+33;Rio de Janeiro;170;2015;12
+35;São Paulo;99;2015;12
+41;Paraná;104;2015;12
+42;Santa Catarina;56;2015;12
+43;Rio Grande do Sul;479;2015;12
+50;Mato Grosso do Sul;25;2015;12
+51;Mato Grosso;5;2015;12
+52;Goiás;21;2015;12
+53;Distrito Federal;30;2015;12
+11;Rondônia;12;2016;12
+12;Acre;18;2016;12
+15;Pará;6;2016;12
+17;Tocantins;21;2016;12
+21;Maranhão;6;2016;12
+22;Piauí;16;2016;12
+23;Ceará;18;2016;12
+25;Paraíba;20;2016;12
+26;Pernambuco;37;2016;12
+27;Alagoas;15;2016;12
+28;Sergipe;30;2016;12
+29;Bahia;2;2016;12
+31;Minas Gerais;233;2016;12
+33;Rio de Janeiro;131;2016;12
+35;São Paulo;52;2016;12
+41;Paraná;90;2016;12
+42;Santa Catarina;49;2016;12
+43;Rio Grande do Sul;349;2016;12
+52;Goiás;13;2016;12
+53;Distrito Federal;40;2016;12
+11;Rondônia;12;2017;12
+12;Acre;18;2017;12
+14;Roraima;11;2017;12
+15;Pará;6;2017;12
+17;Tocantins;21;2017;12
+22;Piauí;20;2017;12
+23;Ceará;25;2017;12
+24;Rio Grande do Norte;11;2017;12
+25;Paraíba;20;2017;12
+26;Pernambuco;59;2017;12
+27;Alagoas;15;2017;12
+28;Sergipe;30;2017;12
+29;Bahia;2;2017;12
+31;Minas Gerais;299;2017;12
+33;Rio de Janeiro;137;2017;12
+35;São Paulo;81;2017;12
+41;Paraná;101;2017;12
+42;Santa Catarina;49;2017;12
+43;Rio Grande do Sul;350;2017;12
+50;Mato Grosso do Sul;4;2017;12
+52;Goiás;21;2017;12
+53;Distrito Federal;45;2017;12
+11;Rondônia;16;2018;12
+12;Acre;18;2018;12
+13;Amazonas;4;2018;12
+14;Roraima;11;2018;12
+15;Pará;23;2018;12
+17;Tocantins;21;2018;12
+21;Maranhão;122;2018;12
+22;Piauí;28;2018;12
+23;Ceará;26;2018;12
+24;Rio Grande do Norte;52;2018;12
+25;Paraíba;35;2018;12
+26;Pernambuco;81;2018;12
+27;Alagoas;15;2018;12
+28;Sergipe;30;2018;12
+29;Bahia;25;2018;12
+31;Minas Gerais;426;2018;12
+32;Espírito Santo;32;2018;12
+33;Rio de Janeiro;194;2018;12
+35;São Paulo;214;2018;12
+41;Paraná;152;2018;12
+42;Santa Catarina;90;2018;12
+43;Rio Grande do Sul;600;2018;12
+50;Mato Grosso do Sul;4;2018;12
+51;Mato Grosso;3;2018;12
+52;Goiás;30;2018;12
+53;Distrito Federal;45;2018;12
+11;Rondônia;12;2019;12
+12;Acre;24;2019;12
+13;Amazonas;4;2019;12
+14;Roraima;11;2019;12
+15;Pará;23;2019;12
+17;Tocantins;21;2019;12
+21;Maranhão;131;2019;12
+22;Piauí;31;2019;12
+23;Ceará;63;2019;12
+24;Rio Grande do Norte;52;2019;12
+25;Paraíba;35;2019;12
+26;Pernambuco;105;2019;12
+27;Alagoas;15;2019;12
+28;Sergipe;30;2019;12
+29;Bahia;33;2019;12
+31;Minas Gerais;442;2019;12
+32;Espírito Santo;40;2019;12
+33;Rio de Janeiro;203;2019;12
+35;São Paulo;214;2019;12
+41;Paraná;169;2019;12
+42;Santa Catarina;95;2019;12
+43;Rio Grande do Sul;617;2019;12
+50;Mato Grosso do Sul;13;2019;12
+51;Mato Grosso;3;2019;12
+52;Goiás;30;2019;12
+53;Distrito Federal;45;2019;12
+11;Rondônia;12;2020;12
+12;Acre;18;2020;12
+14;Roraima;11;2020;12
+15;Pará;20;2020;12
+17;Tocantins;21;2020;12
+22;Piauí;23;2020;12
+23;Ceará;82;2020;12
+24;Rio Grande do Norte;11;2020;12
+25;Paraíba;20;2020;12
+26;Pernambuco;93;2020;12
+27;Alagoas;23;2020;12
+28;Sergipe;30;2020;12
+29;Bahia;2;2020;12
+31;Minas Gerais;381;2020;12
+32;Espírito Santo;18;2020;12
+33;Rio de Janeiro;165;2020;12
+35;São Paulo;160;2020;12
+41;Paraná;111;2020;12
+42;Santa Catarina;79;2020;12
+43;Rio Grande do Sul;464;2020;12
+50;Mato Grosso do Sul;13;2020;12
+52;Goiás;29;2020;12
+53;Distrito Federal;45;2020;12
+11;Rondônia;15;2021;12
+12;Acre;18;2021;12
+13;Amazonas;4;2021;12
+14;Roraima;11;2021;12
+15;Pará;32;2021;12
+17;Tocantins;21;2021;12
+21;Maranhão;130;2021;12
+22;Piauí;31;2021;12
+23;Ceará;101;2021;12
+24;Rio Grande do Norte;67;2021;12
+25;Paraíba;35;2021;12
+26;Pernambuco;119;2021;12
+27;Alagoas;31;2021;12
+28;Sergipe;14;2021;12
+29;Bahia;25;2021;12
+31;Minas Gerais;466;2021;12
+32;Espírito Santo;56;2021;12
+33;Rio de Janeiro;213;2021;12
+35;São Paulo;217;2021;12
+41;Paraná;208;2021;12
+42;Santa Catarina;105;2021;12
+43;Rio Grande do Sul;604;2021;12
+50;Mato Grosso do Sul;13;2021;12
+51;Mato Grosso;4;2021;12
+52;Goiás;29;2021;12
+53;Distrito Federal;59;2021;12
+11;Rondônia;12;2022;12
+12;Acre;18;2022;12
+13;Amazonas;7;2022;12
+14;Roraima;11;2022;12
+15;Pará;52;2022;12
+17;Tocantins;21;2022;12
+21;Maranhão;111;2022;12
+22;Piauí;39;2022;12
+23;Ceará;105;2022;12
+24;Rio Grande do Norte;69;2022;12
+25;Paraíba;35;2022;12
+26;Pernambuco;155;2022;12
+27;Alagoas;31;2022;12
+28;Sergipe;29;2022;12
+29;Bahia;37;2022;12
+31;Minas Gerais;515;2022;12
+32;Espírito Santo;52;2022;12
+33;Rio de Janeiro;213;2022;12
+35;São Paulo;217;2022;12
+41;Paraná;196;2022;12
+42;Santa Catarina;91;2022;12
+43;Rio Grande do Sul;681;2022;12
+50;Mato Grosso do Sul;13;2022;12
+51;Mato Grosso;4;2022;12
+52;Goiás;42;2022;12
+53;Distrito Federal;59;2022;12

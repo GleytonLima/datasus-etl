@@ -29,7 +29,7 @@ def calcular_valor_regiao_saude(row):
 
 def criar_datamart_com_indices_cobertura_caps_por_municipio():
     # Carrega o arquivo CSV em um DataFrame do Pandas
-    df_cnes_enriquecido = pd.read_csv('2018-2022-cnes-enriquecido.csv', sep=';')
+    df_cnes_enriquecido = pd.read_csv('gold/2018-2022-cnes-enriquecido.csv', sep=';')
 
     df_cnes_enriquecido['TIPO'].fillna('Não informado', inplace=True)
 
@@ -52,12 +52,12 @@ def criar_datamart_com_indices_cobertura_caps_por_municipio():
     df_grouped['MUNICIPIO_IC'] = df_grouped.apply(calcular_valor_municipio, axis=1)
 
     print(df_grouped)
-    df_grouped.to_csv('2018-2022-caps-agrupados-por-tipo.csv', sep=';', index=False, decimal=',')
+    df_grouped.to_csv('gold/2018-2022-caps-agrupados-por-tipo.csv', sep=';', index=False, decimal=',')
 
 
 def criar_datamart_com_indices_cobertura_caps_por_estados():
     # Carrega o arquivo CSV em um DataFrame do Pandas
-    df_cnes_enriquecido = pd.read_csv('2018-2022-cnes-enriquecido.csv', sep=';')
+    df_cnes_enriquecido = pd.read_csv('gold/2018-2022-cnes-enriquecido.csv', sep=';')
 
     df_cnes_enriquecido['TIPO'].fillna('Não informado', inplace=True)
 
@@ -76,12 +76,12 @@ def criar_datamart_com_indices_cobertura_caps_por_estados():
     df_grouped['ESTADO_IC'] = df_grouped.apply(calcular_valor_estado, axis=1)
 
     print(df_grouped)
-    df_grouped.to_csv('2018-2022-caps-agrupados-por-tipo-por-uf.csv', sep=';', index=False, decimal=',')
+    df_grouped.to_csv('gold/2018-2022-caps-agrupados-por-tipo-por-uf.csv', sep=';', index=False, decimal=',')
 
 
 def criar_datamart_com_indices_cobertura_caps_por_regiao_saude():
     # Carrega o arquivo CSV em um DataFrame do Pandas
-    df_cnes_enriquecido = pd.read_csv('2018-2022-cnes-enriquecido.csv', sep=';')
+    df_cnes_enriquecido = pd.read_csv('gold/2018-2022-cnes-enriquecido.csv', sep=';')
     df_cnes_enriquecido = df_cnes_enriquecido.rename(columns={'CO_ESTADO_GESTOR': 'codigo_uf'})
     df_cnes_enriquecido['TIPO'].fillna('Não informado', inplace=True)
 
@@ -102,7 +102,7 @@ def criar_datamart_com_indices_cobertura_caps_por_regiao_saude():
     df_grouped['REGIAO_SAUDE_IC'] = df_grouped.apply(calcular_valor_regiao_saude, axis=1)
 
     print(df_grouped)
-    df_grouped.to_csv('2018-2022-caps-agrupados-por-tipo-por-regiao-saude.csv', sep=';', index=False, decimal=',')
+    df_grouped.to_csv('gold/2018-2022-caps-agrupados-por-tipo-por-regiao-saude.csv', sep=';', index=False, decimal=',')
 
 
 if __name__ == '__main__':
