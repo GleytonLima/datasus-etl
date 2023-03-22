@@ -507,7 +507,7 @@ if __name__ == "__main__":
         anos=ANOS_CONSIDERADOS,
         mes=MES_COMPETENCIA_CONSIDERADO
     )
-    # relacao.filtrar_caps()
+    relacao.filtrar_caps()
 
     estabelecimento = Estabelecimento(
         pasta=PASTA_CNES_DADOS_BRUTOS,
