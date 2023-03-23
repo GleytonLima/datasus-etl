@@ -42,7 +42,9 @@ Para executar o script em seu ambiente de desenvolvimento, siga os passos abaixo
 
    1. Para SIASUS: `Rscript.exe extrair-transformar-enviar-siasus.R 2022-12 DF`;
 
-   2. Para CNES: `Rscript.exe extrair-transformar-enviar-cnes.R 2022 all`
+   2. Para CNES: `Rscript.exe extrair-transformar-enviar-cnes.R 2022 all`;
+   
+   3. Para SIH: `Rscript.exe extrair-transformar-enviar-sih.R 2022-12 DF`.
 
 3. Um arquivo .parquet será gerado na raiz do projeto. Note que ele não é adicionado ao controle de versão.
 
