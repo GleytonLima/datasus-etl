@@ -36,9 +36,9 @@ def agrupar_por_categoria():
 def calcular_percentual():
     df = pd.read_csv("silver/2018-2022-diag_princ-sih-df.csv", delimiter=";")
 
-    total_geral = df["TOTAL"].sum()
+    df_by_year = df.groupby("ANO_CMPT")["TOTAL"].sum()
 
-    df["PERCENTUAL"] = (df["TOTAL"] / total_geral) * 100
+    df["PERCENTUAL"] = df.apply(lambda x: (x["TOTAL"] / df_by_year[x["ANO_CMPT"]]) * 100, axis=1)
 
     df.to_csv("silver/2018-2022-percentual-sih-df.csv",
               sep=";",
@@ -46,6 +46,6 @@ def calcular_percentual():
 
 
 if __name__ == "__main__":
-    gerar_arquivo_categorias()
-    agrupar_por_categoria()
+    #gerar_arquivo_categorias()
+    #agrupar_por_categoria()
     calcular_percentual()
