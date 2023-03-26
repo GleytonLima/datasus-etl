@@ -6,9 +6,9 @@ Foram considerados os anos de 2018 a 2012.
 
 Foram considerados apenas os meses de dezembro de cada ano.
 
-## Tipos de Caps
+## Tipos de CAPS
 
-A pasta [caps-por-tipo/caps-tipos.csv](caps-por-tipo/caps-tipos.csv) possui um csv com a lista de tipos de CAPS.
+O arquivo [gold/caps-tipos.csv](caps-por-tipo/caps-tipos.csv) possui um csv com a lista de tipos de CAPS.
 O arquivo é disponibilizado via http.
 
 Fonte: https://sage.saude.gov.br/paineis/planoCrack/lista_caps.php?output=html&
@@ -29,7 +29,7 @@ Estes arquivos seguem uma convenção de ter um sufixo do ano e mês, por exempl
 
 Fonte: http://cnes.datasus.gov.br/pages/downloads/arquivosBaseDados.jsp
 
-### Arquivos de Entrda
+### Arquivos de Entrada
 
 #### Arquivos rlEstabSubTipo
 
@@ -85,10 +85,93 @@ Esses arquivos seguem a convenção de nome [ANO]-cnes_filtrados.csv, por exempl
 | CO_SUB_TIPO_UNIDADE     | Texto |                                                                  | 001                                                     |
 | DS_SUB_TIPO             | Texto |                                                                  | CAPS I                                                  |
 
+# População dos Municípios/Estados
+
+## Arquivos de Entrada
+
+Baseados na prévia do censo de 2022. Os arquivos estão disponibilizados em formato xls não padronizado (com colunas de
+cabeçalho e rodapé)
+
+Fonte: [Censo 2022 prévia](https://www.ibge.gov.br/estatisticas/sociais/saude/22827-censo-demografico-2022.html?=&t=resultados)
+
+## Arquivos de Saída
+
+O arquivo [silver/POP2022_Brasil_e_UFs.csv](silver/POP2022_Brasil_e_UFs.csv) possui os dados tratados de população dos
+estados.
+
+| Coluna           | Tipo     | Descrição           | Exemplo  |
+|------------------|----------|---------------------|----------|
+| ESTADO_NOME      | Texto    | Nome do Estado      | Amazonas |
+| ESTADO_POPULACAO | Numerico | Populacao do estado | 3952262  |
+
+O arquivo [silver/POP2022_Municipios.csv](silver/POP2022_Municipios.csv) possui os dados tratados de população dos
+municipios.
+
+ESTADO_SIGLA;MUNICIPIO_NOME;MUNICIPIO_POPULACAO;MUNICIPIO_CODIGO
+
+| Coluna              | Tipo     | Descrição                | Exemplo |
+|---------------------|----------|--------------------------|---------|
+| ESTADO_SIGLA        | Texto    | Sigla do Estado          | AM      |
+| MUNICIPIO_NOME      | Texto    | Nome do Município        | Manaus  |
+| MUNICIPIO_POPULACAO | Numérico | População do Município   | 2054731 |
+| MUNICIPIO_CODIGO    | Texto    | Código IBGE do MUnicípio | 130260  |
+
+# Municípios
+
+Lista dos Municípios e estados do Brasil
+
+https://github.com/kelvins/Municipios-Brasileiros/tree/main/csv
+
+Lista de Municípios com os respectivos regionais de saúde
+
+https://sage.saude.gov.br/paineis/regiaoSaude/lista.php?output=html&
+
+# Map Box
+
+Mapbox é um fornecedor americano de mapas online personalizados para sites e aplicativos como Foursquare, Lonely Planet,
+Financial Times, The Weather Channel, Instacart Inc. e Snapchat.
+
+Existe um [visual específico para utilização do Mapbox com Power BI](https://docs.mapbox.com/help/tutorials/power-bi/).
+
+## Regionais da saúde GeoJSON
+
+https://github.com/lansaviniec/shapefile_das_regionais_de_saude_sus/blob/master/BR_Regionais_Simplificado.geojson
+
+## Exemplos criados
+
+### Regionais de Saúde
+
+Vector Tile Url Level 1: mapbox://gleyton.3tqw1k2u
+Source Layer Name Level 1: BR_Regionais_Simplificado-0j2yyx
+Vector Property Level 1: reg_id
+
+### Estados
+
+Vector Tile Url Level 1: mapbox://gleyton.bzhkkbhb
+Source Layer Name Level 1: uf-90p7k4
+Vector Property Level 1: GEOCODIGO
+
+## Vídeos Mapbox
+
+https://www.youtube.com/watch?v=0w589b5_Z3o
+
+https://www.youtube.com/watch?v=0aX60Bq6ZXI
+
+## Links Úteis
+
+https://mapshaper.org/: Um link útil para conversão de [GeoJSON](https://geojson.org/)
+para [TopoJSON](https://github.com/topojson/topojson).
+Os mapas nativos do PowerBI somente suportam TopoJSON para poligonos customizados.
+
 # Conteúdos Adicionais
 
-Vídeos sobre configuração de Mapas
+Vídeos sobre configuração de Mapas com Power BI
 
 https://www.youtube.com/watch?v=svw7DQIyJ58
 
 https://www.youtube.com/watch?v=JWCPeKd0p8I
+
+Videos sobre configuração de Mapas com Power BI e Mapbox
+
+https://www.youtube.com/watch?v=0w589b5_Z3o
+
