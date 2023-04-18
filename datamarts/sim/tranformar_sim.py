@@ -89,9 +89,17 @@ def agrupar_arquivos():
     # Concatenate all the dataframes in the list into a single dataframe
     combined_df = pd.concat(dfs, ignore_index=True)
 
+    df2 = pd.read_csv('gold/municipios.csv', delimiter=';')
+
+    # Junta os dataframes com base na coluna "MUNICIPIO_CODIGO"
+    df_merged = pd.merge(combined_df, df2, on='MUNICIPIO_CODIGO')
+
+    # Converte a coluna "MUNICIPIO_CODIGO" para o tipo de dados inteiro
+    df_merged['MUNICIPIO_CODIGO'] = df_merged['MUNICIPIO_CODIGO'].astype(int)
+
     # Write the combined dataframe to a new CSV file
     output_file = os.path.join('gold/', 'sim.csv')
-    combined_df.to_csv(output_file, sep=';', index=False)
+    df_merged.to_csv(output_file, sep=';', index=False)
 
 
 if __name__ == "__main__":
