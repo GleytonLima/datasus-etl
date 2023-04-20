@@ -16,8 +16,8 @@ Fonte: https://sage.saude.gov.br/paineis/planoCrack/lista_caps.php?output=html&
 Dicionário de Dados
 
 | Coluna    | Tipo  | Descrição         | Exemplo                                        |
-|-----------|-------|-------------------|------------------------------------------------|
-| TIPO      | Texto | Tipo de CAPS      | CAPS I, CAPS II                                |     
+| --------- | ----- | ----------------- | ---------------------------------------------- |
+| TIPO      | Texto | Tipo de CAPS      | CAPS I, CAPS II                                |
 | Descrição | Texto | Descrição do CAPS | Um campo opcional para com a descrição do CAPS |
 
 ## Dados CNES
@@ -34,8 +34,8 @@ Fonte: http://cnes.datasus.gov.br/pages/downloads/arquivosBaseDados.jsp
 #### Arquivos rlEstabSubTipo
 
 | Coluna                                      | Tipo     | Descrição         | Exemplo       |
-|---------------------------------------------|----------|-------------------|---------------|
-| CO_UNIDADE                                  | Texto    | Tipo de CAPS      | 3205209075151 |     
+| ------------------------------------------- | -------- | ----------------- | ------------- |
+| CO_UNIDADE                                  | Texto    | Tipo de CAPS      | 3205209075151 |
 | CO_TIPO_UNIDADE                             | Numérico | Descrição do CAPS | 36            |
 | CO_SUB_TIPO_UNIDADE                         | Texto    |                   | 009           |
 | TO_CHAR(DT_ATUALIZACAO,'DD/MM/YYYY')        | Data     |                   | "05/09/2019   |
@@ -45,7 +45,7 @@ Fonte: http://cnes.datasus.gov.br/pages/downloads/arquivosBaseDados.jsp
 #### Arquivos tbEstabelecimento
 
 | Coluna                  | Tipo  | Descrição                                                        | Exemplo                                                 |
-|-------------------------|-------|------------------------------------------------------------------|---------------------------------------------------------|
+| ----------------------- | ----- | ---------------------------------------------------------------- | ------------------------------------------------------- |
 | CO_UNIDADE              | Texto | Texto                                                            | 2512307567502                                           |
 | CO_CNES                 | Texto | Numérico                                                         | 7567502                                                 |
 | NO_FANTASIA             | Texto | Texto                                                            | UNIDADE DE ACOLHIMENTO INFANTO JUVENIL DR ZEZITO SERGIO |
@@ -53,14 +53,14 @@ Fonte: http://cnes.datasus.gov.br/pages/downloads/arquivosBaseDados.jsp
 | TP_UNIDADE              | Texto | Numérico                                                         | 70                                                      |
 | CO_ESTADO_GESTOR        | Texto | Numérico                                                         | 25                                                      |
 | CO_MUNICIPIO_GESTOR     | Texto | Numérico                                                         | 251230                                                  |
-| CO_TIPO_ESTABELECIMENTO | Texto | Numérico                                                         | 17                                                      |     
+| CO_TIPO_ESTABELECIMENTO | Texto | Numérico                                                         | 17                                                      |
 | CO_MOTIVO_DESAB         | Texto | Motivo do CAPS estar desabilitado. Caso vazio, o CAPS está ativo | 08                                                      |
 
 #### Arquivos tbSubTipo
 
 | Coluna          | Tipo  | Descrição                    | Exemplo |
-|-----------------|-------|------------------------------|---------|
-| CO_TIPO_UNIDADE | Texto | Código do Tipo de Unidade    | 70      |     
+| --------------- | ----- | ---------------------------- | ------- |
+| CO_TIPO_UNIDADE | Texto | Código do Tipo de Unidade    | 70      |
 | CO_SUB_TIPO     | Texto | Código do Subtipo de Unidade | 001     |
 | DS_SUB_TIPO     | Texto | Descrição do Subtipo         | CAPS I  |
 
@@ -71,7 +71,7 @@ No arquivo de saída, gerado por ano, além da junção dos três arquivos acima
 Esses arquivos seguem a convenção de nome [ANO]-cnes_filtrados.csv, por exemplo, 2022-cnes-filtrados.
 
 | Coluna                  | Tipo  | Descrição                                                        | Exemplo                                                 |
-|-------------------------|-------|------------------------------------------------------------------|---------------------------------------------------------|
+| ----------------------- | ----- | ---------------------------------------------------------------- | ------------------------------------------------------- |
 | CO_UNIDADE              | Texto | Texto                                                            | 2512307567502                                           |
 | CO_CNES                 | Texto | Numérico                                                         | 7567502                                                 |
 | NO_FANTASIA             | Texto | Texto                                                            | UNIDADE DE ACOLHIMENTO INFANTO JUVENIL DR ZEZITO SERGIO |
@@ -79,7 +79,7 @@ Esses arquivos seguem a convenção de nome [ANO]-cnes_filtrados.csv, por exempl
 | TP_UNIDADE              | Texto | Numérico                                                         | 70                                                      |
 | CO_ESTADO_GESTOR        | Texto | Numérico                                                         | 25                                                      |
 | CO_MUNICIPIO_GESTOR     | Texto | Numérico                                                         | 251230                                                  |
-| CO_TIPO_ESTABELECIMENTO | Texto | Numérico                                                         | 17                                                      |     
+| CO_TIPO_ESTABELECIMENTO | Texto | Numérico                                                         | 17                                                      |
 | ANO                     | Texto | Motivo do CAPS estar desabilitado. Caso vazio, o CAPS está ativo | 2022                                                    |
 | MES                     | Texto |                                                                  | 12                                                      |
 | CO_SUB_TIPO_UNIDADE     | Texto |                                                                  | 001                                                     |
@@ -100,7 +100,7 @@ O arquivo [silver/POP2022_Brasil_e_UFs.csv](silver/POP2022_Brasil_e_UFs.csv) pos
 estados.
 
 | Coluna           | Tipo     | Descrição           | Exemplo  |
-|------------------|----------|---------------------|----------|
+| ---------------- | -------- | ------------------- | -------- |
 | ESTADO_NOME      | Texto    | Nome do Estado      | Amazonas |
 | ESTADO_POPULACAO | Numerico | Populacao do estado | 3952262  |
 
@@ -110,7 +110,7 @@ municipios.
 ESTADO_SIGLA;MUNICIPIO_NOME;MUNICIPIO_POPULACAO;MUNICIPIO_CODIGO
 
 | Coluna              | Tipo     | Descrição                | Exemplo |
-|---------------------|----------|--------------------------|---------|
+| ------------------- | -------- | ------------------------ | ------- |
 | ESTADO_SIGLA        | Texto    | Sigla do Estado          | AM      |
 | MUNICIPIO_NOME      | Texto    | Nome do Município        | Manaus  |
 | MUNICIPIO_POPULACAO | Numérico | População do Município   | 2054731 |
@@ -151,6 +151,12 @@ Vector Tile Url Level 1: mapbox://gleyton.bzhkkbhb
 Source Layer Name Level 1: uf-90p7k4
 Vector Property Level 1: GEOCODIGO
 
+### Municipios
+
+Vector Tile Url Level 1: gleyton.0bhm43es
+Source Layer Name Level 1: geojs-100-mun-simplificado-2igowx
+Vector Property Level 1: id
+
 ## Vídeos Mapbox
 
 https://www.youtube.com/watch?v=0w589b5_Z3o
@@ -174,4 +180,3 @@ https://www.youtube.com/watch?v=JWCPeKd0p8I
 Videos sobre configuração de Mapas com Power BI e Mapbox
 
 https://www.youtube.com/watch?v=0w589b5_Z3o
-

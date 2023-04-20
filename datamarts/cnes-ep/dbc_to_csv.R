@@ -20,6 +20,6 @@ for (i in 1:length(arquivos)) {
   nome_csv <- gsub("\\.dbc$", ".csv", arquivos[i])
 
   # grava o dataframe em um arquivo CSV
-  write.csv(df, file = nome_csv, row.names = FALSE, sep = ";", fileEncoding = "utf-8")
+  write.table(df, file = nome_csv, row.names = FALSE, sep = ";", fileEncoding = "utf-8", quote = FALSE)
 
 }
