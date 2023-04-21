@@ -1,0 +1,133 @@
+<mxfile host="app.diagrams.net" modified="2023-04-21T18:08:59.393Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" etag="LRtRW2GHOb3FPKZbsZVZ" version="21.1.8" type="device">
+  <diagram name="Página-1" id="ERDtP4u2WqB3rQIJMhLn">
+    <mxGraphModel dx="1434" dy="1965" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ZXlQnH__yN3nqNdo_Wpq-1" target="ZXlQnH__yN3nqNdo_Wpq-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-1" value="Baixar Arquivo dbc do Dataus&amp;nbsp;&lt;br&gt;(pacote microdatasus)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="110" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ZXlQnH__yN3nqNdo_Wpq-3" target="ZXlQnH__yN3nqNdo_Wpq-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-10" value="SIM" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="ZXlQnH__yN3nqNdo_Wpq-6">
+          <mxGeometry x="-0.2667" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-13" value="NÃO" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ZXlQnH__yN3nqNdo_Wpq-3" target="ZXlQnH__yN3nqNdo_Wpq-12">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="270" y="470" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-3" value="Pré-Processar?" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="230" y="310" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="ZXlQnH__yN3nqNdo_Wpq-5" target="ZXlQnH__yN3nqNdo_Wpq-12">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="90" y="520" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-5" value="Pré-Processar&lt;br&gt;(pacote microdatasus)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="320" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ZXlQnH__yN3nqNdo_Wpq-7" target="ZXlQnH__yN3nqNdo_Wpq-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="270" y="-20" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-9" value="SIM" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="ZXlQnH__yN3nqNdo_Wpq-8">
+          <mxGeometry x="0.2632" y="-3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ZXlQnH__yN3nqNdo_Wpq-7" target="ZXlQnH__yN3nqNdo_Wpq-25">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-38" value="NÃO" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="ZXlQnH__yN3nqNdo_Wpq-26">
+          <mxGeometry x="0.3307" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-7" value="usar pacote microdatasus?" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="-66" width="120" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-20" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ZXlQnH__yN3nqNdo_Wpq-12" target="ZXlQnH__yN3nqNdo_Wpq-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-12" value="Salvar Arquivo no Formato CSV/Parquet&lt;br&gt;(pacote microdatasus)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="490" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ZXlQnH__yN3nqNdo_Wpq-15" target="ZXlQnH__yN3nqNdo_Wpq-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-15" value="Converter em DataFrame&lt;br&gt;(pacote microdatasus)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="200" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ZXlQnH__yN3nqNdo_Wpq-19" target="ZXlQnH__yN3nqNdo_Wpq-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-19" value="Ler Arquivo e Efetuar Transformações&lt;br&gt;(Python + Pandas)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="210" y="620" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ZXlQnH__yN3nqNdo_Wpq-21" target="ZXlQnH__yN3nqNdo_Wpq-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-21" value="Salvar Arquivos Intermediários categoria Silver&lt;br&gt;(Python + Pandas)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="210" y="750" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ZXlQnH__yN3nqNdo_Wpq-23" target="ZXlQnH__yN3nqNdo_Wpq-32">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-23" value="Salvar Arquivos Finais categoria Gold&lt;br&gt;(Python + Pandas)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="210" y="880" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ZXlQnH__yN3nqNdo_Wpq-25" target="ZXlQnH__yN3nqNdo_Wpq-27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-25" value="Baixar Arquivo dbc do Dataus&amp;nbsp;&lt;br&gt;(Python + ftplib)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="530" y="110" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-29" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ZXlQnH__yN3nqNdo_Wpq-27" target="ZXlQnH__yN3nqNdo_Wpq-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-27" value="Converter em DataFrame&lt;br&gt;(pacote read.dbc)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="530" y="200" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="ZXlQnH__yN3nqNdo_Wpq-30" target="ZXlQnH__yN3nqNdo_Wpq-19">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="600" y="650" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-30" value="Salvar Arquivo no Formato CSV/Parquet&lt;br&gt;(R base)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="530" y="490" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ZXlQnH__yN3nqNdo_Wpq-32" target="ZXlQnH__yN3nqNdo_Wpq-34">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-32" value="Importar Arquivo e gerar Dashboard&lt;br&gt;(Power BI)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="210" y="1010" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-34" value="Publicar Dashboard&lt;br&gt;(Power BI)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="210" y="1130" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-37" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ZXlQnH__yN3nqNdo_Wpq-36" target="ZXlQnH__yN3nqNdo_Wpq-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZXlQnH__yN3nqNdo_Wpq-36" value="Iniciar Processo Agendado&lt;br&gt;(Github Actions)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="-200" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
