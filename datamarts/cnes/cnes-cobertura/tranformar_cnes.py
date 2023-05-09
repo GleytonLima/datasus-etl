@@ -791,7 +791,27 @@ def criar_arquivo_lista_anos_leitos():
     df.to_csv('gold/anos_leitos.csv', sep=";", index=False)
 
 
+def combinar_arquivos_cepaberto():
+    file_list = glob.glob(f'bronze/df.cepaberto*.csv')
+
+    df_final = pd.DataFrame()
+
+    col_names = ['CEP', 'LOGRADOURO', "COLUNA_SEM_DEFINICAO", 'REGIAO_ADMINISTRATIVA', 'CIDADE_ID', 'ESTADO_ID']
+
+    for file in file_list:
+        df = pd.read_csv(file, sep=",", header=None, names=col_names)
+        df_final = pd.concat([df_final, df])
+    df_final["MUNICIPIO_CODIGO"] = "530010"
+    df_final["ESTADO_CODIGO"] = "53"
+    df_final["ESTADO_SIGLA"] = "DF"
+    df_final.to_csv("silver/df_cep_aberto.csv",
+                    sep=";",
+                    index=False)
+
+
 if __name__ == "__main__":
+    combinar_arquivos_cepaberto()
+    exit(1)
     criar_arquivo_lista_tipo_caps()
     criar_arquivo_lista_anos()
     criar_arquivo_lista_anos_leitos()
