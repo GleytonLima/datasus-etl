@@ -184,6 +184,14 @@ class Municipio:
                                  on='MUNICIPIO_CODIGO',
                                  how='left')
 
+        df_municipios_df_com_regionais_saude = pd.read_csv('gold/municipios_df.csv', sep=";")
+
+        # deletando unico registro do DF para substituir pelas regioes administrativas
+        df_municipios = df_municipios[df_municipios['MUNICIPIO_CODIGO'] != 530010]
+        df_municipios = df_municipios[df_municipios['MUNICIPIO_CODIGO'] != "530010"]
+
+        df_municipios = pd.concat([df_municipios, df_municipios_df_com_regionais_saude])
+
         df_municipios.to_csv(self.gerar_nome_arquivo_saida(),
                              sep=';',
                              index=False)
@@ -536,7 +544,30 @@ class Combinado:
                 self.tabela_relacao.colunas.CO_SUB_TIPO_UNIDADE.nome].fillna(
                 0).astype(int)
             df_merge = df_merge.drop_duplicates()
-            df_merge.to_csv(self.gerar_nome_saida(ano),
+
+            # enriquecendo DF com codigos de municipios ficticios dado que o IBGE nao mapea as areas
+            # administrativas de la
+            # precisamos tratar as areas de saude do df
+            df_cep_municipio_regiao_saude = pd.read_csv('gold/df_cep_municipio_regiao_saude.csv', sep=";")
+
+            # fazendo o merge dos dataframes com base na coluna CO_CEP
+            df_merged = pd.merge(df_merge, df_cep_municipio_regiao_saude[
+                ['CO_CEP', 'CO_MUNICIPIO_GESTOR']], on='CO_CEP',
+                                 how='left')
+
+            # Preenche valores nulos nas colunas do lado direito com os valores originais nas colunas do lado esquerdo
+            df_merged['CO_MUNICIPIO_GESTOR_y'].fillna(df_merged['CO_MUNICIPIO_GESTOR_x'], inplace=True)
+
+            # renomeando as colunas para substituir as colunas originais do primeiro dataframe
+            df_merged = df_merged.rename(
+                columns={'CO_MUNICIPIO_GESTOR_y': 'CO_MUNICIPIO_GESTOR'})
+
+            # excluindo as colunas originais do primeiro dataframe que foram substituídas
+            df_merged = df_merged.drop(['CO_MUNICIPIO_GESTOR_x'], axis=1)
+
+            df_merged['CO_MUNICIPIO_GESTOR'] = df_merged['CO_MUNICIPIO_GESTOR'].astype(int)
+
+            df_merged.to_csv(self.gerar_nome_saida(ano),
                             sep=";",
                             index=False)
 
@@ -615,7 +646,7 @@ class CombinadoEnriquecido:
                             on='ESTADO_CODIGO',
                             how='left')
 
-        df_merge = pd.merge(df_merge, municipios_enriquecidos[
+        df_merge_merge_com_municipios_enriquecidos = pd.merge(df_merge, municipios_enriquecidos[
             ['MUNICIPIO_CODIGO',
              "MUNICIPIO_NOME",
              "MUNICIPIO_POPULACAO",
@@ -627,10 +658,10 @@ class CombinadoEnriquecido:
                             how='left')
 
         # Remover linhas duplicadas em todas as colunas
-        df_merge = df_merge.drop_duplicates()
+        df_merged = df_merge_merge_com_municipios_enriquecidos.drop_duplicates()
 
         # Escreva o dataframe no arquivo parquet
-        df_merge.to_csv(self.gerar_nome_arquivo_saida(),
+        df_merged.to_csv(self.gerar_nome_arquivo_saida(),
                         sep=";",
                         index=False,
                         float_format='%.0f')
@@ -667,6 +698,7 @@ class DatamartIndicadorCapsMunicipio:
         # Agrupa as linhas e conta o número de linhas em cada grupo
         df_grouped = df_cnes_enriquecido.groupby(
             ['MUNICIPIO_CODIGO',
+             'CO_CEP',
              'MUNICIPIO_NOME',
              'ESTADO_CODIGO',
              'ESTADO_SIGLA',
@@ -683,6 +715,79 @@ class DatamartIndicadorCapsMunicipio:
         df_grouped['MUNICIPIO_IC'] = df_grouped.apply(self.calcular_valor_municipio, axis=1)
 
         print(df_grouped)
+        ### preencher municipios vazios com zeros
+        df_municipios = pd.read_csv('gold/municipios.csv',
+                                    sep=";",
+                                    dtype={'MUNICIPIO_CODIGO': object,
+                                           'ESTADO_CODIGO': object,
+                                           'REGIAO_SAUDE_CODIGO': object
+                                           })
+        # Merge dos DataFrames df_grouped e df_municipios
+        # Convertendo as colunas-chave para o tipo correto
+        df_grouped['MUNICIPIO_CODIGO'] = df_grouped['MUNICIPIO_CODIGO'].astype(int)
+        df_grouped['ESTADO_CODIGO'] = df_grouped['ESTADO_CODIGO'].astype(int)
+        df_grouped['REGIAO_SAUDE_CODIGO'] = df_grouped['REGIAO_SAUDE_CODIGO'].astype(int)
+
+        df_municipios['MUNICIPIO_CODIGO'] = df_municipios['MUNICIPIO_CODIGO'].astype(int)
+        df_municipios['ESTADO_CODIGO'] = df_municipios['ESTADO_CODIGO'].astype(int)
+        df_municipios['REGIAO_SAUDE_CODIGO'] = df_municipios['REGIAO_SAUDE_CODIGO'].astype(int)
+
+        # Merge dos DataFrames df_grouped e df_municipios
+        df_merged = pd.merge(df_grouped, df_municipios, on=['MUNICIPIO_CODIGO', 'ESTADO_CODIGO', 'REGIAO_SAUDE_CODIGO'],
+                             how='outer')
+
+        # Selecionar as linhas que estão em df_municipios mas não em df_grouped
+        novas_linhas = df_merged[df_merged['MUNICIPIO_NOME_x'].isnull()]
+
+        # Lista de ANOS e CAPS
+        caps = ['CAPS I']
+
+        # Lista para armazenar as novas linhas
+        novas_linhas_combinadas = []
+
+        # Iterar sobre as novas linhas
+        for _, row in novas_linhas.iterrows():
+            municipio_codigo = row['MUNICIPIO_CODIGO']
+            municipio_nome = row['MUNICIPIO_NOME_y']
+            municipio_populacao = row["MUNICIPIO_POPULACAO_y"]
+            estado_codigo = row['ESTADO_CODIGO']
+            estado_sigla = row['ESTADO_SIGLA_y']
+            estado_nome = row['ESTADO_NOME_y']
+            codigo_cep = row['CO_CEP']
+            regiao_saude_codigo = row['REGIAO_SAUDE_CODIGO']
+            regiao_saude_nome = row['REGIAO_SAUDE_NOME_y']
+
+            # Criar combinações de anos e tipos de CAPS
+            for ano in ANOS_CONSIDERADOS:
+                for cap in caps:
+                    nova_linha = {
+                        'MUNICIPIO_CODIGO': municipio_codigo,
+                        'CO_CEP': codigo_cep,
+                        'MUNICIPIO_NOME': municipio_nome,
+                        'ESTADO_CODIGO': estado_codigo,
+                        'ESTADO_SIGLA': estado_sigla,
+                        'ESTADO_NOME': estado_nome,
+                        'REGIAO_SAUDE_CODIGO': regiao_saude_codigo,
+                        'REGIAO_SAUDE_NOME': regiao_saude_nome,
+                        'ANO': ano,
+                        'MES': 12,
+                        'MUNICIPIO_POPULACAO': municipio_populacao,
+                        'TIPO': cap,
+                        'MUNICIPIO_QTDE_CAPS': 0,
+                        'MUNICIPIO_IC': 0
+                    }
+                    novas_linhas_combinadas.append(nova_linha)
+
+        # Converter a lista de novas linhas combinadas em um DataFrame
+        novas_linhas_df = pd.DataFrame(novas_linhas_combinadas)
+
+        # Adicionar as novas linhas ao df_grouped
+        df_grouped = pd.concat([df_grouped, novas_linhas_df])
+
+        # Resetar o índice do DataFrame resultante
+        df_grouped = df_grouped.reset_index(drop=True)
+
+
         df_grouped.to_csv(F'gold/{PREFIXO_NOME_ANOS}-caps-agrupados-por-tipo.csv', sep=';', index=False, decimal=',')
 
 
@@ -701,6 +806,7 @@ class DatamartIndicadorCapsEstado:
             ['ESTADO_CODIGO',
              'ESTADO_SIGLA',
              'ESTADO_NOME',
+             'CO_CEP',
              'ANO',
              'MES',
              'ESTADO_POPULACAO',
@@ -731,6 +837,7 @@ class DatamartIndicadorCapsRegiaoSaude:
                 'ESTADO_NOME',
                 'REGIAO_SAUDE_CODIGO',
                 'REGIAO_SAUDE_NOME',
+                'CO_CEP',
                 'ANO',
                 'MES',
                 'REGIAO_SAUDE_POPULACAO',
@@ -742,6 +849,70 @@ class DatamartIndicadorCapsRegiaoSaude:
         df_grouped['REGIAO_SAUDE_IC'] = df_grouped.apply(self.calcular_valor_regiao_saude, axis=1)
 
         print(df_grouped)
+
+        # TODO: Preencher os regionais vazios com zero
+        ### preencher municipios vazios com zeros
+        df_regioes_saude = pd.read_csv('gold/regioes-saude-enriquecido.csv',
+                                    sep=";",
+                                    dtype={'REGIAO_SAUDE_CODIGO': object,
+                                           })
+        # Merge dos DataFrames df_grouped e df_municipios
+        # Convertendo as colunas-chave para o tipo correto
+        df_grouped['REGIAO_SAUDE_CODIGO'] = df_grouped['REGIAO_SAUDE_CODIGO'].astype(int)
+
+        df_regioes_saude['REGIAO_SAUDE_CODIGO'] = df_regioes_saude['REGIAO_SAUDE_CODIGO'].astype(int)
+
+        # Merge dos DataFrames df_grouped e df_municipios
+        df_merged = pd.merge(df_grouped, df_regioes_saude, on=['REGIAO_SAUDE_CODIGO'],
+                             how='outer')
+
+        # Selecionar as linhas que estão em df_municipios mas não em df_grouped
+        novas_linhas = df_merged[df_merged['REGIAO_SAUDE_NOME_x'].isnull()]
+
+        # Lista de ANOS e CAPS
+        caps = ['CAPS I']
+
+        # Lista para armazenar as novas linhas
+        novas_linhas_combinadas = []
+
+        # Iterar sobre as novas linhas
+        for _, row in novas_linhas.iterrows():
+            regiao_saude_populacao = row["REGIAO_SAUDE_POPULACAO_y"]
+            estado_codigo = row['ESTADO_CODIGO_y']
+            estado_sigla = row['ESTADO_SIGLA_y']
+            estado_nome = row['ESTADO_NOME_y']
+            codigo_cep = row['CO_CEP']
+            regiao_saude_codigo = row['REGIAO_SAUDE_CODIGO']
+            regiao_saude_nome = row['REGIAO_SAUDE_NOME_y']
+
+            # Criar combinações de anos e tipos de CAPS
+            for ano in ANOS_CONSIDERADOS:
+                for cap in caps:
+                    nova_linha = {
+                        'ESTADO_CODIGO': estado_codigo,
+                        'ESTADO_SIGLA': estado_sigla,
+                        'ESTADO_NOME': estado_nome,
+                        'REGIAO_SAUDE_CODIGO': regiao_saude_codigo,
+                        'REGIAO_SAUDE_NOME': regiao_saude_nome,
+                        'CO_CEP': codigo_cep,
+                        'ANO': ano,
+                        'MES': 12,
+                        'REGIAO_SAUDE_POPULACAO': regiao_saude_populacao,
+                        'TIPO': cap,
+                        'REGIAO_SAUDE_QTDE_CAPS': 0,
+                        'REGIAO_SAUDE_IC': 0
+                    }
+                    novas_linhas_combinadas.append(nova_linha)
+
+        # Converter a lista de novas linhas combinadas em um DataFrame
+        novas_linhas_df = pd.DataFrame(novas_linhas_combinadas)
+
+        # Adicionar as novas linhas ao df_grouped
+        df_grouped = pd.concat([df_grouped, novas_linhas_df])
+
+        # Resetar o índice do DataFrame resultante
+        df_grouped = df_grouped.reset_index(drop=True)
+
         df_grouped.to_csv(f'gold/{PREFIXO_NOME_ANOS}-caps-agrupados-por-tipo-por-regiao-saude.csv', sep=';',
                           index=False,
                           decimal=',')
@@ -809,41 +980,33 @@ def combinar_arquivos_cepaberto():
                     index=False)
 
 
-if __name__ == "__main__":
-    combinar_arquivos_cepaberto()
-    exit(1)
+def method_name():
+    global combinado
     criar_arquivo_lista_tipo_caps()
     criar_arquivo_lista_anos()
     criar_arquivo_lista_anos_leitos()
-
     populacao = Populacao()
     populacao.obter_detalhes_populacao_por_municipio()
     populacao.obter_detalhes_populacao_por_estado()
-
     estado = Estado()
     estado.enriquecer_estados()
-
     municipio = Municipio()
     municipio.enriquecer_municipios()
-
     relacao = EstabelecimentoSubtipo(
         anos=ANOS_CONSIDERADOS,
         mes=MES_COMPETENCIA_CONSIDERADO
     )
     relacao.filtrar_caps()
-
     estabelecimento = Estabelecimento(
         anos=ANOS_CONSIDERADOS,
         mes=MES_COMPETENCIA_CONSIDERADO
     )
     estabelecimento.filtrar_caps()
-
     subtipo = Subtipo(
         anos=ANOS_CONSIDERADOS,
         mes=MES_COMPETENCIA_CONSIDERADO
     )
     subtipo.filtrar_caps()
-
     combinado = Combinado(
         anos=ANOS_CONSIDERADOS,
         mes=MES_COMPETENCIA_CONSIDERADO,
@@ -853,11 +1016,14 @@ if __name__ == "__main__":
     )
     combinado.combinar_estabelecimento_subtipo()
     combinado.combinar_arquivos_ano()
-
     combinado = CombinadoEnriquecido(
         combinado=combinado
     )
     combinado.enriquecer_cnes()
+
+
+if __name__ == "__main__":
+    #method_name()
 
     datamart_indicador_caps_municipio = DatamartIndicadorCapsMunicipio()
     datamart_indicador_caps_municipio.criar_datamart_com_indices_cobertura_caps_por_municipio()
