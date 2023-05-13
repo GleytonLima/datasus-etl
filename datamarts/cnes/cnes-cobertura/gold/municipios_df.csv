@@ -1,0 +1,34 @@
+MUNICIPIO_CODIGO;MUNICIPIO_NOME;latitude;longitude;capital;ESTADO_CODIGO;siafi_id;ddd;fuso_horario;ESTADO_SIGLA;REGIAO_SAUDE_CODIGO;REGIAO_SAUDE_NOME;ESTADO_NOME;MUNICIPIO_POPULACAO
+530011;Plano Piloto;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53002;CENTRAL;Distrito Federal;217073
+530012;Gama;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53005;SUL;Distrito Federal;132404
+530013;Taguatinga;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53008;SUDOESTE;Distrito Federal;210142
+530014;Brazlandia;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53007;OESTE;Distrito Federal;53534
+530015;Sobradinho;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53004;NORTE;Distrito Federal;69363
+530016;Planaltina;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53004;NORTE;Distrito Federal;130204
+530017;Paranoa;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53006;LESTE;Distrito Federal;65519
+530018;Nucleo Bandeirante;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53003;CENTRO-SUL;Distrito Federal;24786
+530019;Ceilandia;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53007;OESTE;Distrito Federal;349955
+530020;Guara;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53003;CENTRO-SUL;Distrito Federal;133748
+530021;Cruzeiro;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53002;CENTRAL;Distrito Federal;31079
+530022;Samambaia;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53008;SUDOESTE;Distrito Federal;231942
+530023;Santa Maria;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53005;SUL;Distrito Federal;126262
+530024;Sao Sebastiao;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53006;LESTE;Distrito Federal;92750
+530025;Recanto das Emas;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53008;SUDOESTE;Distrito Federal;101058
+530026;Lago Sul;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53002;CENTRAL;Distrito Federal;29662
+530027;Riacho Fundo;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53003;CENTRO-SUL;Distrito Federal;42022
+530028;Lago Norte;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53002;CENTRAL;Distrito Federal;36474
+530029;Candangolandia;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53003;CENTRO-SUL;Distrito Federal;16489
+530030;Aguas Claras;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53008;SUDOESTE;Distrito Federal;117346
+530031;Riacho Fundo II;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53003;CENTRO-SUL;Distrito Federal;85047
+530032;Sudoeste/Octogonal;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53002;CENTRAL;Distrito Federal;54559
+530033;Varjao;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53002;CENTRAL;Distrito Federal;8891
+530034;Park Way;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53003;CENTRO-SUL;Distrito Federal;21511
+530035;SCIA;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53003;CENTRO-SUL;Distrito Federal;35520
+530036;Sobradinho II;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53004;NORTE;Distrito Federal;76125
+530037;Jardim Botanico;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53006;LESTE;Distrito Federal;51650
+530038;Itapoa;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53006;LESTE;Distrito Federal;62234
+530039;SIA;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53003;CENTRO-SUL;Distrito Federal;1926
+530040;Vicente Pires;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53008;SUDOESTE;Distrito Federal;66753
+530041;Fercal;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53004;NORTE;Distrito Federal;8687
+530042;Sol Nascente/Por do Sol;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53007;OESTE;Distrito Federal;83102
+530043;Arniqueira;-1;-1;0;53;-1;-1;America/Sao_Paulo;DF;53008;SUDOESTE;Distrito Federal;39236

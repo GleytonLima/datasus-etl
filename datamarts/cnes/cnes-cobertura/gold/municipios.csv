@@ -754,7 +754,6 @@ MUNICIPIO_CODIGO;MUNICIPIO_NOME;latitude;longitude;capital;ESTADO_CODIGO;siafi_i
 170360;Brasilândia do Tocantins;-8.38918;-48.4822;0;17;339;63;America/Sao_Paulo;TO;17004;Cerrado Tocantins Araguaia;Tocantins;1947
 120010;Brasiléia;-10.995;-68.7497;0;12;105;68;America/Rio_Branco;AC;12001;Alto Acre;Acre;25786
 220196;Brasileira;-4.1337;-41.7859;0;22;2283;86;America/Sao_Paulo;PI;22003;Cocais;Piauí;8438
-530010;Brasília;-15.7795;-47.9297;1;53;9701;61;America/Sao_Paulo;DF;53001;Distrito Federal;Distrito Federal;2923369
 310860;Brasília de Minas;-16.2104;-44.4299;0;31;4171;38;America/Sao_Paulo;MG;31049;Brasília de Minas/São Francisco;Minas Gerais;31246
 510190;Brasnorte;-12.1474;-57.9833;0;51;9873;66;America/Porto_Velho;MT;51008;Noroeste Matogrossense;Mato Grosso;18407
 350770;Braúna;-21.499;-50.3175;0;35;6255;18;America/Sao_Paulo;SP;35023;Consórcios do DRS II;São Paulo;5358
@@ -5569,3 +5568,36 @@ MUNICIPIO_CODIGO;MUNICIPIO_NOME;latitude;longitude;capital;ESTADO_CODIGO;siafi_i
 355715;Zacarias;-21.0506;-50.0552;0;35;2973;18;America/Sao_Paulo;SP;35156;José Bonifácio;São Paulo;2680
 211400;Zé Doca;-3.27014;-45.6553;0;21;1287;98;America/Sao_Paulo;MA;21019;Zé Doca;Maranhão;40786
 421985;Zortéa;-27.4521;-51.552;0;42;950;49;America/Sao_Paulo;SC;42008;Meio Oeste;Santa Catarina;3925
+530011;Plano Piloto;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53002;CENTRAL;Distrito Federal;217073
+530012;Gama;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53005;SUL;Distrito Federal;132404
+530013;Taguatinga;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53008;SUDOESTE;Distrito Federal;210142
+530014;Brazlandia;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53007;OESTE;Distrito Federal;53534
+530015;Sobradinho;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53004;NORTE;Distrito Federal;69363
+530016;Planaltina;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53004;NORTE;Distrito Federal;130204
+530017;Paranoa;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53006;LESTE;Distrito Federal;65519
+530018;Nucleo Bandeirante;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53003;CENTRO-SUL;Distrito Federal;24786
+530019;Ceilandia;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53007;OESTE;Distrito Federal;349955
+530020;Guara;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53003;CENTRO-SUL;Distrito Federal;133748
+530021;Cruzeiro;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53002;CENTRAL;Distrito Federal;31079
+530022;Samambaia;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53008;SUDOESTE;Distrito Federal;231942
+530023;Santa Maria;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53005;SUL;Distrito Federal;126262
+530024;Sao Sebastiao;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53006;LESTE;Distrito Federal;92750
+530025;Recanto das Emas;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53008;SUDOESTE;Distrito Federal;101058
+530026;Lago Sul;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53002;CENTRAL;Distrito Federal;29662
+530027;Riacho Fundo;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53003;CENTRO-SUL;Distrito Federal;42022
+530028;Lago Norte;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53002;CENTRAL;Distrito Federal;36474
+530029;Candangolandia;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53003;CENTRO-SUL;Distrito Federal;16489
+530030;Aguas Claras;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53008;SUDOESTE;Distrito Federal;117346
+530031;Riacho Fundo II;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53003;CENTRO-SUL;Distrito Federal;85047
+530032;Sudoeste/Octogonal;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53002;CENTRAL;Distrito Federal;54559
+530033;Varjao;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53002;CENTRAL;Distrito Federal;8891
+530034;Park Way;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53003;CENTRO-SUL;Distrito Federal;21511
+530035;SCIA;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53003;CENTRO-SUL;Distrito Federal;35520
+530036;Sobradinho II;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53004;NORTE;Distrito Federal;76125
+530037;Jardim Botanico;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53006;LESTE;Distrito Federal;51650
+530038;Itapoa;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53006;LESTE;Distrito Federal;62234
+530039;SIA;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53003;CENTRO-SUL;Distrito Federal;1926
+530040;Vicente Pires;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53008;SUDOESTE;Distrito Federal;66753
+530041;Fercal;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53004;NORTE;Distrito Federal;8687
+530042;Sol Nascente/Por do Sol;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53007;OESTE;Distrito Federal;83102
+530043;Arniqueira;-1.0;-1.0;0;53;-1;-1;America/Sao_Paulo;DF;53008;SUDOESTE;Distrito Federal;39236
