@@ -33,7 +33,7 @@ Os arquivos de exemplo foram enviados para https://unbdatasus.dfs.core.windows.n
 
 Para executar o workflow manualmente, siga as [instruções da documentação oficial](https://docs.github.com/en/actions/managing-workflow-runs/manually-running-a-workflow)
 
-## Executando o script localmente
+## Executando o script localmente (Windows)
 
 Para executar o script em seu ambiente de desenvolvimento, siga os passos abaixo:
 
@@ -47,6 +47,35 @@ Para executar o script em seu ambiente de desenvolvimento, siga os passos abaixo
    3. Para SIH: `Rscript.exe extrair-transformar-enviar-sih.R 2022-12 DF`.
 
 3. Um arquivo .parquet será gerado na raiz do projeto. Note que ele não é adicionado ao controle de versão.
+
+## Executando o script localmente em Linux (Ubuntu)
+
+- Instalar as seguintes libs:     
+    `sudo apt install build-essential aptitude libcurl4-gnutls-dev libssl-dev libcurl4-openssl-dev libfontconfig1-dev libxml2-dev libharfbuzz-dev libfribidi-dev libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev`
+
+- Instalar R (https://cran.r-project.org/bin/linux/ubuntu/)
+
+- Instalar as dependências do projeto R:     
+
+	`install.packages("remotes")`
+
+	`install.packages("arrow")`
+
+	`remotes::install_github("rfsaldanha/microdatasus")`
+
+	`install.packages("lubridate")`
+
+	
+- Instalar pip
+
+Para executar o script de extração, utilize o Rscript seguido do nome do script, seguido do ano/mês (yyyy/mm) de download dos dados, seguido da UF de download, como no exemplo:
+
+`Rscript extrair-transformar-enviar-sih.R 2022-12 DF`
+
+
+Para executar os scripts de transformação de cada datamart, basta executar um script normalmente com Python:
+
+`python3 transform.py`
 
 ## Enviando arquivos para o storage da Azure
 
