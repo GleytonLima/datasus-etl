@@ -1,8 +1,9 @@
 install.packages("read.dbc")
 library(read.dbc)
+library(here)
 
 # define o caminho completo para a pasta em que os arquivos .dbc estão armazenados
-caminho <- file.path("bronze")
+caminho <- ("datamarts/cnes-ep/bronze")
 
 # lista todos os arquivos .dbc na pasta
 arquivos <- list.files(path = caminho, pattern = "\\.dbc$", full.names = TRUE)
