@@ -56,6 +56,59 @@ def calcular_quantitativo_servicos_residenciais_terapeuticos():
     contagem.to_csv(caminho_saida, sep=';', index=False)
 
 
+def calcular_quantitativo_servicos_hospitalares_saude_mental():
+    # Obtém a lista de arquivos CSV na pasta "bronze"
+    arquivos_csv = glob.glob('bronze/*.csv')
+
+    # Lista para armazenar os DataFrames filtrados de cada arquivo
+    dfs_filtrados = []
+
+    # Itera sobre cada arquivo CSV
+    for arquivo in arquivos_csv:
+        # Carrega o arquivo CSV em um DataFrame
+        df = pd.read_csv(arquivo)
+
+        # Filtra somente as linhas com SERV_ESP igual a 115
+        df_filtrado = df[df['SERV_ESP'] == 115]
+
+        # Filtra os CLASS_SR igual a 003
+        df_filtrado = df_filtrado[df_filtrado['CLASS_SR'].isin([2, 3])]
+
+        # Cria a coluna CODUF com os dois primeiros dígitos da coluna CODUFMUN
+        df_filtrado['CODUF'] = df_filtrado['CODUFMUN'].astype(str).str[:2]
+
+        # Converte a coluna "COMPETEN" para o tipo string
+        df_filtrado['COMPETEN'] = df_filtrado['COMPETEN'].astype(str)
+
+        # Extrai os primeiros 4 caracteres da coluna "COMPETEN" para obter o ano
+        df_filtrado['ANO'] = df_filtrado['COMPETEN'].str[:4]
+
+        # Adiciona o DataFrame filtrado à lista
+        dfs_filtrados.append(df_filtrado)
+
+    # Concatena todos os DataFrames filtrados em um único DataFrame
+    df_resultado = pd.concat(dfs_filtrados)
+
+    # Conta as linhas agrupadas por CODUF, CODUFMUN, SERV_ESP e CLASS_SR
+    contagem = df_resultado.groupby(['CODUF', 'CODUFMUN', 'SERV_ESP', 'CLASS_SR', 'ANO']).size().reset_index(
+        name='TOTAL_SERVICO_HOSPITALAR_SAUDE_MENTAL')
+
+    # Define o caminho do arquivo de saída
+    caminho_saida = 'gold/quantitativo_servicos_hospitalares_saude_mental.csv'
+
+    contagem.rename(columns={
+        "SERV_ESP": "SERVICO_ESPECIALIZADO_CODIGO",
+        "CLASS_SR": "SERVICO_ESPECIALIZADO_CLASSIFICACAO_CODIGO",
+        "CODUF": "ESTADO_CODIGO",
+        "CODUFMUN": "MUNICIPIO_CODIGO"
+    }, inplace=True)
+
+    contagem = contagem.dropna(subset=['ANO'])
+
+    # Salva o DataFrame filtrado em um arquivo CSV separado por ponto e vírgula
+    contagem.to_csv(caminho_saida, sep=';', index=False)
+
+
 def calcular_quantitativo_ua_adulto_infantil():
     # Obtém a lista de arquivos CSV na pasta "bronze"
     arquivos_csv = glob.glob('bronze/*.csv')
@@ -126,8 +179,11 @@ def gerar_arquivo_servico_especializado():
 def gerar_arquivo_classificacao_srt():
     # Dados do DataFrame
     data = {
-        'SERVICO_ESPECIALIZADO_CLASSIFICACAO_CODIGO': [4, 5, 6, 7],
-        'SERVICO_ESPECIALIZADO_CLASSIFICACAO_DESCRICAO': ['Serviço Residencial Terapêutico SRT - Tipo I',
+        'SERVICO_ESPECIALIZADO_CLASSIFICACAO_CODIGO': [2, 3, 4, 5, 6, 7],
+        'SERVICO_ESPECIALIZADO_CLASSIFICACAO_DESCRICAO': [
+                                                          'Atendimento Psicossocial',
+                                                          'Serviço Hospitalar para Saúde Mental',
+                                                          'Serviço Residencial Terapêutico SRT - Tipo I',
                                                           'Serviço Residencial Terapêutico SRT - Tipo II',
                                                           'UA Adulto',
                                                           'UA Infantil']
@@ -141,8 +197,9 @@ def gerar_arquivo_classificacao_srt():
 
 
 if __name__ == "__main__":
-    calcular_quantitativo_ua_adulto_infantil()
+    #calcular_quantitativo_ua_adulto_infantil()
 
-    gerar_arquivo_servico_especializado()
+    #gerar_arquivo_servico_especializado()
 
     gerar_arquivo_classificacao_srt()
+    calcular_quantitativo_servicos_hospitalares_saude_mental()
