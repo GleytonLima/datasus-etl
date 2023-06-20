@@ -13,7 +13,18 @@ def calcular_quantitativo_servicos_residenciais_terapeuticos():
     # Itera sobre cada arquivo CSV
     for arquivo in arquivos_csv:
         # Carrega o arquivo CSV em um DataFrame
-        df = pd.read_csv(arquivo)
+        df = pd.read_csv(arquivo, delimiter=';', quotechar=None, quoting=3, low_memory=False).applymap(
+            lambda x: x.replace('"', '') if isinstance(x, str) else x)
+
+        # Substituir as aspas por uma string vazia nos títulos das colunas
+        df.columns = df.columns.str.replace('"', '')
+
+        # Tentar interpretar o tipo de cada coluna
+        df = df.infer_objects()
+
+        # Convertendo colunas em tipos
+        df['SERV_ESP'] = df['SERV_ESP'].astype(int)
+        df['CLASS_SR'] = df['CLASS_SR'].astype(int)
 
         # Filtra somente as linhas com SERV_ESP igual a 115
         df_filtrado = df[df['SERV_ESP'] == 115]
@@ -66,7 +77,17 @@ def calcular_quantitativo_servicos_hospitalares_saude_mental():
     # Itera sobre cada arquivo CSV
     for arquivo in arquivos_csv:
         # Carrega o arquivo CSV em um DataFrame
-        df = pd.read_csv(arquivo)
+        df = pd.read_csv(arquivo, delimiter=';', quotechar=None, quoting=3, low_memory=False).applymap(lambda x: x.replace('"', '') if isinstance(x, str) else x)
+
+        # Substituir as aspas por uma string vazia nos títulos das colunas
+        df.columns = df.columns.str.replace('"', '')
+
+        # Tentar interpretar o tipo de cada coluna
+        df = df.infer_objects()
+
+        # Convertendo colunas em tipos
+        df['SERV_ESP'] = df['SERV_ESP'].astype(int)
+        df['CLASS_SR'] = df['CLASS_SR'].astype(int)
 
         # Filtra somente as linhas com SERV_ESP igual a 115
         df_filtrado = df[df['SERV_ESP'] == 115]
@@ -119,7 +140,18 @@ def calcular_quantitativo_ua_adulto_infantil():
     # Itera sobre cada arquivo CSV
     for arquivo in arquivos_csv:
         # Carrega o arquivo CSV em um DataFrame
-        df = pd.read_csv(arquivo)
+        df = pd.read_csv(arquivo, delimiter=';', quotechar=None, quoting=3, low_memory=False).applymap(
+            lambda x: x.replace('"', '') if isinstance(x, str) else x)
+
+        # Substituir as aspas por uma string vazia nos títulos das colunas
+        df.columns = df.columns.str.replace('"', '')
+
+        # Tentar interpretar o tipo de cada coluna
+        df = df.infer_objects()
+
+        # Convertendo colunas em tipos
+        df['SERV_ESP'] = df['SERV_ESP'].astype(int)
+        df['CLASS_SR'] = df['CLASS_SR'].astype(int)
 
         # Filtra somente as linhas com SERV_ESP igual a 115
         df_filtrado = df[df['SERV_ESP'] == 115]
@@ -197,9 +229,9 @@ def gerar_arquivo_classificacao_srt():
 
 
 if __name__ == "__main__":
-    #calcular_quantitativo_ua_adulto_infantil()
+    calcular_quantitativo_ua_adulto_infantil()
 
-    #gerar_arquivo_servico_especializado()
+    gerar_arquivo_servico_especializado()
 
     gerar_arquivo_classificacao_srt()
     calcular_quantitativo_servicos_hospitalares_saude_mental()

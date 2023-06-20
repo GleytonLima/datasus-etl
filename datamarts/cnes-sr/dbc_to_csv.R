@@ -23,6 +23,6 @@ for (i in 1:length(arquivos)) {
   caminho_bronze <- file.path("bronze", basename(nome_csv))
   
   # grava o dataframe em um arquivo CSV
-  write.csv(df, file = caminho_bronze, row.names = FALSE, sep = ";", fileEncoding = "utf-8")
+  write.csv2(df, file = caminho_bronze, row.names = FALSE, fileEncoding = "utf-8")
 
 }
