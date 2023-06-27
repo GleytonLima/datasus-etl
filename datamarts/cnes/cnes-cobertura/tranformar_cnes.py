@@ -13,6 +13,14 @@ ANOS_LEITOS_CONSIDERADOS = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022
 MES_COMPETENCIA_CONSIDERADO = "12"
 
 
+def renomear_nomes_caps(df_cnes_enriquecido):
+    df_cnes_enriquecido['TIPO'] = df_cnes_enriquecido['TIPO'].replace(
+        {'CAPS ALCOOL E DROGAS III - MUNICIPAL': 'CAPS AD',
+         'CAPS ALCOOL E DROGAS III - REGIONAL': 'CAPS AD',
+         'CAPS ALCOOL E DROGA': 'CAPS AD',
+         'CAPS INFANTO/JUVENIL': 'CAPS IJ'})
+
+
 class Populacao:
     def gerar_nome_arquivo_populacao_estado_entrada(self):
         return 'bronze/POP2022_Brasil_e_UFs.xls'
@@ -673,8 +681,8 @@ multiplicador = {
     'CAPS ALCOOL E DROGAS III - MUNICIPAL': 1,
     'CAPS ALCOOL E DROGAS III - REGIONAL': 1,
     'CAPS AD IV': 5,
-    'CAPS ALCOOL E DROGA': 1,
-    'CAPS INFANTO/JUVENIL': 1,
+    'CAPS AD': 1,
+    'CAPS IJ': 1,
     'CAPS III': 1.5,
     'Não informado': 0
 }
@@ -691,9 +699,7 @@ class DatamartIndicadorCapsMunicipio:
         # df_cnes_enriquecido['TIPO'].fillna('Não informado', inplace=True)
         df_cnes_enriquecido['TIPO'].dropna()
 
-        df_cnes_enriquecido['TIPO'] = df_cnes_enriquecido['TIPO'].replace(
-            {'CAPS ALCOOL E DROGAS III - MUNICIPAL': 'CAPS ALCOOL E DROGA',
-             'CAPS ALCOOL E DROGAS III - REGIONAL': 'CAPS ALCOOL E DROGA'})
+        renomear_nomes_caps(df_cnes_enriquecido)
 
         # Agrupa as linhas e conta o número de linhas em cada grupo
         df_grouped = df_cnes_enriquecido.groupby(
@@ -787,7 +793,6 @@ class DatamartIndicadorCapsMunicipio:
         # Resetar o índice do DataFrame resultante
         df_grouped = df_grouped.reset_index(drop=True)
 
-
         df_grouped.to_csv(F'gold/{PREFIXO_NOME_ANOS}-caps-agrupados-por-tipo.csv', sep=';', index=False, decimal=',')
 
 
@@ -800,6 +805,9 @@ class DatamartIndicadorCapsEstado:
         df_cnes_enriquecido = pd.read_csv(f'gold/{PREFIXO_NOME_ANOS}-cnes-enriquecido.csv', sep=';')
 
         df_cnes_enriquecido['TIPO'].fillna('Não informado', inplace=True)
+
+        # Ajustando nomes para simplificar
+        renomear_nomes_caps(df_cnes_enriquecido)
 
         # Agrupa as linhas e conta o número de linhas em cada grupo
         df_grouped = df_cnes_enriquecido.groupby(
@@ -830,6 +838,7 @@ class DatamartIndicadorCapsRegiaoSaude:
         df_cnes_enriquecido = pd.read_csv(f'gold/{PREFIXO_NOME_ANOS}-cnes-enriquecido.csv', sep=';')
         df_cnes_enriquecido = df_cnes_enriquecido.rename(columns={'CO_ESTADO_GESTOR': 'codigo_uf'})
         df_cnes_enriquecido['TIPO'].fillna('Não informado', inplace=True)
+        renomear_nomes_caps(df_cnes_enriquecido)
 
         # Agrupa as linhas e conta o número de linhas em cada grupo
         cols = ['ESTADO_CODIGO',
@@ -853,9 +862,9 @@ class DatamartIndicadorCapsRegiaoSaude:
         # TODO: Preencher os regionais vazios com zero
         ### preencher municipios vazios com zeros
         df_regioes_saude = pd.read_csv('gold/regioes-saude-enriquecido.csv',
-                                    sep=";",
-                                    dtype={'REGIAO_SAUDE_CODIGO': object,
-                                           })
+                                       sep=";",
+                                       dtype={'REGIAO_SAUDE_CODIGO': object,
+                                              })
         # Merge dos DataFrames df_grouped e df_municipios
         # Convertendo as colunas-chave para o tipo correto
         df_grouped['REGIAO_SAUDE_CODIGO'] = df_grouped['REGIAO_SAUDE_CODIGO'].astype(int)
@@ -922,22 +931,22 @@ def criar_arquivo_lista_tipo_caps():
     data = {
         'TIPO': [
             'CAPS AD IV',
-            'CAPS ALCOOL E DROGA',
+            'CAPS AD',
             'CAPS ALCOOL E DROGAS III - MUNICIPAL',
             'CAPS ALCOOL E DROGAS III - REGIONAL',
             'CAPS I',
             'CAPS II',
             'CAPS III',
-            'CAPS INFANTO/JUVENIL'
+            'CAPS IJ'
         ],
         'Descrição': [
             'CAPS AD IV',
-            'CAPS ALCOOL E DROGA',
+            'CAPS AD',
             'CAPS ALCOOL E DROGAS III - MUNICIPAL',
             'CAPS ALCOOL E DROGAS III - REGIONAL',
             'CAPS I', 'CAPS II',
             'CAPS III',
-            'CAPS INFANTO/JUVENIL'
+            'CAPS IJ'
         ]
     }
 
@@ -980,7 +989,7 @@ def combinar_arquivos_cepaberto():
                     index=False)
 
 
-def method_name():
+def preparar_dados():
     global combinado
     criar_arquivo_lista_tipo_caps()
     criar_arquivo_lista_anos()
@@ -1023,7 +1032,7 @@ def method_name():
 
 
 if __name__ == "__main__":
-    #method_name()
+    preparar_dados()
 
     datamart_indicador_caps_municipio = DatamartIndicadorCapsMunicipio()
     datamart_indicador_caps_municipio.criar_datamart_com_indices_cobertura_caps_por_municipio()
