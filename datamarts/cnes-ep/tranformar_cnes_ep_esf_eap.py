@@ -106,7 +106,7 @@ def agrupar_arquivos():
     ano_min = combined_df['ANO'].min()
     ano_max = combined_df['ANO'].max()
     anos = pd.date_range(start=str(int(ano_min)), end=str(int(ano_max) + 1), freq='Y').year
-    tipos_equipe = [16, 17, 18, 1, 4, 12, 14, 24, 27, 30, 33, 36, 70, 76]
+    tipos_equipe = [16, 17, 18, 1, 12, 14, 24, 27, 30, 33, 36, 70, 76]
 
     df3 = pd.DataFrame([(e, t, a) for e in municipios for a in anos for t in tipos_equipe],
                        columns=['MUNICIPIO_CODIGO', 'TIPO_EQP', 'ANO'])
@@ -134,9 +134,9 @@ def agrupar_arquivos():
     df_merged['TOTAL_EQUIPES'] = df_merged['TOTAL_EQUIPES'].astype('Int64')
 
     # Mapear os valores da coluna 'código' para a nova coluna 'TIPO_EQP_CLASSIFICACAO'
-    codigo_map = {16: 'EAP', 17: 'EAP', 18: 'EAP', 76: 'EAP', 1: 'ESF', 4: 'ESF', 12: 'ESF', 14: 'ESF', 24: 'ESF',
+    codigo_map = {16: 'EAP', 17: 'EAP', 18: 'EAP', 76: 'EAP', 1: 'ESF', 12: 'ESF', 14: 'ESF', 24: 'ESF',
                   27: 'ESF', 30: 'ESF', 33: 'ESF', 36: 'ESF', 70: 'ESF'}
-    df['TIPO_EQP_CLASSIFICACAO'] = df['código'].map(codigo_map)
+    df_merged['TIPO_EQP_CLASSIFICACAO'] = df_merged['TIPO_EQP'].map(codigo_map)
 
     # Write the combined dataframe to a new CSV file
     output_file = os.path.join('gold/', 'cnes-ep-esf-eap.csv')
