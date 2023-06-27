@@ -133,6 +133,11 @@ def agrupar_arquivos():
     df_merged['MES'] = df_merged['MES'].astype('Int64')
     df_merged['TOTAL_EQUIPES'] = df_merged['TOTAL_EQUIPES'].astype('Int64')
 
+    # Mapear os valores da coluna 'código' para a nova coluna 'TIPO_EQP_CLASSIFICACAO'
+    codigo_map = {16: 'EAP', 17: 'EAP', 18: 'EAP', 76: 'EAP', 1: 'ESF', 4: 'ESF', 12: 'ESF', 14: 'ESF', 24: 'ESF',
+                  27: 'ESF', 30: 'ESF', 33: 'ESF', 36: 'ESF', 70: 'ESF'}
+    df['TIPO_EQP_CLASSIFICACAO'] = df['código'].map(codigo_map)
+
     # Write the combined dataframe to a new CSV file
     output_file = os.path.join('gold/', 'cnes-ep-esf-eap.csv')
     df_merged.to_csv(output_file, sep=';', index=False)
