@@ -26,7 +26,7 @@ Para usar o script, por exemplo, para baixar arquivos do CNES-ST no formato CSV,
 commando:
 
 ```commandline
-docker run -v $pwd/scripts:/app -v $pwd/data:/data -e SCRIPT_NAME=download_cnes_st.py gleytonlima/datasusftp
+docker run --rm --name datasus-etl -v $pwd/scripts:/app -v $pwd/data:/data -e SCRIPT_NAME=download_cnes_st.py gleytonlima/datasusftp
 ```
 
 Esse comando:
@@ -39,25 +39,34 @@ Outros exemplos:
 CNES-SR
 
 ```commandline
-docker run -v $pwd/scripts:/app -v $pwd/data:/data -e SCRIPT_NAME=download_cnes_sr.py gleytonlima/datasusftp
+docker run --rm --name datasus-etl -v $pwd/scripts:/app -v $pwd/data:/data -e SCRIPT_NAME=download_cnes_sr.py gleytonlima/datasusftp
 ```
 
 CNES-LT
 
 ```commandline
-docker run -v $pwd/scripts:/app -v $pwd/data:/data -e SCRIPT_NAME=download_cnes_lt.py gleytonlima/datasusftp
+docker run --rm --name datasus-etl -v $pwd/scripts:/app -v $pwd/data:/data -e SCRIPT_NAME=download_cnes_lt.py gleytonlima/datasusftp
 ```
 
 CNES-SR
 
 ```commandline
-docker run -v $pwd/scripts:/app -v $pwd/data:/data -e SCRIPT_NAME=download_cnes_sr.py gleytonlima/datasusftp
+docker run --rm --name datasus-etl -v $pwd/scripts:/app -v $pwd/data:/data -e SCRIPT_NAME=download_cnes_sr.py gleytonlima/datasusftp
+```
+
+CNES-RAW
+
+Dados brutos do CNES. Útil para extrair dados que não estão nos arquivos padrão disponibilizados
+pelo DATASUS
+
+```commandline
+docker run --rm --name datasus-etl -v $pwd/scripts:/app -v $pwd/data:/data -e SCRIPT_NAME=download_cnes_raw.py gleytonlima/datasusftp
 ```
 
 Comando em modo interativo para navegar pelos arquivos do container em execução
 
 ```commandline
-docker run -it -v $pwd/scripts:/app -v $pwd/data:/data -e SCRIPT_NAME=download_cnes_st.py gleytonlima/datasusftp bash
+docker run -it --rm --name datasus-etl -v $pwd/scripts:/app -v $pwd/data:/data -e SCRIPT_NAME=download_cnes_st.py gleytonlima/datasusftp bash
 ```
 
 ## Conversão do DBC em CSV
