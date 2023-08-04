@@ -52,7 +52,8 @@ def sumarizar_arquivos():
 
     df.dropna(subset=['TIPO_EQP'], inplace=True)
     df.dropna(subset=['COMPETEN'], inplace=True)
-    df = df[(df["TIPO_EQP"] == 16) | (df["TIPO_EQP"] == 17) | (df["TIPO_EQP"] == 18) | (df["TIPO_EQP"] == 1) | (df["TIPO_EQP"] == 4) | (df["TIPO_EQP"] == 12) | (df["TIPO_EQP"] == 14) | (df["TIPO_EQP"] == 24) | (df["TIPO_EQP"] == 27) | (df["TIPO_EQP"] == 30) | (df["TIPO_EQP"] == 33) | (df["TIPO_EQP"] == 36) | (df["TIPO_EQP"] == 70) | (df["TIPO_EQP"] == 76)]
+    tipos_equipe = [16, 17, 18, 1, 4, 12, 14, 24, 27, 30, 33, 36, 70, 76]
+    df = df[df["TIPO_EQP"].isin(tipos_equipe)]
 
     # Converter a coluna COMPETEN para string
     df["COMPETEN"] = df["COMPETEN"].astype(str)
