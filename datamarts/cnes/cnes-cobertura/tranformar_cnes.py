@@ -34,7 +34,7 @@ class Populacao:
     def gerar_nome_arquivo_populacao_municipio_saida(self):
         return 'silver/POP2022_Municipios.csv'
 
-    def obter_detalhes_populacao_por_estado(self):
+    def converter_censo_uf_xls_em_csv(self):
         # Carrega o arquivo XLS em um DataFrame do Pandas
         df = pd.read_excel(self.gerar_nome_arquivo_populacao_estado_entrada(), skiprows=[0], header=[0],
                            usecols=lambda x: 'Unnamed' not in x)
@@ -89,7 +89,7 @@ class Populacao:
                   sep=";",
                   index=False)
 
-    def obter_detalhes_populacao_por_municipio(self):
+    def converter_censo_municipio_xls_em_csv(self):
         df = pd.read_excel(self.gerar_nome_arquivo_populacao_municipio_entrada(), skiprows=[0], header=[0],
                            dtype={'COD. UF': str, 'COD. MUNIC': str})
 
@@ -159,18 +159,18 @@ class Municipio:
                                              dtype={'MUNICIPIO_CODIGO': object})
 
         df_municipios_com_regionais_saude = pd.read_csv('bronze/municipios-com-nome-regiao-saude.csv',
-                                                        dtype={'Município': object,
-                                                               'Nome da Região de Saúde': object,
-                                                               'Cód IBGE': object})
+                                                        dtype={'cidade': object,
+                                                               'no_colegiado': object,
+                                                               'ibge': object})
 
         # Renomeie as colunas para que correspondam
         df_municipios_com_regionais_saude.rename(
             columns={
-                'UF': 'ESTADO_SIGLA',
-                'Município': 'MUNICIPIO_NOME',
-                'Nome da Região de Saúde': 'REGIAO_SAUDE_NOME',
-                'Cód Região de Saúde': 'REGIAO_SAUDE_CODIGO',
-                'Cód IBGE': 'MUNICIPIO_CODIGO'},
+                'uf': 'ESTADO_SIGLA',
+                'cidade': 'MUNICIPIO_NOME',
+                'no_colegiado': 'REGIAO_SAUDE_NOME',
+                'co_colegiado': 'REGIAO_SAUDE_CODIGO',
+                'ibge': 'MUNICIPIO_CODIGO'},
             inplace=True)
         df_municipios_com_regionais_saude = pd.merge(df_municipios_com_regionais_saude,
                                                      df_estados[
@@ -192,6 +192,7 @@ class Municipio:
                                  on='MUNICIPIO_CODIGO',
                                  how='left')
 
+        # municipios ficticios do DF
         df_municipios_df_com_regionais_saude = pd.read_csv('gold/municipios_df.csv', sep=";")
 
         # deletando unico registro do DF para substituir pelas regioes administrativas
@@ -995,8 +996,8 @@ def preparar_dados():
     criar_arquivo_lista_anos()
     criar_arquivo_lista_anos_leitos()
     populacao = Populacao()
-    populacao.obter_detalhes_populacao_por_municipio()
-    populacao.obter_detalhes_populacao_por_estado()
+    populacao.converter_censo_municipio_xls_em_csv()
+    populacao.converter_censo_uf_xls_em_csv()
     estado = Estado()
     estado.enriquecer_estados()
     municipio = Municipio()

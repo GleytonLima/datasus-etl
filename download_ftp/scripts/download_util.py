@@ -5,9 +5,15 @@ import subprocess
 import urllib.request
 import zipfile
 
+import pandas as pd
+import requests
+
 urls_ftp = {
     "CNES": "ftp://ftp.datasus.gov.br/dissemin/publicos/CNES/200508_/Dados/",
-    "CNES_RAW": "ftp://ftp.datasus.gov.br/cnes/BASE_DE_DADOS_CNES_{}{}.ZIP"
+    "CNES_RAW": "ftp://ftp.datasus.gov.br/cnes/BASE_DE_DADOS_CNES_{}{}.ZIP",
+    "IBGE_UF": "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Previa_da_Populacao/POP2022_Brasil_e_UFs.xls",
+    "IBGE_MUNICIPIO": "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Previa_da_Populacao/POP2022_Municipios_20230622.xls",
+    "SAGE_REGIOES_SAUDE": "https://sage.saude.gov.br/paineis/regiaoSaude/lista.php?output=jsonbt&&order=asc"
 }
 
 system_config = {
@@ -53,7 +59,7 @@ class DowloadDataSusFtp:
 
     def convert_dbc_to_csv_with(self):
         try:
-            subprocess.run("Rscript dbc_to_csv.R", check=True, shell=True)
+            subprocess.run("Rscript scripts/dbc_to_csv.R", check=True, shell=True)
         except subprocess.CalledProcessError as e:
             print(f"Erro ao executar o script R: {e}")
 
@@ -105,3 +111,45 @@ class DowloadDataSusCnesRawFtp:
                         zip_ref.extract(nome_arquivo, diretorio_destino)
 
         print("Conteúdo dos arquivos .csv foi extraído com sucesso!")
+
+
+@dataclasses.dataclass
+class DowloadIBGEFtp:
+    def __post_init__(self):
+        self.base_url_uf = urls_ftp["IBGE_UF"]
+        self.base_url_municipio = urls_ftp["IBGE_MUNICIPIO"]
+
+    def download_file(self, url, file_name, destination_path="."):
+        try:
+            print(f"iniciando downaload do arquivo {url} {file_name} {destination_path}")
+            full_file_path = os.path.join(destination_path, file_name)
+            urllib.request.urlretrieve(url, full_file_path)
+            print(f"Arquivo {file_name} baixado com sucesso!")
+        except Exception as e:
+            print(f"Erro ao baixar o arquivo: {e}")
+
+    def download_censo_previa_2022(self):
+        self.download_file(self.base_url_uf, "POP2022_Brasil_e_UFs.xls", "/data")
+        self.download_file(self.base_url_municipio, "POP2022_Municipios.xls", "/data")
+
+
+@dataclasses.dataclass
+class DownloadSageSaudeHttp:
+    def __post_init__(self):
+        self.url = urls_ftp["SAGE_REGIOES_SAUDE"]
+
+    def download_municipios_com_regioes_saude(self):
+        data = self._make_request()
+        if data is not None:
+            df = pd.DataFrame(data)
+            df.to_csv("/data/municipios-com-nome-regiao-saude.csv", index=False, sep=";", encoding="utf-8")
+            print("arquivo municipios-com-nome-regiao-saude.csv baixado com sucesso")
+
+    def _make_request(self):
+        try:
+            response = requests.get(self.url)
+            response.raise_for_status()
+            return response.json()
+        except requests.exceptions.RequestException as e:
+            print(f"Error making the request: {e}")
+            return None

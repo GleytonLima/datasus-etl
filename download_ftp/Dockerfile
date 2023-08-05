@@ -21,4 +21,4 @@ RUN python3 -m venv .venv && \
 RUN R -e "install.packages(c('devtools', 'read.dbc'))"
 
 # Comando para executar o script definido pela variável de ambiente
-CMD python3 $SCRIPT_NAME
+CMD . .venv/bin/activate && python3 scripts/$SCRIPT_NAME

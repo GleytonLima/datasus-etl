@@ -70,20 +70,20 @@ No arquivo de saída, gerado por ano, além da junção dos três arquivos acima
 
 Esses arquivos seguem a convenção de nome [ANO]-cnes_filtrados.csv, por exemplo, 2022-cnes-filtrados.
 
-| Coluna                  | Tipo  | Descrição                                                        | Exemplo                                                 |
-| ----------------------- | ----- | ---------------------------------------------------------------- | ------------------------------------------------------- |
-| CO_UNIDADE              | Texto | Texto                                                            | 2512307567502                                           |
-| CO_CNES                 | Texto | Numérico                                                         | 7567502                                                 |
-| NO_FANTASIA             | Texto | Texto                                                            | UNIDADE DE ACOLHIMENTO INFANTO JUVENIL DR ZEZITO SERGIO |
-| CO_CEP                  | Texto | Texto                                                            | 58755000                                                |
-| TP_UNIDADE              | Texto | Numérico                                                         | 70                                                      |
-| CO_ESTADO_GESTOR        | Texto | Numérico                                                         | 25                                                      |
-| CO_MUNICIPIO_GESTOR     | Texto | Numérico                                                         | 251230                                                  |
-| CO_TIPO_ESTABELECIMENTO | Texto | Numérico                                                         | 17                                                      |
-| ANO                     | Texto | Motivo do CAPS estar desabilitado. Caso vazio, o CAPS está ativo | 2022                                                    |
-| MES                     | Texto |                                                                  | 12                                                      |
-| CO_SUB_TIPO_UNIDADE     | Texto |                                                                  | 001                                                     |
-| DS_SUB_TIPO             | Texto |                                                                  | CAPS I                                                  |
+| Coluna                  | Tipo  | Descrição | Exemplo                                                 |
+| ----------------------- | ----- |-----------| ------------------------------------------------------- |
+| CO_UNIDADE              | Texto | Texto     | 2512307567502                                           |
+| CO_CNES                 | Texto | Numérico  | 7567502                                                 |
+| NO_FANTASIA             | Texto | Texto     | UNIDADE DE ACOLHIMENTO INFANTO JUVENIL DR ZEZITO SERGIO |
+| CO_CEP                  | Texto | Texto     | 58755000                                                |
+| TP_UNIDADE              | Texto | Numérico  | 70                                                      |
+| CO_ESTADO_GESTOR        | Texto | Numérico  | 25                                                      |
+| CO_MUNICIPIO_GESTOR     | Texto | Numérico  | 251230                                                  |
+| CO_TIPO_ESTABELECIMENTO | Texto | Numérico  | 17                                                      |
+| ANO                     | Texto | Ano       | 2022                                                    |
+| MES                     | Texto |           | 12                                                      |
+| CO_SUB_TIPO_UNIDADE     | Texto |           | 001                                                     |
+| DS_SUB_TIPO             | Texto |           | CAPS I                                                  |
 
 # População dos Municípios/Estados
 
