@@ -1,5 +1,6 @@
 import dataclasses
 import glob
+import io
 import os
 import subprocess
 import urllib.request
@@ -82,6 +83,9 @@ class DowloadDataSusCnesRawFtp:
     def __post_init__(self):
         self.base_url = urls["CNES_RAW"]
 
+    def arquivo_cnes_raw_path(self):
+        return "/data/bronze/datasus/CNES/raw"
+
     def download_file(self, url, file_name, destination_path="."):
         try:
             print(f"iniciando downaload do arquivo {url} {file_name} {destination_path}")
@@ -105,9 +109,6 @@ class DowloadDataSusCnesRawFtp:
         # Diretório onde os arquivos .zip estão localizados
         diretorio_arquivos_zip = '/tmp'
 
-        # Diretório onde você deseja extrair o conteúdo dos arquivos .zip
-        diretorio_destino = f"/data/bronze/datasus/CNES/raw"
-
         # Encontrar todos os arquivos .zip que correspondem ao padrão de busca
         arquivos_zip_encontrados = glob.glob(f'{diretorio_arquivos_zip}/{padrao_busca}')
 
@@ -121,7 +122,7 @@ class DowloadDataSusCnesRawFtp:
             with zipfile.ZipFile(arquivo_zip, 'r') as zip_ref:
                 for nome_arquivo in zip_ref.namelist():
                     if nome_arquivo.endswith('.csv') and atende_condicoes(nome_arquivo):
-                        zip_ref.extract(nome_arquivo, diretorio_destino)
+                        zip_ref.extract(nome_arquivo, self.arquivo_cnes_raw_path())
 
         print("Conteúdo dos arquivos .csv foi extraído com sucesso!")
 
@@ -136,7 +137,7 @@ class DownloadIBGEFtp:
         return f'{path("/data/bronze/ibge/censo")}/POP2022_Brasil_e_UFs.xls'
 
     def arquivo_populacao_municipio(self):
-        return f'{path("/data/bronze/ibge/censo")}/POP2022_Brasil_e_UFs.xls'
+        return f'{path("/data/bronze/ibge/censo")}/POP2022_Municipios.xls'
 
     def download_populacao_municipio(self, url):
         try:
@@ -153,8 +154,8 @@ class DownloadIBGEFtp:
             print(f"Erro ao baixar o arquivo: {e}")
 
     def download_censo_previa_2022(self):
-        self.download_populacao_municipio(self.base_url_uf, "", )
-        self.download_populacao_municipio(self.base_url_municipio, "POP2022_Municipios.xls", "/data/bronze/ibge/censo")
+        self.download_populacao_municipio(self.base_url_municipio)
+        self.download_populacao_estado(self.base_url_uf)
 
 
 @dataclasses.dataclass
@@ -191,32 +192,28 @@ class DownloadDataSusCids:
     def __post_init__(self):
         self.base_url = urls["CIDS"]
 
-    def download_file(self, url, file_name, destination_path="."):
+    def tabelas_cid_path(self):
+        return "/data/bronze/datasus/cids"
+    
+    def tabelas_cid(self):
+        return f"/data/bronze/datasus/cids/CID-10-CATEGORIAS.CSV"
+
+    def download_file(self):
         try:
-            print(f"iniciando downaload do arquivo {url} {file_name} {destination_path}")
-
-            if not os.path.exists(destination_path):
-                os.makedirs(destination_path)
-
-            full_file_path = os.path.join(destination_path, file_name)
-            urllib.request.urlretrieve(url, full_file_path)
-            print(f"Arquivo {file_name} baixado com sucesso!")
+            urllib.request.urlretrieve(self.base_url, "/tmp/CID10CSV.zip")
+            print(f"Arquivo CID10CSV.zip baixado com sucesso!")
         except Exception as e:
             print(f"Erro ao baixar o arquivo: {e}")
 
     def download_tabela_cids(self):
-        file_name = "CID10CSV.zip"
-        self.download_file(self.base_url, file_name, "/data")
+        self.download_file()
 
     def extrair_arquivos(self):
         # Padrão de busca para encontrar todos os arquivos .zip que correspondem ao padrão
         padrao_busca = 'CID10CSV.zip'
 
         # Diretório onde os arquivos .zip estão localizados
-        diretorio_arquivos_zip = '/data'
-
-        # Diretório onde você deseja extrair o conteúdo dos arquivos .zip
-        diretorio_destino = '/data'
+        diretorio_arquivos_zip = '/tmp'
 
         # Encontrar todos os arquivos .zip que correspondem ao padrão de busca
         arquivos_zip_encontrados = glob.glob(f'{diretorio_arquivos_zip}/{padrao_busca}')
@@ -230,7 +227,7 @@ class DownloadDataSusCids:
             with zipfile.ZipFile(arquivo_zip, 'r') as zip_ref:
                 for nome_arquivo in zip_ref.namelist():
                     if nome_arquivo.lower().endswith('.csv') and atende_condicoes(nome_arquivo):
-                        zip_ref.extract(nome_arquivo, diretorio_destino)
+                        zip_ref.extract(nome_arquivo, self.tabelas_cid_path())
 
         print("Conteúdo dos arquivos .csv foi extraído com sucesso!")
 
@@ -251,7 +248,7 @@ class DownloadGithubIbge:
     def download_municipios_originais(self):
         data = self._make_request(self.url_municipios)
         if data is not None:
-            df = pd.DataFrame(data)
+            df = pd.read_csv(io.StringIO(data.decode('utf-8')))
 
             df.to_csv(self.gerar_arquivo_saida_municipios(),
                       index=False,
@@ -262,7 +259,7 @@ class DownloadGithubIbge:
     def download_estados_originais(self):
         data = self._make_request(self.url_estados)
         if data is not None:
-            df = pd.DataFrame(data)
+            df = pd.read_csv(io.StringIO(data.decode('utf-8')))
 
             df.to_csv(self.gerar_arquivo_saida_estados(),
                       index=False,
@@ -274,7 +271,29 @@ class DownloadGithubIbge:
         try:
             response = requests.get(url)
             response.raise_for_status()
-            return response.json()
+            return response.content
+        except requests.exceptions.RequestException as e:
+            print(f"Error making the request: {e}")
+            return None
+
+
+
+@dataclasses.dataclass
+class DownloadCepAbertoHttp:
+    def __post_init__(self):
+        self.url = "TODO"
+
+    def arquivo_cep_municipio_df(self):
+        return f'{path("/data/gold/sds")}/df_cep_municipio_regiao_saude.csv'
+
+    def download_municipios_cep(self):
+        pass
+
+    def _make_request(self, url):
+        try:
+            response = requests.get(url)
+            response.raise_for_status()
+            return response.content
         except requests.exceptions.RequestException as e:
             print(f"Error making the request: {e}")
             return None

@@ -87,6 +87,12 @@ CID
 docker run --rm --name datasus-etl -v $pwd/scripts/extract:/app/scripts -v $pwd/data:/data -e SCRIPT_NAME=download_cid.py gleytonlima/datasusftp
 ```
 
+IBGE - Github - Lista de Municipios e Estados
+
+```commandline
+docker run --rm --name datasus-etl -v $pwd/scripts/extract:/app/scripts -v $pwd/data:/data -e SCRIPT_NAME=download_ibge_github.py gleytonlima/datasusftp
+```
+
 MODO ITERATIVO
 
 Comando em modo interativo para navegar pelos arquivos do container em execução
@@ -101,6 +107,12 @@ BASE
 
 ```commandline
 docker run --rm --name datasus-etl -v $pwd/scripts:/app/scripts -v $pwd/data:/data -e SCRIPT_NAME=transform_base.py gleytonlima/datasusftp
+```
+
+CAPS
+
+```commandline
+docker run --rm --name datasus-etl -v $pwd/scripts:/app/scripts -v $pwd/data:/data -e SCRIPT_NAME=transform_caps.py gleytonlima/datasusftp
 ```
 
 ## Conversão do DBC em CSV

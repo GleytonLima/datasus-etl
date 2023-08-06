@@ -55,7 +55,7 @@ class Populacao:
         return f'{path("/data/silver/ibge/censo")}/POP2022_Brasil_e_UFs.csv'
 
     def gerar_nome_arquivo_populacao_municipio_entrada(self):
-        return DownloadIBGEFtp().arquivo_populacao_estado()
+        return DownloadIBGEFtp().arquivo_populacao_municipio()
 
     def gerar_nome_arquivo_populacao_municipio_saida(self):
         return f'{path("/data/silver/ibge/censo")}/POP2022_Municipios.csv'
@@ -147,7 +147,7 @@ class Estado:
         return f'{path("/data/gold/sds")}/estados.csv'
 
     def enriquecer_estados(self):
-        estados_com_codigo = pd.read_csv(self.gerar_nome_arquivo_entrada())
+        estados_com_codigo = pd.read_csv(self.gerar_nome_arquivo_entrada(), sep=';')
         estados_com_codigo.rename(
             columns={'codigo_uf': 'ESTADO_CODIGO', 'uf': 'ESTADO_SIGLA', 'nome': 'ESTADO_NOME',
                      'regiao': 'ESTADO_REGIAO'},
@@ -180,7 +180,7 @@ class Municipio:
 
     def enriquecer_municipios(self):
         # Carregue os arquivos CSV e parquet em dataframes pandas
-        df_municipios = pd.read_csv(self.gerar_nome_arquivo_entrada())
+        df_municipios = pd.read_csv(self.gerar_nome_arquivo_entrada(), sep=';')
         df_municipios['codigo_ibge'] = df_municipios['codigo_ibge'].astype(str).str[:-1]
         df_municipios.rename(
             columns={'codigo_ibge': 'MUNICIPIO_CODIGO', 'nome': 'MUNICIPIO_NOME', 'codigo_uf': 'ESTADO_CODIGO'},
@@ -193,6 +193,7 @@ class Municipio:
                                              dtype={'MUNICIPIO_CODIGO': object})
 
         df_municipios_com_regionais_saude = pd.read_csv(RegiaoSaude().arquivo_bronze(),
+                                                        sep=';',
                                                         dtype={'cidade': object,
                                                                'no_colegiado': object,
                                                                'ibge': object})

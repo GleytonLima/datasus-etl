@@ -1,0 +1,23 @@
+name: Gerar arquivos caps
+
+on:
+  workflow_dispatch:
+    inputs:
+      anos:
+        description: "Anos separados por virgulas. Ex: 2018,2019,2020"
+        required: false
+        default: "2018"
+      mes_referencia:
+        description: "Mês de referência. Ex: 12"
+        required: false
+        default: "12"
+
+jobs:
+  extrair-transformar-enviar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v3
+      - name: executar docker hello world
+        run: docker run hello-world
+

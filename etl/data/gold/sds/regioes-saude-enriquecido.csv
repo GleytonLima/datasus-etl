@@ -1,0 +1,457 @@
+ESTADO_CODIGO;ESTADO_SIGLA;ESTADO_NOME;REGIAO_SAUDE_CODIGO;REGIAO_SAUDE_NOME;REGIAO_SAUDE_POPULACAO
+11;RO;Rondônia;11001;Vale do Jamari;219617
+11;RO;Rondônia;11002;Café;174158
+11;RO;Rondônia;11003;Central;341752
+11;RO;Rondônia;11004;Madeira-Mamoré;558625
+11;RO;Rondônia;11005;Zona da Mata;131385
+11;RO;Rondônia;11006;Cone Sul;150724
+11;RO;Rondônia;11007;Vale do Guaporé;40118
+12;AC;Acre;12001;Alto Acre;70821
+12;AC;Acre;12002;Baixo Acre e Purus;523732
+12;AC;Acre;12003;Juruá e Tarauacá/Envira;235227
+13;AM;Amazonas;13001;Manaus, Entorno e Alto Rio Negro;2391219
+13;AM;Amazonas;13002;Rio Negro e Solimões;275393
+13;AM;Amazonas;13003;Rio Madeira;197592
+13;AM;Amazonas;13004;Médio Amazonas;179877
+13;AM;Amazonas;13005;Baixo Amazonas;232675
+13;AM;Amazonas;13006;Regional Purus;142594
+13;AM;Amazonas;13007;Regional Juruá;128362
+13;AM;Amazonas;13008;Triângulo;140143
+13;AM;Amazonas;13009;Alto Solimões;264407
+14;RR;Roraima;14001;Centro Norte;548335
+14;RR;Roraima;14002;Sul;86470
+15;PA;Pará;15001;Araguaia;477554
+15;PA;Pará;15002;Baixo Amazonas;864967
+15;PA;Pará;15003;Carajás;935087
+15;PA;Pará;15004;Lago de Tucuruí;335023
+15;PA;Pará;15006;Metropolitana I;2084212
+15;PA;Pará;15007;Metropolitana II;366731
+15;PA;Pará;15008;Metropolitana III;883326
+15;PA;Pará;15009;Rio Caetés;513940
+15;PA;Pará;15010;Tapajós;274790
+15;PA;Pará;15011;Tocantins;709854
+15;PA;Pará;15012;Xingu;395787
+15;PA;Pará;15013;Marajó I;253670
+15;PA;Pará;15014;Marajó II;348021
+16;AP;Amapá;16001;Área Central;530034
+16;AP;Amapá;16002;Área Norte;60649
+16;AP;Amapá;16003;Área Sudoeste;183585
+17;TO;Tocantins;17001;Médio Norte Araguaia;301961
+17;TO;Tocantins;17002;Bico do Papagaio;200070
+17;TO;Tocantins;17003;Sudeste;89979
+17;TO;Tocantins;17004;Cerrado Tocantins Araguaia;152737
+17;TO;Tocantins;17005;Ilha do Bananal;179235
+17;TO;Tocantins;17006;Capim Dourado;410790
+17;TO;Tocantins;17007;Cantão;126516
+17;TO;Tocantins;17008;Amor Perfeito;123018
+21;MA;Maranhão;21001;Açailândia;258362
+21;MA;Maranhão;21002;Bacabal;254558
+21;MA;Maranhão;21003;Balsas;231699
+21;MA;Maranhão;21004;Barra do Corda;226084
+21;MA;Maranhão;21005;Caxias;279679
+21;MA;Maranhão;21006;Chapadinha;351268
+21;MA;Maranhão;21007;Codó;280817
+21;MA;Maranhão;21008;Imperatriz;538362
+21;MA;Maranhão;21009;Itapecuru Mirim;349912
+21;MA;Maranhão;21010;Pedreiras;206569
+21;MA;Maranhão;21011;Pinheiro;391238
+21;MA;Maranhão;21012;Presidente Dutra;272627
+21;MA;Maranhão;21013;Rosário;286338
+21;MA;Maranhão;21014;Santa Inês;342740
+21;MA;Maranhão;21015;São João dos Patos;235759
+21;MA;Maranhão;21016;São Luís;1526896
+21;MA;Maranhão;21017;Timon;250226
+21;MA;Maranhão;21018;Viana;255905
+21;MA;Maranhão;21019;Zé Doca;261566
+22;PI;Piauí;22001;Carnaubais;158788
+22;PI;Piauí;22002;Chapada das Mangabeiras;195784
+22;PI;Piauí;22003;Cocais;400760
+22;PI;Piauí;22004;Entre Rios;1244584
+22;PI;Piauí;22005;Planície Litorânea;291586
+22;PI;Piauí;22006;Serra da Capivara;150890
+22;PI;Piauí;22007;Tabuleiros do Alto Parnaíba;52185
+22;PI;Piauí;22008;Vale do Canindé;106758
+22;PI;Piauí;22009;Vale do Rio Guaribas;363707
+22;PI;Piauí;22010;Vale do Sambito;102351
+22;PI;Piauí;22011;Vale dos Rios Piauí e Itaueiras;202781
+23;CE;Ceará;23001;1ª Região Fortaleza;2822811
+23;CE;Ceará;23002;2ª Região Caucaia;636924
+23;CE;Ceará;23003;3ª Região Maracanaú;500942
+23;CE;Ceará;23004;4ª Região Baturité;130177
+23;CE;Ceará;23005;5ª Região Canindé;185020
+23;CE;Ceará;23006;6ª Região Itapipoca;305761
+23;CE;Ceará;23007;7ª Região Aracati;128716
+23;CE;Ceará;23008;8ª Região Quixadá;304708
+23;CE;Ceará;23009;9ª Região Russas;190320
+23;CE;Ceará;23010;10ª Região Limoeiro do Norte;216049
+23;CE;Ceará;23011;11ª Região Sobral;643324
+23;CE;Ceará;23012;12ª Região Acaraú;244232
+23;CE;Ceará;23013;13ª Região Tianguá;322293
+23;CE;Ceará;23014;14ª Região Tauá;108117
+23;CE;Ceará;23015;15ª Região Crateús;290296
+23;CE;Ceará;23016;16ª Região Camocim;153623
+23;CE;Ceará;23017;17ª Região Icó;159484
+23;CE;Ceará;23018;18ª Região Iguatú;284362
+23;CE;Ceará;23019;19ª Região Brejo Santo;208036
+23;CE;Ceará;23020;20ª Região Crato;334591
+23;CE;Ceará;23021;21ª Região Juazeiro do Norte;437268
+23;CE;Ceará;23022;22ª Região Cascavel;329377
+24;RN;Rio Grande do Norte;24001;1ª Região de Saúde - São José de Mipibu;378974
+24;RN;Rio Grande do Norte;24002;2ª Região de Saúde - Mossoró;450030
+24;RN;Rio Grande do Norte;24003;3ª Região de Saúde - João Câmara;336877
+24;RN;Rio Grande do Norte;24004;4ª Região de Saúde - Caicó;296550
+24;RN;Rio Grande do Norte;24005;5ª Região de Saúde - Santa Cruz;189502
+24;RN;Rio Grande do Norte;24006;6ª Região de Saúde - Pau dos Ferros;241762
+24;RN;Rio Grande do Norte;24007;7ª Região de Saúde - Metropolitana;1263314
+24;RN;Rio Grande do Norte;24008;8ª Região de Saúde - Açu;146944
+25;PB;Paraíba;25001;1ª Região Mata Atlântica;1391802
+25;PB;Paraíba;25002;2ª Região;292135
+25;PB;Paraíba;25003;3ª Região;189523
+25;PB;Paraíba;25004;4ª Região;105432
+25;PB;Paraíba;25005;5ª Região;110484
+25;PB;Paraíba;25006;6ª Região;227380
+25;PB;Paraíba;25007;7ª Região;141389
+25;PB;Paraíba;25008;8ª Região;113557
+25;PB;Paraíba;25009;9ª Região;172116
+25;PB;Paraíba;25010;10ª Região;113545
+25;PB;Paraíba;25011;11ª Região;77360
+25;PB;Paraíba;25012;12ª Região;175144
+25;PB;Paraíba;25013;13ª Região;58410
+25;PB;Paraíba;25014;14ª Região;156668
+25;PB;Paraíba;25015;15ª Região;152536
+25;PB;Paraíba;25016;16ª Região;553480
+26;PE;Pernambuco;26001;Afogados da Ingazeira;184050
+26;PE;Pernambuco;26002;Arcoverde;410868
+26;PE;Pernambuco;26003;Caruaru;1330571
+26;PE;Pernambuco;26004;Garanhuns;537943
+26;PE;Pernambuco;26005;Goiana;300627
+26;PE;Pernambuco;26006;Limoeiro;562022
+26;PE;Pernambuco;26007;Ouricuri;337504
+26;PE;Pernambuco;26008;Palmares;506802
+26;PE;Pernambuco;26009;Petrolina;529199
+26;PE;Pernambuco;26010;Recife;3974714
+26;PE;Pernambuco;26011;Salgueiro;140604
+26;PE;Pernambuco;26012;Serra Talhada;236209
+27;AL;Alagoas;27001;1ª Região de Saúde;1250904
+27;AL;Alagoas;27002;2ª Região de Saúde;157642
+27;AL;Alagoas;27003;3ª Região de Saúde;193044
+27;AL;Alagoas;27004;4ª Região de Saúde;121939
+27;AL;Alagoas;27005;5ª Região de Saúde;187516
+27;AL;Alagoas;27006;6ª Região de Saúde;185604
+27;AL;Alagoas;27007;7ª Região de Saúde;509828
+27;AL;Alagoas;27008;8ª Região de Saúde;147089
+27;AL;Alagoas;27009;9ª Região de Saúde;223170
+27;AL;Alagoas;27010;10ª Região de Saúde;148518
+28;SE;Sergipe;28001;Aracaju;818113
+28;SE;Sergipe;28002;Estância;230116
+28;SE;Sergipe;28003;Itabaiana;252301
+28;SE;Sergipe;28004;Lagarto;255328
+28;SE;Sergipe;28005;Nossa Senhora da Glória;170224
+28;SE;Sergipe;28006;Nossa Senhora do Socorro;337640
+28;SE;Sergipe;28007;Propriá;148146
+29;BA;Bahia;29001;Alagoinhas;506866
+29;BA;Bahia;29002;Barreiras;493244
+29;BA;Bahia;29003;Brumado;395201
+29;BA;Bahia;29004;Camaçari;636709
+29;BA;Bahia;29005;Cruz das Almas;251478
+29;BA;Bahia;29006;Feira de Santana;1187745
+29;BA;Bahia;29007;Guanambi;466785
+29;BA;Bahia;29008;Ibotirama;190189
+29;BA;Bahia;29009;Ilhéus;329806
+29;BA;Bahia;29010;Irecê;415112
+29;BA;Bahia;29011;Itaberaba;245763
+29;BA;Bahia;29012;Itabuna;464889
+29;BA;Bahia;29013;Itapetinga;240124
+29;BA;Bahia;29014;Jacobina;381660
+29;BA;Bahia;29015;Jequié;490737
+29;BA;Bahia;29016;Juazeiro;558845
+29;BA;Bahia;29017;Paulo Afonso;248920
+29;BA;Bahia;29018;Porto Seguro;387008
+29;BA;Bahia;29019;Ribeira do Pombal;302472
+29;BA;Bahia;29020;Salvador;3133506
+29;BA;Bahia;29021;Santa Maria da Vitória;303094
+29;BA;Bahia;29022;Santo Antônio de Jesus;452458
+29;BA;Bahia;29023;Seabra;193300
+29;BA;Bahia;29024;Senhor do Bonfim;294149
+29;BA;Bahia;29025;Serrinha;641288
+29;BA;Bahia;29026;Teixeira de Freitas;436461
+29;BA;Bahia;29027;Valença;299868
+29;BA;Bahia;29028;Vitória da Conquista;711346
+31;MG;Minas Gerais;31001;Alfenas / Machado;290055
+31;MG;Minas Gerais;31002;Guaxupé;141674
+31;MG;Minas Gerais;31003;Itajubá;197802
+31;MG;Minas Gerais;31004;Lavras;177987
+31;MG;Minas Gerais;31006;Poços de Caldas;243182
+31;MG;Minas Gerais;31007;Pouso Alegre;584894
+31;MG;Minas Gerais;31008;São Lourenço;255606
+31;MG;Minas Gerais;31009;São Sebastião do Paraíso;125314
+31;MG;Minas Gerais;31010;Três Corações;126507
+31;MG;Minas Gerais;31011;Três Pontas;122875
+31;MG;Minas Gerais;31012;Varginha;198697
+31;MG;Minas Gerais;31013;Barbacena;219434
+31;MG;Minas Gerais;31015;São João Del Rei;240605
+31;MG;Minas Gerais;31016;Belo Horizonte/ Nova Lima/ Caeté ;3292954
+31;MG;Minas Gerais;31017;Betim;773274
+31;MG;Minas Gerais;31018;Contagem;834145
+31;MG;Minas Gerais;31019;Curvelo;179700
+31;MG;Minas Gerais;31020;Guanhães;87687
+31;MG;Minas Gerais;31021;Itabira;223116
+31;MG;Minas Gerais;31022;Ouro Preto;199503
+31;MG;Minas Gerais;31023;João Monlevade;133782
+31;MG;Minas Gerais;31024;Sete Lagoas;437038
+31;MG;Minas Gerais;31025;Vespasiano;345887
+31;MG;Minas Gerais;31026;Diamantina;137737
+31;MG;Minas Gerais;31027;Turmalina/Minas Novas/Capelinha;111538
+31;MG;Minas Gerais;31028;Bom Despacho;110137
+31;MG;Minas Gerais;31030;Formiga;120911
+31;MG;Minas Gerais;31031;Itaúna;134083
+31;MG;Minas Gerais;31032;Pará de Minas;265391
+31;MG;Minas Gerais;31034;Caratinga;195441
+31;MG;Minas Gerais;31035;Coronel Fabriciano/Timóteo;206008
+31;MG;Minas Gerais;31036;Governador Valadares;397907
+31;MG;Minas Gerais;31037;Ipatinga;350859
+31;MG;Minas Gerais;31038;Mantena;63858
+31;MG;Minas Gerais;31040;Resplendor;82979
+31;MG;Minas Gerais;31041;Além  Paraíba;51997
+31;MG;Minas Gerais;31042;Carangola;126654
+31;MG;Minas Gerais;31044;Leopoldina / Cataguases;170025
+31;MG;Minas Gerais;31045;Muriaé;165446
+31;MG;Minas Gerais;31046;Santos Dumont;47940
+31;MG;Minas Gerais;31047;São João Nepomuceno / bicas;70555
+31;MG;Minas Gerais;31048;Ubá;291818
+31;MG;Minas Gerais;31049;Brasília de Minas/São Francisco;219413
+31;MG;Minas Gerais;31050;Coração de Jesus;43395
+31;MG;Minas Gerais;31051;Francisco Sá;63575
+31;MG;Minas Gerais;31052;Janaúba/Monte Azul;263422
+31;MG;Minas Gerais;31053;Januária;109242
+31;MG;Minas Gerais;31055;Pirapora;133147
+31;MG;Minas Gerais;31057;Patos de Minas;271790
+31;MG;Minas Gerais;31058;Unaí;275845
+31;MG;Minas Gerais;31059;Manhuaçu;344382
+31;MG;Minas Gerais;31060;Ponte Nova;208710
+31;MG;Minas Gerais;31061;Viçosa;143065
+31;MG;Minas Gerais;31062;Águas Formosas;55269
+31;MG;Minas Gerais;31064;Araçuaí;78858
+31;MG;Minas Gerais;31065;Itaobim;72439
+31;MG;Minas Gerais;31066;Nanuque;60046
+31;MG;Minas Gerais;31067;Padre Paraíso;53751
+31;MG;Minas Gerais;31068;Pedra azul;64025
+31;MG;Minas Gerais;31070;Araxá;198876
+31;MG;Minas Gerais;31071;Frutal / Iturama;176234
+31;MG;Minas Gerais;31072;Uberaba;441487
+31;MG;Minas Gerais;31073;Ituiutaba;181372
+31;MG;Minas Gerais;31074;Patrocínio / Monte Carmelo;195496
+31;MG;Minas Gerais;31075;Uberlândia / Araguari;954225
+31;MG;Minas Gerais;31076;Manga;55710
+31;MG;Minas Gerais;31077;João Pinheiro;71494
+31;MG;Minas Gerais;31078;Congonhas;127684
+31;MG;Minas Gerais;31079;Conselheiro Lafaiete;187389
+31;MG;Minas Gerais;31080;Peçanha/São João Evangelista;55025
+31;MG;Minas Gerais;31081;Santa Maria do Suaçuí;39227
+31;MG;Minas Gerais;31082;São Gotardo;102593
+31;MG;Minas Gerais;31083;Bocaiúva;75103
+31;MG;Minas Gerais;31084;Montes Claros ;467369
+31;MG;Minas Gerais;31085;Taiobeiras;126708
+31;MG;Minas Gerais;31086;Divinópolis;366590
+31;MG;Minas Gerais;31087;Lagoa da Prata/Sto Ant do Monte;130265
+31;MG;Minas Gerais;31088;Oliveira/Santo Antônio do Amparo;100148
+31;MG;Minas Gerais;31089;Campo Belo;95395
+31;MG;Minas Gerais;31090;Lima Duarte;70796
+31;MG;Minas Gerais;31091;Cassia;47177
+31;MG;Minas Gerais;31092;Passos;203276
+31;MG;Minas Gerais;31093;Piumhi;76874
+31;MG;Minas Gerais;31094;Almenara/Jacinto;157885
+31;MG;Minas Gerais;31095;Serro;56975
+31;MG;Minas Gerais;31096;Itambacuri;40022
+31;MG;Minas Gerais;31097;Juiz de Fora;608847
+31;MG;Minas Gerais;31098;salinas;63742
+31;MG;Minas Gerais;31099;Teófilo Otoni / Malacacheta;265300
+32;ES;Espírito Santo;32002;Metropolitana;2383044
+32;ES;Espírito Santo;32004;Sul;678629
+32;ES;Espírito Santo;32005;Central Norte;913427
+33;RJ;Rio de Janeiro;33001;Baia da Ilha Grande;270773
+33;RJ;Rio de Janeiro;33002;Baixada Litorânea;824674
+33;RJ;Rio de Janeiro;33003;Centro-Sul;321895
+33;RJ;Rio de Janeiro;33004;Médio Paraíba;873213
+33;RJ;Rio de Janeiro;33005;Metropolitana I;10089639
+33;RJ;Rio de Janeiro;33006;Metropolitana II;2015798
+33;RJ;Rio de Janeiro;33007;Noroeste;333095
+33;RJ;Rio de Janeiro;33008;Norte;913450
+33;RJ;Rio de Janeiro;33009;Serrana;972989
+35;SP;São Paulo;35011;Alto do Tietê;3106798
+35;SP;São Paulo;35012;Franco da Rocha;655305
+35;SP;São Paulo;35013;Mananciais;1182458
+35;SP;São Paulo;35014;Rota dos Bandeirantes;2076368
+35;SP;São Paulo;35015;Grande ABC;2725209
+35;SP;São Paulo;35016;São Paulo;12200180
+35;SP;São Paulo;35021;Central do DRS II;311205
+35;SP;São Paulo;35022;Lagos do DRS II;196228
+35;SP;São Paulo;35023;Consórcios do DRS II;263434
+35;SP;São Paulo;35031;Central do DRS III;321208
+35;SP;São Paulo;35032;Centro Oeste do DRS III;136493
+35;SP;São Paulo;35033;Norte do DRS III;146777
+35;SP;São Paulo;35034;Coração do DRS III;392670
+35;SP;São Paulo;35041;Baixada Santista;1835584
+35;SP;São Paulo;35051;Norte - Barretos;282970
+35;SP;São Paulo;35052;Sul - Barretos;142131
+35;SP;São Paulo;35061;Vale do Jurumirim;302481
+35;SP;São Paulo;35062;Bauru;651746
+35;SP;São Paulo;35063;Polo Cuesta;308962
+35;SP;São Paulo;35064;Jaú;322857
+35;SP;São Paulo;35065;Lins;156807
+35;SP;São Paulo;35071;Bragança;520134
+35;SP;São Paulo;35072;Região Metropolitana de Campinas;3255127
+35;SP;São Paulo;35073;Jundiaí;878678
+35;SP;São Paulo;35074;Circuito das Águas;133777
+35;SP;São Paulo;35081;Três Colinas;442116
+35;SP;São Paulo;35082;Alta Anhanguera;146033
+35;SP;São Paulo;35083;Alta Mogiana;110699
+35;SP;São Paulo;35091;Adamantina;128183
+35;SP;São Paulo;35092;Assis;233355
+35;SP;São Paulo;35093;Marília;381781
+35;SP;São Paulo;35094;Ourinhos;235560
+35;SP;São Paulo;35095;Tupã;125466
+35;SP;São Paulo;35101;Araras;334615
+35;SP;São Paulo;35102;Limeira;373641
+35;SP;São Paulo;35103;Piracicaba;619711
+35;SP;São Paulo;35104;Rio Claro;263610
+35;SP;São Paulo;35111;Alta Paulista;132234
+35;SP;São Paulo;35112;Alta Sorocabana;406730
+35;SP;São Paulo;35113;Alto Capivari;56022
+35;SP;São Paulo;35114;Extremo Oeste Paulista;87266
+35;SP;São Paulo;35115;Pontal do Paranapanema;62767
+35;SP;São Paulo;35121;Vale do Ribeira;289797
+35;SP;São Paulo;35131;Horizonte Verde;414404
+35;SP;São Paulo;35132;Aquífero Guarani;919373
+35;SP;São Paulo;35133;Vale das Cachoeiras;137047
+35;SP;São Paulo;35141;Baixa Mogiana;327316
+35;SP;São Paulo;35142;Mantiqueira;266644
+35;SP;São Paulo;35143;Rio Pardo;203125
+35;SP;São Paulo;35151;Catanduva;297342
+35;SP;São Paulo;35152;Santa Fé do Sul;52764
+35;SP;São Paulo;35153;Jales;102623
+35;SP;São Paulo;35154;Fernandópolis;122164
+35;SP;São Paulo;35155;São José do Rio Preto;760304
+35;SP;São Paulo;35156;José Bonifácio;100419
+35;SP;São Paulo;35157;Votuporanga;198477
+35;SP;São Paulo;35161;Itapetininga;503118
+35;SP;São Paulo;35162;Itapeva;278735
+35;SP;São Paulo;35163;Sorocaba;1848052
+35;SP;São Paulo;35171;Alto Vale do Paraíba;1127339
+35;SP;São Paulo;35172;Circuito da Fé e Vale Histórico;456451
+35;SP;São Paulo;35173;Litoral Norte;356118
+35;SP;São Paulo;35174;Vale do Paraíba/Região Serrana;617949
+41;PR;Paraná;41001;1ª RS Paranaguá;315144
+41;PR;Paraná;41002;2ª RS Metropolitana;3742171
+41;PR;Paraná;41003;3ª RS Ponta Grossa;675714
+41;PR;Paraná;41004;4ª RS Irati;165565
+41;PR;Paraná;41005;5ª RS Guarapuava;463694
+41;PR;Paraná;41006;6ª RS União da Vitória;164120
+41;PR;Paraná;41007;7ª RS Pato Branco;287428
+41;PR;Paraná;41008;8ª RS Francisco Beltrão;371437
+41;PR;Paraná;41009;9ª RS Foz do Iguaçu;445448
+41;PR;Paraná;41010;10ª RS Cascavel;581990
+41;PR;Paraná;41011;11ª RS Campo Mourão;342594
+41;PR;Paraná;41012;12ª RS Umuarama;289865
+41;PR;Paraná;41013;13ª RS Cianorte;159313
+41;PR;Paraná;41014;14ª RS Paranavaí;271637
+41;PR;Paraná;41015;15ª RS Maringá;930490
+41;PR;Paraná;41016;16ª RS Apucarana;387019
+41;PR;Paraná;41017;17ª RS Londrina;986527
+41;PR;Paraná;41018;18ª RS Cornélio Procópio;214293
+41;PR;Paraná;41019;19ª RS Jacarezinho;299529
+41;PR;Paraná;41020;20ª RS Toledo;425785
+41;PR;Paraná;41021;21ª RS Telêmaco Borba;179380
+41;PR;Paraná;41022;22ª RS Ivaiporã;136236
+42;SC;Santa Catarina;42001;Extremo Oeste;241975
+42;SC;Santa Catarina;42002;Oeste;404112
+42;SC;Santa Catarina;42003;Xanxerê;205250
+42;SC;Santa Catarina;42004;Alto Vale do Itajaí;310208
+42;SC;Santa Catarina;42005;Foz do Rio Itajaí;854561
+42;SC;Santa Catarina;42006;Médio Vale do Itajaí;818309
+42;SC;Santa Catarina;42007;Grande Florianópolis;1426392
+42;SC;Santa Catarina;42008;Meio Oeste;192714
+42;SC;Santa Catarina;42009;Alto Vale do Rio do Peixe;288553
+42;SC;Santa Catarina;42010;Alto Uruguai Catarinense;154591
+42;SC;Santa Catarina;42011;Nordeste;780182
+42;SC;Santa Catarina;42012;Planalto Norte;368363
+42;SC;Santa Catarina;42013;Serra Catarinense;296677
+42;SC;Santa Catarina;42014;Extremo Sul Catarinense;220654
+42;SC;Santa Catarina;42015;Carbonífera;468723
+42;SC;Santa Catarina;42016;Laguna;386545
+42;SC;Santa Catarina;42017;vale do itapocú;344345
+43;RS;Rio Grande do Sul;43001;Região 01 - Verdes Campos;461625
+43;RS;Rio Grande do Sul;43002;Região 02 - Entre Rios;117641
+43;RS;Rio Grande do Sul;43003;Região 03 - Fronteira Oeste;442103
+43;RS;Rio Grande do Sul;43004;Região 04 - Belas Praias;176528
+43;RS;Rio Grande do Sul;43005;Região 05 - Bons Ventos;248236
+43;RS;Rio Grande do Sul;43006;Região 06 - Vale do Paranhana e Costa Serra;221462
+43;RS;Rio Grande do Sul;43007;Região 07 - Vale dos Sinos;792474
+43;RS;Rio Grande do Sul;43008;Região 08 - Vale do Caí e Metropolitana;757693
+43;RS;Rio Grande do Sul;43009;Região 09 - Carbonífera/Costa Doce;381871
+43;RS;Rio Grande do Sul;43010;Região 10 - Capital e Vale do Gravataí;2235272
+43;RS;Rio Grande do Sul;43011;Região 11 - Sete Povos das Missões;277126
+43;RS;Rio Grande do Sul;43012;Região 12 - Portal das Missões;124902
+43;RS;Rio Grande do Sul;43013;Região 13 - Diversidade;228185
+43;RS;Rio Grande do Sul;43014;Região 14 - Fronteira Noroeste;231965
+43;RS;Rio Grande do Sul;43015;Região 15 - Caminho das Águas;188999
+43;RS;Rio Grande do Sul;43016;Região 16 - Alto Uruguai Gaúcho;235806
+43;RS;Rio Grande do Sul;43017;Região 17 - Planalto;431211
+43;RS;Rio Grande do Sul;43018;Região 18 - Araucárias;133770
+43;RS;Rio Grande do Sul;43019;Região 19 - Botucaraí;111648
+43;RS;Rio Grande do Sul;43020;Região 20 - Rota da Produção;157790
+43;RS;Rio Grande do Sul;43021;Região 21 - Sul;815309
+43;RS;Rio Grande do Sul;43022;Região 22 - Pampa;177615
+43;RS;Rio Grande do Sul;43023;Região 23 - Caxias e Hortênsias;637133
+43;RS;Rio Grande do Sul;43024;Região 24 - Campos de Cima da Serra;96660
+43;RS;Rio Grande do Sul;43025;Região 25 - Vinhedos e Basalto;321168
+43;RS;Rio Grande do Sul;43026;Região 26 - Uva Vale;198249
+43;RS;Rio Grande do Sul;43027;Região 27 - Jacuí Centro;187115
+43;RS;Rio Grande do Sul;43028;Região 28 - Vinte e Oito;339548
+43;RS;Rio Grande do Sul;43029;Região 29 - Vales e Montanhas;234051
+43;RS;Rio Grande do Sul;43030;Região 30 - Vale da Luz;124910
+50;MS;Mato Grosso do Sul;50001;Campo Grande;1549444
+50;MS;Mato Grosso do Sul;50002;Corumbá;115869
+50;MS;Mato Grosso do Sul;50003;Dourados;869992
+50;MS;Mato Grosso do Sul;50004;Três Lagoas;298437
+51;MT;Mato Grosso;51001;Alto Tapajós;110473
+51;MT;Mato Grosso;51002;Baixada Cuiabana;1113003
+51;MT;Mato Grosso;51003;Araguaia Xingu;87776
+51;MT;Mato Grosso;51004;Centro Norte;93284
+51;MT;Mato Grosso;51005;Garças Araguaia;142540
+51;MT;Mato Grosso;51006;Médio Araguaia;122017
+51;MT;Mato Grosso;51007;Médio Norte Matogrossense;244592
+51;MT;Mato Grosso;51008;Noroeste Matogrossense;150509
+51;MT;Mato Grosso;51009;Norte Araguaia Karajá;23996
+51;MT;Mato Grosso;51010;Norte Matogrossense;72552
+51;MT;Mato Grosso;51011;Oeste Matogrossense;189033
+51;MT;Mato Grosso;51012;Sudoeste Matogrossense;129585
+51;MT;Mato Grosso;51013;Sul Matogrossense;583794
+51;MT;Mato Grosso;51014;Teles Pires;551656
+51;MT;Mato Grosso;51015;Vale do Peixoto;110064
+51;MT;Mato Grosso;51016;Vale dos Arinos;59365
+52;GO;Goiás;52001;Central;1872683
+52;GO;Goiás;52002;Centro Sul;923411
+52;GO;Goiás;52003;Entorno Norte;271278
+52;GO;Goiás;52004;Entorno Sul;912426
+52;GO;Goiás;52005;Estrada de Ferro;316182
+52;GO;Goiás;52006;Nordeste I;43127
+52;GO;Goiás;52007;Nordeste II;94832
+52;GO;Goiás;52008;Norte;132152
+52;GO;Goiás;52009;Oeste I;116300
+52;GO;Goiás;52010;Oeste II;116389
+52;GO;Goiás;52011;Pirineus;531431
+52;GO;Goiás;52012;Rio Vermelho;207458
+52;GO;Goiás;52013;São Patrício I;172170
+52;GO;Goiás;52014;Serra da Mesa;124740
+52;GO;Goiás;52015;Sudoeste I;432079
+52;GO;Goiás;52016;Sudoeste II;239073
+52;GO;Goiás;52017;Sul;266478
+52;GO;Goiás;52018;São Patrício II;178767
+53;DF;Distrito Federal;53002;CENTRAL;377738
+53;DF;Distrito Federal;53003;CENTRO-SUL;361049
+53;DF;Distrito Federal;53004;NORTE;284379
+53;DF;Distrito Federal;53005;SUL;258666
+53;DF;Distrito Federal;53006;LESTE;272153
+53;DF;Distrito Federal;53007;OESTE;486591
+53;DF;Distrito Federal;53008;SUDOESTE;766477
