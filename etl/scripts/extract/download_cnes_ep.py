@@ -1,8 +1,8 @@
 from download_util import DowloadDataSusFtp, DonwloadDataSusConfig
 
 ufs = ["AM"]
-years = [2019]
-months = [11]
+years = [2022]
+months = [12]
 
 config = DonwloadDataSusConfig(
     system="CNES",

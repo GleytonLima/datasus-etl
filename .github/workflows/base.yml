@@ -13,11 +13,37 @@ on:
         default: "12"
 
 jobs:
-  extrair-transformar-enviar:
+  gerar-arquivos-caps:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout do repositório
         uses: actions/checkout@v3
-      - name: executar docker hello world
-        run: docker run hello-world
-
+      - name: base e caps - baixar, converter e salvar
+        uses: addnab/docker-run-action@v3
+        with:
+          image: gleytonlima/datasusftp
+          options: -v ${{ github.workspace }}/etl/scripts:/app/scripts -v ${{ github.workspace }}/etl/data:/data
+          run: |
+            ls -lha /app/scripts
+            . .venv/bin/activate
+            python3 scripts/extract/download_censo.py
+            python3 scripts/extract/download_cid.py
+            python3 scripts/extract/download_cnes_ep.py
+            python3 scripts/extract/download_cnes_lt.py
+            python3 scripts/extract/download_cnes_raw.py
+            python3 scripts/extract/download_cnes_sr.py
+            python3 scripts/extract/download_cnes_st.py
+            python3 scripts/extract/download_ibge_github.py
+            python3 scripts/extract/download_regioes_saude_municipios.py
+            python3 scripts/transform_base.py
+            python3 scripts/transform_caps.py
+      - name: verifica se a pasta etl/data possui os arquivos gerados
+        run: |
+          ls -lha etl/data/bronze
+          ls -lha etl/data/silver
+          ls -lha etl/data/gold
+      - name: salvar arquivos gerados como artefatos
+        uses: actions/upload-artifact@v3
+        with:
+          name: arquivos-caps
+          path: etl/data

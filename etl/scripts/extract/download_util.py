@@ -58,7 +58,7 @@ class DowloadDataSusFtp:
             urllib.request.urlretrieve(url, full_file_path)
             print(f"Arquivo {file_name} baixado com sucesso!")
         except Exception as e:
-            print(f"Erro ao baixar o arquivo: {e}")
+            print(f"Erro ao baixar o arquivo {file_name}: {e}")
 
     def download_files_by_range(self, ufs, years, months):
         for uf in ufs:
@@ -72,7 +72,7 @@ class DowloadDataSusFtp:
         print("iniciando conversao dbc em csv")
         try:
             subprocess.run(
-                f"Rscript scripts/dbc_to_csv.R /tmp /data/bronze/datasus/{self.config.system}/{self.config.subsystem}",
+                f"Rscript /app/scripts/extract/dbc_to_csv.R /tmp /data/bronze/datasus/{self.config.system}/{self.config.subsystem}",
                 check=True, shell=True)
         except subprocess.CalledProcessError as e:
             print(f"Erro ao executar o script R: {e}")
@@ -93,21 +93,34 @@ class DowloadDataSusCnesRawFtp:
             urllib.request.urlretrieve(url, full_file_path)
             print(f"Arquivo {file_name} baixado com sucesso!")
         except Exception as e:
-            print(f"Erro ao baixar o arquivo: {e}")
+            print(f"Erro ao baixar o arquivo {file_name}: {e}")
 
     def download_files_by_range(self, years, months):
         for year in years:
             for month in months:
                 file_name = "BASE_DE_DADOS_CNES_{}{}.zip".format(year, f"{month:02d}")
                 url = self.base_url.format(year, f"{month:02d}")
-                self.download_file(url, file_name, "/tmp")
+                self.download_file(url, file_name, path('/cnesrawzip'))
+
+    def fix_bad_file(self, zipFile):
+        f = open(zipFile, 'r+b')
+        data = f.read()
+        pos = data.find(b'\x50\x4b\x05\x06')  # End of central directory signature
+        if pos > 0:
+            f.seek(pos + 22)  # size of 'ZIP end of central directory record'
+            f.truncate()
+            f.close()
+        else:
+            raise Exception("Houve um erro ao converter")
 
     def extract_december_files(self):
         # Padrão de busca para encontrar todos os arquivos .zip que correspondem ao padrão
         padrao_busca = 'BASE_DE_DADOS_CNES_*.zip'
 
+        print(f"iniciando extracao arquivos {padrao_busca}")
+
         # Diretório onde os arquivos .zip estão localizados
-        diretorio_arquivos_zip = '/tmp'
+        diretorio_arquivos_zip = path('/cnesrawzip')
 
         # Encontrar todos os arquivos .zip que correspondem ao padrão de busca
         arquivos_zip_encontrados = glob.glob(f'{diretorio_arquivos_zip}/{padrao_busca}')
@@ -119,12 +132,16 @@ class DowloadDataSusCnesRawFtp:
 
         # Extrair o conteúdo dos arquivos .zip que atendem às condições
         for arquivo_zip in arquivos_zip_encontrados:
+            print("arquivo zip cnes raw encontrado: " + str(arquivo_zip))
+            tamanho_arquivo = os.path.getsize(arquivo_zip)
+            print(f"Tamanho do arquivo: {tamanho_arquivo} bytes")
+            self.fix_bad_file(arquivo_zip)
             with zipfile.ZipFile(arquivo_zip, 'r') as zip_ref:
                 for nome_arquivo in zip_ref.namelist():
                     if nome_arquivo.endswith('.csv') and atende_condicoes(nome_arquivo):
                         zip_ref.extract(nome_arquivo, self.arquivo_cnes_raw_path())
 
-        print("Conteúdo dos arquivos .csv foi extraído com sucesso!")
+        print(f"Conteúdo dos arquivos .csv datasus cnes raw foi extraído com sucesso!")
 
 
 @dataclasses.dataclass
@@ -144,14 +161,14 @@ class DownloadIBGEFtp:
             urllib.request.urlretrieve(url, self.arquivo_populacao_municipio())
             print(f"Arquivo {self.arquivo_populacao_municipio()} baixado com sucesso!")
         except Exception as e:
-            print(f"Erro ao baixar o arquivo: {e}")
+            print(f"Erro ao baixar o arquivo de populacao municipios: {e}")
 
     def download_populacao_estado(self, url):
         try:
             urllib.request.urlretrieve(url, self.arquivo_populacao_estado())
             print(f"Arquivo {self.arquivo_populacao_estado()} baixado com sucesso!")
         except Exception as e:
-            print(f"Erro ao baixar o arquivo: {e}")
+            print(f"Erro ao baixar o arquivo de populacao estado: {e}")
 
     def download_censo_previa_2022(self):
         self.download_populacao_municipio(self.base_url_municipio)
@@ -194,7 +211,7 @@ class DownloadDataSusCids:
 
     def tabelas_cid_path(self):
         return "/data/bronze/datasus/cids"
-    
+
     def tabelas_cid(self):
         return f"/data/bronze/datasus/cids/CID-10-CATEGORIAS.CSV"
 
@@ -203,7 +220,7 @@ class DownloadDataSusCids:
             urllib.request.urlretrieve(self.base_url, "/tmp/CID10CSV.zip")
             print(f"Arquivo CID10CSV.zip baixado com sucesso!")
         except Exception as e:
-            print(f"Erro ao baixar o arquivo: {e}")
+            print(f"Erro ao baixar o arquivo de tabela de cids: {e}")
 
     def download_tabela_cids(self):
         self.download_file()
@@ -229,7 +246,7 @@ class DownloadDataSusCids:
                     if nome_arquivo.lower().endswith('.csv') and atende_condicoes(nome_arquivo):
                         zip_ref.extract(nome_arquivo, self.tabelas_cid_path())
 
-        print("Conteúdo dos arquivos .csv foi extraído com sucesso!")
+        print("Conteúdo dos arquivos .csv das tabelas cid foi extraído com sucesso!")
 
 
 @dataclasses.dataclass
@@ -275,7 +292,6 @@ class DownloadGithubIbge:
         except requests.exceptions.RequestException as e:
             print(f"Error making the request: {e}")
             return None
-
 
 
 @dataclasses.dataclass
