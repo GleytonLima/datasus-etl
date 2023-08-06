@@ -62,7 +62,7 @@ def sumarizar_arquivos():
     # Filtrar as linhas com anos entre 2013 e 2022
     df = df[df["ANO"].between(2013, 2023)]
 
-    # Limpar a coluna "MES" para remover valores inválidos
+    # Criar coluna mes com ultimos digitos de COMPETEN
     df["MES"] = df["COMPETEN"].str.slice(start=4)
 
     # Converter a coluna "MES" para inteiro
@@ -107,9 +107,9 @@ def agrupar_arquivos():
     ano_min = combined_df['ANO'].min()
     ano_max = combined_df['ANO'].max()
     anos = pd.date_range(start=str(int(ano_min)), end=str(int(ano_max) + 1), freq='Y').year
-    tipos_equipe = [16, 17, 18, 1, 12, 14, 24, 27, 30, 33, 36, 70, 76]
+    tipos_equipe = [16, 17, 18, 1, 4, 12, 14, 24, 27, 30, 33, 36, 70, 76]
 
-    df3 = pd.DataFrame([(e, t, a) for e in municipios for a in anos for t in tipos_equipe],
+    df3 = pd.DataFrame([(m, t, a) for m in municipios for a in anos for t in tipos_equipe],
                        columns=['MUNICIPIO_CODIGO', 'TIPO_EQP', 'ANO'])
 
     # fazendo um left join entre o dataframe criado acima e o dataframe original "df2"

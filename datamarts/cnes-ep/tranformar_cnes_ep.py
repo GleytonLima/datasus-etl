@@ -53,7 +53,8 @@ def sumarizar_arquivos_nasf_esf():
 
     df.dropna(subset=['TIPO_EQP'], inplace=True)
     df.dropna(subset=['COMPETEN'], inplace=True)
-    df = df[(df["TIPO_EQP"] == 70) | (df["TIPO_EQP"] == 72)]
+    lista_equipes = [1, 12, 14, 24, 27, 30, 33, 36, 70, 6, 7, 45, 72]
+    df = df[df['TIPO_EQP'].isin(lista_equipes)]
 
     # Converter a coluna COMPETEN para string
     df["COMPETEN"] = df["COMPETEN"].astype(str)
@@ -91,7 +92,8 @@ def sumarizar_arquivos_consultorios_rua():
 
     df.dropna(subset=['TIPO_EQP'], inplace=True)
     df.dropna(subset=['COMPETEN'], inplace=True)
-    df = df[(df["TIPO_EQP"] == 73)]
+    lista_equipes = [40, 41, 42, 73]
+    df = df[df['TIPO_EQP'].isin(lista_equipes)]
 
     # Converter a coluna COMPETEN para string
     df["COMPETEN"] = df["COMPETEN"].astype(str)
@@ -119,50 +121,35 @@ def sumarizar_arquivos_consultorios_rua():
 
 
 def agrupar_arquivos_nasf_esf():
-    # Set the path to the directory containing the CSV files
-    path = 'silver/'
+    df_cnes_silver = pd.read_csv('silver/cnes-ep.csv', delimiter=';')
 
-    # Get a list of all the CSV files in the directory that start with 'sim'
-    csv_files = [f for f in os.listdir(path) if f.startswith('cnes') and f.endswith('.csv')]
-
-    # Create an empty list to hold the dataframes
-    dfs = []
-
-    # Loop through each CSV file and read it into a dataframe, then append it to the list of dataframes
-    for file in csv_files:
-        df = pd.read_csv(os.path.join(path, file), sep=";")
-        dfs.append(df)
-
-    # Concatenate all the dataframes in the list into a single dataframe
-    combined_df = pd.concat(dfs, ignore_index=True)
-
-    df2 = pd.read_csv('gold/municipios.csv', delimiter=';')
+    df_municipios = pd.read_csv('gold/municipios.csv', delimiter=';')
 
     # inicio preenchendo vazios
     # criando um dataframe com todos os pares de estado/ano possíveis
-    municipios = df2['MUNICIPIO_CODIGO'].unique()
-    ano_min = combined_df['ANO'].min()
-    ano_max = combined_df['ANO'].max()
+    municipios = df_municipios['MUNICIPIO_CODIGO'].unique()
+    ano_min = df_cnes_silver['ANO'].min()
+    ano_max = df_cnes_silver['ANO'].max()
     anos = pd.date_range(start=str(int(ano_min)), end=str(int(ano_max) + 1), freq='Y').year
-    tipos_equipe = [70, 72]
+    tipos_equipe = [1, 12, 14, 24, 27, 30, 33, 36, 70, 6, 7, 45, 72]
 
     df3 = pd.DataFrame([(e, t, a) for e in municipios for a in anos for t in tipos_equipe],
                        columns=['MUNICIPIO_CODIGO', 'TIPO_EQP', 'ANO'])
 
     # fazendo um left join entre o dataframe criado acima e o dataframe original "df2"
-    df4 = pd.merge(df3, combined_df, how='left', on=['MUNICIPIO_CODIGO', 'TIPO_EQP', 'ANO'])
+    df4 = pd.merge(df3, df_cnes_silver, how='left', on=['MUNICIPIO_CODIGO', 'TIPO_EQP', 'ANO'])
     # preenchendo com 0 os valores nulos da coluna "total"
     df4['TOTAL_EQUIPES'] = df4['TOTAL_EQUIPES'].fillna(0)
     df4['MES'] = df4['MES'].fillna(12)
 
     # agregando por estado e ano, somando os valores da coluna "total"
-    combined_df = df4.groupby(["MUNICIPIO_CODIGO", 'TIPO_EQP', 'ANO', 'MES'], as_index=False).agg(
+    df_cnes_silver = df4.groupby(["MUNICIPIO_CODIGO", 'TIPO_EQP', 'ANO', 'MES'], as_index=False).agg(
         {'TOTAL_EQUIPES': 'sum'})
 
     # fim preenchendo vazios
 
     # Junta os dataframes com base na coluna "MUNICIPIO_CODIGO"
-    df_merged = pd.merge(df2, combined_df, on='MUNICIPIO_CODIGO', how='left')
+    df_merged = pd.merge(df_municipios, df_cnes_silver, on='MUNICIPIO_CODIGO', how='left')
     df_merged['TOTAL_EQUIPES'] = df_merged['TOTAL_EQUIPES'].fillna(0)
 
     # Converte a coluna "MUNICIPIO_CODIGO" para o tipo de dados inteiro
@@ -171,56 +158,47 @@ def agrupar_arquivos_nasf_esf():
     df_merged['MES'] = df_merged['MES'].astype('Int64')
     df_merged['TOTAL_EQUIPES'] = df_merged['TOTAL_EQUIPES'].astype('Int64')
 
+    # Mapear os valores da coluna 'código' para a nova coluna 'TIPO_EQP_CLASSIFICACAO'
+    codigo_map = {6: 'NASF', 7: 'NASF', 45: 'NASF', 72: 'NASF',
+                  1: 'ESF', 12: 'ESF', 14: 'ESF', 24: 'ESF',
+                  27: 'ESF', 30: 'ESF', 33: 'ESF', 36: 'ESF', 70: 'ESF'}
+    df_merged['TIPO_EQP_CLASSIFICACAO'] = df_merged['TIPO_EQP'].map(codigo_map)
+
     # Write the combined dataframe to a new CSV file
     output_file = os.path.join('gold/', 'cnes-ep.csv')
     df_merged.to_csv(output_file, sep=';', index=False)
 
 
 def agrupar_consultorios_rua():
-    # Set the path to the directory containing the CSV files
-    path = 'silver/'
+    cnes_consultorios_rua = pd.read_csv('silver/cnes-ep-consultorio-rua.csv', delimiter=';')
 
-    # Get a list of all the CSV files in the directory that start with 'sim'
-    csv_files = [f for f in os.listdir(path) if f.startswith('cnes-ep-consultorio-rua') and f.endswith('.csv')]
-
-    # Create an empty list to hold the dataframes
-    dfs = []
-
-    # Loop through each CSV file and read it into a dataframe, then append it to the list of dataframes
-    for file in csv_files:
-        df = pd.read_csv(os.path.join(path, file), sep=";")
-        dfs.append(df)
-
-    # Concatenate all the dataframes in the list into a single dataframe
-    combined_df = pd.concat(dfs, ignore_index=True)
-
-    df2 = pd.read_csv('gold/municipios.csv', delimiter=';')
+    df_municipios = pd.read_csv('gold/municipios.csv', delimiter=';')
 
     # inicio preenchendo vazios
     # criando um dataframe com todos os pares de estado/ano possíveis
-    municipios = df2['MUNICIPIO_CODIGO'].unique()
-    ano_min = combined_df['ANO'].min()
-    ano_max = combined_df['ANO'].max()
+    municipios = df_municipios['MUNICIPIO_CODIGO'].unique()
+    ano_min = cnes_consultorios_rua['ANO'].min()
+    ano_max = cnes_consultorios_rua['ANO'].max()
     anos = pd.date_range(start=str(int(ano_min)), end=str(int(ano_max) + 1), freq='Y').year
-    tipos_equipe = [73]
+    tipos_equipe = [40, 41, 42, 73]
 
     df3 = pd.DataFrame([(e, t, a) for e in municipios for a in anos for t in tipos_equipe],
                        columns=['MUNICIPIO_CODIGO', 'TIPO_EQP', 'ANO'])
 
     # fazendo um left join entre o dataframe criado acima e o dataframe original "df2"
-    df4 = pd.merge(df3, combined_df, how='left', on=['MUNICIPIO_CODIGO', 'TIPO_EQP', 'ANO'])
+    df4 = pd.merge(df3, cnes_consultorios_rua, how='left', on=['MUNICIPIO_CODIGO', 'TIPO_EQP', 'ANO'])
     # preenchendo com 0 os valores nulos da coluna "total"
     df4['TOTAL_EQUIPES'] = df4['TOTAL_EQUIPES'].fillna(0)
     df4['MES'] = df4['MES'].fillna(12)
 
     # agregando por estado e ano, somando os valores da coluna "total"
-    combined_df = df4.groupby(["MUNICIPIO_CODIGO", 'TIPO_EQP', 'ANO', 'MES'], as_index=False).agg(
+    cnes_consultorios_rua = df4.groupby(["MUNICIPIO_CODIGO", 'TIPO_EQP', 'ANO', 'MES'], as_index=False).agg(
         {'TOTAL_EQUIPES': 'sum'})
 
     # fim preenchendo vazios
 
     # Junta os dataframes com base na coluna "MUNICIPIO_CODIGO"
-    df_merged = pd.merge(df2, combined_df, on='MUNICIPIO_CODIGO', how='left')
+    df_merged = pd.merge(df_municipios, cnes_consultorios_rua, on='MUNICIPIO_CODIGO', how='left')
     df_merged['TOTAL_EQUIPES'] = df_merged['TOTAL_EQUIPES'].fillna(0)
 
     # Converte a coluna "MUNICIPIO_CODIGO" para o tipo de dados inteiro
@@ -243,22 +221,22 @@ def calcular_cobertura_municipio_sem_nasf():
                            index=["MUNICIPIO_CODIGO", "MUNICIPIO_NOME", "ESTADO_CODIGO", "ESTADO_SIGLA",
                                   "REGIAO_SAUDE_CODIGO", "REGIAO_SAUDE_NOME", "ESTADO_NOME", "MUNICIPIO_POPULACAO",
                                   "ANO", "MES"],
-                           columns=['TIPO_EQP'],
+                           columns=['TIPO_EQP_CLASSIFICACAO'],
                            aggfunc='sum')
 
     # Filtra as linhas que atendem aos critérios especificados
-    filtro = (table[72] == 0) & (table[70] != 0)
+    filtro = (table["NASF"] == 0) & (table["ESF"] != 0)
     table_filtrada = table.loc[filtro]
 
     # Calcula a coluna COBERTURA_ESAF
     table_filtrada = table_filtrada.reset_index()
-    table_filtrada['COBERTURA_ESAF'] = table_filtrada[70] * 3450 * 100 / table_filtrada['MUNICIPIO_POPULACAO']
+    table_filtrada['COBERTURA_ESAF'] = table_filtrada["ESF"] * 3450 * 100 / table_filtrada['MUNICIPIO_POPULACAO']
 
     # Reorganiza a tabela final
     table_final = table_filtrada.reset_index()[
         ["MUNICIPIO_CODIGO", "MUNICIPIO_NOME", "ESTADO_CODIGO", "ESTADO_SIGLA",
          "REGIAO_SAUDE_CODIGO", "REGIAO_SAUDE_NOME", "ESTADO_NOME", "MUNICIPIO_POPULACAO",
-         "ANO", "MES", 70, 72, "COBERTURA_ESAF"]]
+         "ANO", "MES", "ESF", "NASF", "COBERTURA_ESAF"]]
 
     # Salva o resultado em um novo arquivo CSV
     table_final.to_csv('gold/cnes-ep-com-calculo.csv', sep=";", index=False)
@@ -279,7 +257,7 @@ def tratar_arquivo_json_geobr():
 if __name__ == "__main__":
     # sumarizar_arquivos_nasf_esf()
     # agrupar_arquivos_nasf_esf()
-    # sumarizar_arquivos_consultorios_rua()
-    # agrupar_consultorios_rua()
+    sumarizar_arquivos_consultorios_rua()
+    agrupar_consultorios_rua()
     # tratar_arquivo_json_geobr()
-    calcular_cobertura_municipio_sem_nasf()
+    # calcular_cobertura_municipio_sem_nasf()

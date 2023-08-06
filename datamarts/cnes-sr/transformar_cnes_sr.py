@@ -51,9 +51,6 @@ def calcular_quantitativo_servicos_residenciais_terapeuticos():
     contagem = df_resultado.groupby(['CODUF', 'CODUFMUN', 'SERV_ESP', 'CLASS_SR', 'ANO']).size().reset_index(
         name='TOTAL_RESIDENCIAS_TERAPEUTICAS')
 
-    # Define o caminho do arquivo de saída
-    caminho_saida = 'gold/quantitativo_servicos_residenciais_terapeuticos.csv'
-
     contagem.rename(columns={
         "SERV_ESP": "SERVICO_ESPECIALIZADO_CODIGO",
         "CLASS_SR": "SERVICO_ESPECIALIZADO_CLASSIFICACAO_CODIGO",
@@ -64,7 +61,7 @@ def calcular_quantitativo_servicos_residenciais_terapeuticos():
     contagem = contagem.dropna(subset=['ANO'])
 
     # Salva o DataFrame filtrado em um arquivo CSV separado por ponto e vírgula
-    contagem.to_csv(caminho_saida, sep=';', index=False)
+    contagem.to_csv('gold/quantitativo_servicos_residenciais_terapeuticos.csv', sep=';', index=False)
 
 
 def calcular_numero_servicos_ambulatoriais_em_psiquiatria():
@@ -187,9 +184,6 @@ def calcular_quantitativo_servicos_hospitalares_saude_mental():
     contagem = df_resultado.groupby(['CODUF', 'CODUFMUN', 'SERV_ESP', 'CLASS_SR', 'ANO']).size().reset_index(
         name='TOTAL_SERVICO_HOSPITALAR_SAUDE_MENTAL')
 
-    # Define o caminho do arquivo de saída
-    caminho_saida = 'gold/quantitativo_servicos_hospitalares_saude_mental.csv'
-
     contagem.rename(columns={
         "SERV_ESP": "SERVICO_ESPECIALIZADO_CODIGO",
         "CLASS_SR": "SERVICO_ESPECIALIZADO_CLASSIFICACAO_CODIGO",
@@ -200,7 +194,7 @@ def calcular_quantitativo_servicos_hospitalares_saude_mental():
     contagem = contagem.dropna(subset=['ANO'])
 
     # Salva o DataFrame filtrado em um arquivo CSV separado por ponto e vírgula
-    contagem.to_csv(caminho_saida, sep=';', index=False)
+    contagem.to_csv('gold/quantitativo_servicos_hospitalares_saude_mental.csv', sep=';', index=False)
 
 
 def calcular_quantitativo_ua_adulto_infantil():
@@ -251,9 +245,6 @@ def calcular_quantitativo_ua_adulto_infantil():
     contagem = df_resultado.groupby(['CODUF', 'CODUFMUN', 'SERV_ESP', 'CLASS_SR', 'ANO']).size().reset_index(
         name='TOTAL_RESIDENCIAS_TERAPEUTICAS')
 
-    # Define o caminho do arquivo de saída
-    caminho_saida = 'gold/quantitativo_ua_adulto_infantil.csv'
-
     contagem.rename(columns={
         "SERV_ESP": "SERVICO_ESPECIALIZADO_CODIGO",
         "CLASS_SR": "SERVICO_ESPECIALIZADO_CLASSIFICACAO_CODIGO",
@@ -264,7 +255,7 @@ def calcular_quantitativo_ua_adulto_infantil():
     contagem = contagem.dropna(subset=['ANO'])
 
     # Salva o DataFrame filtrado em um arquivo CSV separado por ponto e vírgula
-    contagem.to_csv(caminho_saida, sep=';', index=False)
+    contagem.to_csv('gold/quantitativo_ua_adulto_infantil.csv', sep=';', index=False)
 
 
 def gerar_arquivo_servico_especializado():
@@ -307,5 +298,5 @@ if __name__ == "__main__":
     # gerar_arquivo_servico_especializado()
 
     # gerar_arquivo_classificacao_srt()
-    #calcular_quantitativo_servicos_hospitalares_saude_mental()
-    calcular_numero_servicos_ambulatoriais_em_psiquiatria()
+    calcular_quantitativo_servicos_hospitalares_saude_mental()
+    #calcular_numero_servicos_ambulatoriais_em_psiquiatria()
