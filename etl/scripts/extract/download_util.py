@@ -3,8 +3,10 @@ import glob
 import io
 import os
 import subprocess
+import time
 import urllib.request
 import zipfile
+from ftplib import FTP
 
 import pandas as pd
 import requests
@@ -80,28 +82,77 @@ class DowloadDataSusFtp:
 
 @dataclasses.dataclass
 class DowloadDataSusCnesRawFtp:
-    def __post_init__(self):
-        self.base_url = urls["CNES_RAW"]
 
     def arquivo_cnes_raw_path(self):
         return "/data/bronze/datasus/CNES/raw"
 
-    def download_file(self, url, file_name, destination_path="."):
-        try:
-            print(f"iniciando downaload do arquivo {url} {file_name} {destination_path}")
-            full_file_path = os.path.join(destination_path, file_name)
-            urllib.request.urlretrieve(url, full_file_path)
-            print(f"Arquivo {file_name} baixado com sucesso!")
-        except Exception as e:
-            print(f"Erro ao baixar o arquivo {file_name}: {e}")
+    def download_file(self, file_name):
+        # Informações do servidor FTP e arquivo a ser baixado
+        ftp_server = 'ftp.datasus.gov.br'
+        ftp_path = f'/cnes/{file_name}'
+        local_directory = '/cnesrawzip'
+        local_filename = os.path.join(local_directory, file_name)
+
+        # Criar o diretório local se não existir
+        os.makedirs(local_directory, exist_ok=True)
+
+        # Configurar a conexão FTP
+        ftp = FTP(ftp_server)
+        ftp.login()
+
+        # Mudar para o diretório correto no servidor FTP
+        ftp.cwd(os.path.dirname(ftp_path))
+
+        # Determinar o tamanho do arquivo
+        file_size = ftp.size(os.path.basename(ftp_path))
+
+        # Definir os segundos de cada minuto para atualizações de progresso
+        progress_seconds = [20, 40]
+
+        # Iniciar o download
+        with open(local_filename, 'wb') as local_file:
+            bytes_downloaded = 0
+
+            def callback(data):
+                nonlocal bytes_downloaded
+                local_file.write(data)
+                bytes_downloaded += len(data)
+                if time.localtime().tm_sec in progress_seconds:
+                    print(
+                        f"Baixando: {bytes_downloaded / 1024 / 1024:.2f} MB / {file_size / 1024 / 1024:.2f} MB ({bytes_downloaded / file_size:.2%})",
+                        end='\r')
+
+            ftp.retrbinary(f"RETR {os.path.basename(ftp_path)}", callback)
+
+            print("\nDownload concluído.")
+
+        # Fechar a conexão FTP
+        ftp.quit()
+
+    def download_from_bucket_s3(self):
+        # URL pública do arquivo ZIP no bucket S3
+        s3_public_url = 'https://datasus-etl.s3.amazonaws.com/bronze/datasus/raw/cnes_raw.zip'
+
+        # Nome que você deseja dar ao arquivo localmente
+        local_filename = f'{path("/cnesrawzip")}/BASE_DE_DADOS_CNES_TODOS.zip'
+
+        # Fazer o download do arquivo usando requests
+        response = requests.get(s3_public_url)
+
+        if response.status_code == 200:
+            with open(local_filename, 'wb') as file:
+                file.write(response.content)
+            print(f"Arquivo baixado como {local_filename}")
+        else:
+            print("Não foi possível baixar o arquivo")
 
     def download_files_by_range(self, years, months):
         for year in years:
             for month in months:
                 file_name = "BASE_DE_DADOS_CNES_{}{}.zip".format(year, f"{month:02d}")
-                url = self.base_url.format(year, f"{month:02d}")
-                self.download_file(url, file_name, path('/cnesrawzip'))
+                self.download_file(file_name)
 
+    # https://stackoverflow.com/a/11385480
     def fix_bad_file(self, zipFile):
         f = open(zipFile, 'r+b')
         data = f.read()
@@ -110,8 +161,6 @@ class DowloadDataSusCnesRawFtp:
             f.seek(pos + 22)  # size of 'ZIP end of central directory record'
             f.truncate()
             f.close()
-        else:
-            raise Exception("Houve um erro ao converter")
 
     def extract_december_files(self):
         # Padrão de busca para encontrar todos os arquivos .zip que correspondem ao padrão

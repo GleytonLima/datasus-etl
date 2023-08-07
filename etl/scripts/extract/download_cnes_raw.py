@@ -4,5 +4,5 @@ years = [2022]
 months = [12]
 
 download_cnes = DowloadDataSusCnesRawFtp()
-download_cnes.download_files_by_range(years=years, months=months)
+download_cnes.download_from_bucket_s3()
 download_cnes.extract_december_files()
