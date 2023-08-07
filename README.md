@@ -2,6 +2,11 @@
 
 Este projeto tem como objetivo coletar mensalmente dados relacionados à saúde mental do Datasus, processá-los e enviá-los para um data lake para consumo posterior.
 
+
+## Executando o processo de ETL localmente
+
+Para executar o projeto localmente, siga as instruções do [README.md](etl/README.md)
+
 ## Fluxo do processo de extração
 
 O processo de extração envolve o uso do Github Actions com um workflow agendado ou manual e o R para baixar os dados do datasus com o pacote microdatasus e converter os dados para o formato [parquet](https://parquet.apache.org/). Os dados processados são enviados para um data lake e finalmente são consumidos por meio do Power BI para análise e relatórios.
