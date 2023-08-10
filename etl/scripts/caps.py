@@ -1,17 +1,19 @@
 import glob
-from dataclasses import dataclass, field
 import os
+from dataclasses import dataclass, field
 from typing import List
 
 import pandas as pd
 
+from base import Estado, Municipio, RegiaoSaude, Coluna
 from extract.download_util import DowloadDataSusCnesRawFtp, DownloadCepAbertoHttp
-from base import Estado, Municipio, RegiaoSaude
+
 
 def path(path):
     if not os.path.exists(path):
         os.makedirs(path)
     return path
+
 
 def renomear_nomes_caps(df_cnes_enriquecido):
     df_cnes_enriquecido['TIPO'] = df_cnes_enriquecido['TIPO'].replace(
@@ -20,13 +22,8 @@ def renomear_nomes_caps(df_cnes_enriquecido):
          'CAPS ALCOOL E DROGA': 'CAPS AD',
          'CAPS INFANTO/JUVENIL': 'CAPS IJ'})
 
-@dataclass
-class Coluna:
-    nome: str
-    tipo: str
 
-    def get_dtype(self):
-        return {self.nome: self.tipo}
+
 
 
 @dataclass
@@ -81,7 +78,7 @@ class EstabelecimentoColuna:
 class Estabelecimento:
     anos: List[int]
     mes: str
-    colunas: EstabelecimentoColuna = field(default_factory=lambda:EstabelecimentoColuna())
+    colunas: EstabelecimentoColuna = field(default_factory=lambda: EstabelecimentoColuna())
     nome = "tbEstabelecimento"
     chunksize: int = 1000
     codigo_caps = 70
@@ -305,7 +302,7 @@ class Combinado:
 
     def gerar_dtype(self):
         return self.colunas.CO_MUNICIPIO_GESTOR.get_dtype()
-    
+
     def gerar_path_saida(self):
         return f'{path("/data/silver/caps")}'
 
@@ -375,8 +372,8 @@ class Combinado:
             df_merged['CO_MUNICIPIO_GESTOR'] = df_merged['CO_MUNICIPIO_GESTOR'].astype(int)
 
             df_merged.to_csv(self.gerar_nome_saida(ano),
-                            sep=";",
-                            index=False)
+                             sep=";",
+                             index=False)
 
     def gerar_nome_arquivos_caps_combinados(self):
         return f'{self.gerar_path_saida()}/cnes_filtrados.csv'
@@ -396,7 +393,7 @@ class Combinado:
 
 
 @dataclass
-class CombinadoEnriquecido:    
+class CombinadoEnriquecido:
     def __init__(self, anos, mes, combinado: Combinado):
         self.prefixo_nome_anos = f'{anos[0]}-{anos[-1]}'
         self.anos = anos
@@ -405,7 +402,7 @@ class CombinadoEnriquecido:
 
     def gerar_path_saida(self):
         return f'{path("/data/gold/caps")}'
-    
+
     def gerar_nome_arquivo_saida(self):
         return f'{self.gerar_path_saida()}/{self.prefixo_nome_anos}-cnes-enriquecido.csv'
 
@@ -436,7 +433,7 @@ class CombinadoEnriquecido:
                                                   "CO_ESTADO_GESTOR": "ESTADO_CODIGO"},
                                          inplace=True)
 
-        estados_com_codigo = pd.read_csv(Estado().gerar_nome_arquivo_saida(), 
+        estados_com_codigo = pd.read_csv(Estado().gerar_nome_arquivo_saida(),
                                          sep=";")
 
         municipios_enriquecidos = pd.read_csv(Municipio().gerar_nome_arquivo_saida(),
@@ -469,17 +466,17 @@ class CombinadoEnriquecido:
              'REGIAO_SAUDE_CODIGO',
              'REGIAO_SAUDE_NOME',
              'REGIAO_SAUDE_POPULACAO']],
-                            on='MUNICIPIO_CODIGO',
-                            how='left')
+                                                              on='MUNICIPIO_CODIGO',
+                                                              how='left')
 
         # Remover linhas duplicadas em todas as colunas
         df_merged = df_merge_merge_com_municipios_enriquecidos.drop_duplicates()
 
         # Escreva o dataframe no arquivo parquet
         df_merged.to_csv(self.gerar_nome_arquivo_saida(),
-                        sep=";",
-                        index=False,
-                        float_format='%.0f')
+                         sep=";",
+                         index=False,
+                         float_format='%.0f')
 
 
 multiplicador = {
@@ -500,7 +497,7 @@ class DatamartIndicadorCapsMunicipio:
         self.prefixo_nome_anos = f'{anos[0]}-{anos[-1]}'
         self.anos = anos
         self.mes = mes
-        
+
     def gerar_path_saida(self):
         return f'{path("/data/gold/caps")}'
 
@@ -608,7 +605,8 @@ class DatamartIndicadorCapsMunicipio:
         # Resetar o índice do DataFrame resultante
         df_grouped = df_grouped.reset_index(drop=True)
 
-        df_grouped.to_csv(f'{self.gerar_path_saida()}/{self.prefixo_nome_anos}-caps-agrupados-por-tipo.csv', sep=';', index=False, decimal=',')
+        df_grouped.to_csv(f'{self.gerar_path_saida()}/{self.prefixo_nome_anos}-caps-agrupados-por-tipo.csv', sep=';',
+                          index=False, decimal=',')
 
 
 class DatamartIndicadorCapsEstado:
@@ -616,7 +614,7 @@ class DatamartIndicadorCapsEstado:
         self.prefixo_nome_anos = f'{anos[0]}-{anos[-1]}'
         self.anos = anos
         self.mes = mes
-        
+
     def gerar_path_saida(self):
         return f'{path("/data/gold/caps")}'
 
@@ -648,8 +646,8 @@ class DatamartIndicadorCapsEstado:
         df_grouped['ESTADO_IC'] = df_grouped.apply(self.calcular_valor_estado, axis=1)
 
         print(df_grouped)
-        df_grouped.to_csv(f'{self.gerar_path_saida()}/{self.prefixo_nome_anos}-caps-agrupados-por-tipo-por-uf.csv', 
-                          sep=';', 
+        df_grouped.to_csv(f'{self.gerar_path_saida()}/{self.prefixo_nome_anos}-caps-agrupados-por-tipo-por-uf.csv',
+                          sep=';',
                           index=False,
                           decimal=',')
 
@@ -659,7 +657,7 @@ class DatamartIndicadorCapsRegiaoSaude:
         self.prefixo_nome_anos = f'{anos[0]}-{anos[-1]}'
         self.anos = anos
         self.mes = mes
-        
+
     def gerar_path_saida(self):
         return f'{path("/data/gold/caps")}'
 
@@ -755,9 +753,10 @@ class DatamartIndicadorCapsRegiaoSaude:
         # Resetar o índice do DataFrame resultante
         df_grouped = df_grouped.reset_index(drop=True)
 
-        df_grouped.to_csv(f'{self.gerar_path_saida()}/{self.prefixo_nome_anos}-caps-agrupados-por-tipo-por-regiao-saude.csv', sep=';',
-                          index=False,
-                          decimal=',')
+        df_grouped.to_csv(
+            f'{self.gerar_path_saida()}/{self.prefixo_nome_anos}-caps-agrupados-por-tipo-por-regiao-saude.csv', sep=';',
+            index=False,
+            decimal=',')
 
 
 def criar_arquivo_lista_tipo_caps():
@@ -820,4 +819,3 @@ def combinar_arquivos_cepaberto():
     df_final.to_csv("silver/df_cep_aberto.csv",
                     sep=";",
                     index=False)
-

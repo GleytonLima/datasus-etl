@@ -115,6 +115,13 @@ CAPS
 docker run --rm --name datasus-etl -v $pwd/scripts:/app/scripts -v $pwd/data:/data -e SCRIPT_NAME=transform_caps.py gleytonlima/datasusftp
 ```
 
+FICHA #1
+
+```commandline
+docker run --rm --name datasus-etl -v $pwd/scripts:/app/scripts -v $pwd/data:/data -e SCRIPT_NAME=transform_cnes_ep_esf_eap.py gleytonlima/datasusftp
+```
+
+
 ## Conversão do DBC em CSV
 
 Para conversão do arquivo dbc baixado do FTP do Datasus é utilizado o script [dbc_to_csv.R](scripts/extract/dbc_to_csv.R).

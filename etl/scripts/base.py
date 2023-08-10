@@ -13,6 +13,36 @@ def path(path):
 
 
 @dataclasses.dataclass
+class Coluna:
+    nome: str
+    tipo: str
+    descricao: str = dataclasses.field(default_factory=lambda: "")
+
+    def get_dtype(self):
+        return {self.nome: self.tipo}
+
+
+@dataclasses.dataclass
+class ColunasSds:
+    TOTAL_EQUIPES = Coluna(
+        nome="TOTAL_EQUIPES",
+        tipo="int"
+    )
+    MES = Coluna(
+        nome="MES",
+        tipo="str"
+    )
+    ANO = Coluna(
+        nome="ANO",
+        tipo="str"
+    )
+    MUNICIPIO_CODIGO = Coluna(
+        nome="MUNICIPIO_CODIGO",
+        tipo="str"
+    )
+
+
+@dataclasses.dataclass
 class RegiaoSaude:
     def arquivo_bronze(self):
         return DownloadSageSaudeHttp().arquivo_municipios_com_regiao_saude()

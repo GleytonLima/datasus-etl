@@ -74,10 +74,13 @@ class DowloadDataSusFtp:
         print("iniciando conversao dbc em csv")
         try:
             subprocess.run(
-                f"Rscript /app/scripts/extract/dbc_to_csv.R /tmp /data/bronze/datasus/{self.config.system}/{self.config.subsystem}",
+                f"Rscript /app/scripts/extract/dbc_to_csv.R /tmp {self.gerar_path_arquivos_saida()}",
                 check=True, shell=True)
         except subprocess.CalledProcessError as e:
             print(f"Erro ao executar o script R: {e}")
+
+    def gerar_path_arquivos_saida(self):
+        return f"/data/bronze/datasus/{self.config.system}/{self.config.subsystem}"
 
 
 @dataclasses.dataclass
