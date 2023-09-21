@@ -1,3 +1,4 @@
+import dataclasses
 import glob
 import os
 from dataclasses import dataclass
@@ -44,17 +45,14 @@ class EquipeColunas:
     )
 
 
+@dataclasses.dataclass
 class TransformarEquipesCnes:
-    CODIGOS_EQUIPES_ESF_EAP = [16, 17, 18, 1, 4, 12, 14, 24, 27, 30, 33, 36, 70, 76]
-
-    CLASSIFICACAO_EQUIPE_ESF_EAP = {16: 'EAP', 17: 'EAP', 18: 'EAP', 76: 'EAP', 1: 'ESF', 12: 'ESF', 14: 'ESF',
-                                    24: 'ESF',
-                                    27: 'ESF', 30: 'ESF', 33: 'ESF', 36: 'ESF', 70: 'ESF'}
+    classificacao_equipe_esf_eap: dict
+    nome_arquivo_saida: str
     download_cnes_ep = DowloadDataSusFtp(config=DonwloadDataSusConfig(
         system="CNES",
         subsystem="EP"
     ))
-    nome_arquivo_saida = 'cnes-ep-esf-eap.csv'
 
     def gerar_nome_arquivo_saida_silver(self):
         return f'{path("/data/silver/datasus/cnes")}/{self.nome_arquivo_saida}'
@@ -73,7 +71,7 @@ class TransformarEquipesCnes:
 
         df.dropna(subset=[EquipeColunas.TIPO_EQP.nome], inplace=True)
         df.dropna(subset=[EquipeColunas.COMPETEN.nome], inplace=True)
-        df = df[df[EquipeColunas.TIPO_EQP.nome].isin(self.CODIGOS_EQUIPES_ESF_EAP)]
+        df = df[df[EquipeColunas.TIPO_EQP.nome].isin(self.classificacao_equipe_esf_eap.keys())]
 
         # Converter a coluna COMPETEN para string
         df[EquipeColunas.COMPETEN.nome] = df[EquipeColunas.COMPETEN.nome].astype("str")
@@ -113,7 +111,7 @@ class TransformarEquipesCnes:
         ano_max = df_equipes_silver[ColunasSds.ANO.nome].max()
         anos = pd.date_range(start=str(int(ano_min)), end=str(int(ano_max) + 1), freq='Y').year
 
-        df3 = pd.DataFrame([(m, t, a) for m in codigos_municipios for a in anos for t in self.CODIGOS_EQUIPES_ESF_EAP],
+        df3 = pd.DataFrame([(m, t, a) for m in codigos_municipios for a in anos for t in self.classificacao_equipe_esf_eap.keys()],
                            columns=[ColunasSds.MUNICIPIO_CODIGO.nome, EquipeColunas.TIPO_EQP.nome, ColunasSds.ANO.nome])
 
         # fazendo um left join entre o dataframe criado acima e o dataframe original "df2"
@@ -145,6 +143,6 @@ class TransformarEquipesCnes:
         df_merged[ColunasSds.TOTAL_EQUIPES.nome] = df_merged[ColunasSds.TOTAL_EQUIPES.nome].astype('Int64')
 
         df_merged[EquipeColunas.TIPO_EQP_CLASSIFICACAO.nome] = df_merged[EquipeColunas.TIPO_EQP.nome].map(
-            self.CLASSIFICACAO_EQUIPE_ESF_EAP)
+            self.classificacao_equipe_esf_eap)
 
         df_merged.to_csv(self.gerar_nome_arquivo_saida_gold(), sep=';', index=False)
