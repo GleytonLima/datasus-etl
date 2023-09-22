@@ -121,7 +121,7 @@ FICHA #1
 docker run --rm --name datasus-etl -v $pwd/scripts:/app/scripts -v $pwd/data:/data -e SCRIPT_NAME=transform_cnes_ep_esf_eap.py gleytonlima/datasusftp
 ```
 
-FICHA #2
+FICHA #2 e #3
 
 ```commandline
 docker run --rm --name datasus-etl -v $pwd/scripts:/app/scripts -v $pwd/data:/data -e SCRIPT_NAME=transform_cnes_ep_esf_nasf.py gleytonlima/datasusftp

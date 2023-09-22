@@ -40,6 +40,46 @@ class ColunasSds:
         nome="MUNICIPIO_CODIGO",
         tipo="str"
     )
+    MUNICIPIO_NOME = Coluna(
+        nome="MUNICIPIO_NOME",
+        tipo="str"
+    )
+    MUNICIPIO_POPULACAO = Coluna(
+        nome="MUNICIPIO_POPULACAO",
+        tipo="str"
+    )
+    ESTADO_CODIGO = Coluna(
+        nome="ESTADO_CODIGO",
+        tipo="str"
+    )
+    ESTADO_NOME = Coluna(
+        nome="ESTADO_NOME",
+        tipo="str"
+    )
+    ESTADO_SIGLA = Coluna(
+        nome="ESTADO_SIGLA",
+        tipo="str"
+    )
+    ESTADO_POPULACAO = Coluna(
+        nome="ESTADO_POPULACAO",
+        tipo="str"
+    )
+    REGIAO_SAUDE_CODIGO = Coluna(
+        nome="REGIAO_SAUDE_CODIGO",
+        tipo="str"
+    )
+    REGIAO_SAUDE_NOME = Coluna(
+        nome="REGIAO_SAUDE_NOME",
+        tipo="str"
+    )
+    COBERTURA_ESAF = Coluna(
+        nome="COBERTURA_ESAF",
+        tipo="float"
+    )
+    TIPO_EQP_CLASSIFICACAO = Coluna(
+        nome="TIPO_EQP_CLASSIFICACAO",
+        tipo="str"
+    )
 
 
 @dataclasses.dataclass
