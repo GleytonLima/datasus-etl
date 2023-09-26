@@ -109,12 +109,6 @@ BASE
 docker run --rm --name datasus-etl -v $pwd/scripts:/app/scripts -v $pwd/data:/data -e SCRIPT_NAME=transform_base.py gleytonlima/datasusftp
 ```
 
-CAPS
-
-```commandline
-docker run --rm --name datasus-etl -v $pwd/scripts:/app/scripts -v $pwd/data:/data -e SCRIPT_NAME=transform_caps.py gleytonlima/datasusftp
-```
-
 FICHA #1
 
 ```commandline
@@ -127,6 +121,56 @@ FICHA #2 e #3
 docker run --rm --name datasus-etl -v $pwd/scripts:/app/scripts -v $pwd/data:/data -e SCRIPT_NAME=transform_cnes_ep_esf_nasf.py gleytonlima/datasusftp
 ```
 
+FICHA #4
+
+```commandline
+docker run --rm --name datasus-etl -v $pwd/scripts:/app/scripts -v $pwd/data:/data -e SCRIPT_NAME=transform_cnes_ep_consultorio_rua.py gleytonlima/datasusftp
+```
+
+CAPS FICHAS #5, #6, #7, #8 e #9
+
+```commandline
+docker run --rm --name datasus-etl -v $pwd/scripts:/app/scripts -v $pwd/data:/data -e SCRIPT_NAME=transform_caps.py gleytonlima/datasusftp
+```
+
+
+FICHA #10
+
+```commandline
+docker run --rm --name datasus-etl -v $pwd/scripts:/app/scripts -v $pwd/data:/data -e SCRIPT_NAME=transform_cnes_ep_emaesm.py gleytonlima/datasusftp
+```
+
+FICHA #11
+
+Manual
+
+FICHA #11
+
+```commandline
+docker run --rm --name datasus-etl -v $pwd/scripts:/app/scripts -v $pwd/data:/data -e SCRIPT_NAME=transform_cnes_sr_sap.py gleytonlima/datasusftp
+```
+
+FICHA #12
+
+TODO: Manual a partir do tabnet
+
+FICHA #13
+
+```commandline
+docker run --rm --name datasus-etl -v $pwd/scripts:/app/scripts -v $pwd/data:/data -e SCRIPT_NAME=transform_cnes_sr_shsm.py gleytonlima/datasusftp
+```
+
+FICHA #14 e #15
+
+```commandline
+docker run --rm --name datasus-etl -v $pwd/scripts:/app/scripts -v $pwd/data:/data -e SCRIPT_NAME=transform_cnes_sr_ua.py gleytonlima/datasusftp
+```
+
+FICHA #16
+
+```commandline
+docker run --rm --name datasus-etl -v $pwd/scripts:/app/scripts -v $pwd/data:/data -e SCRIPT_NAME=transform_cnes_sr_srt.py gleytonlima/datasusftp
+```
 
 ## Conversão do DBC em CSV
 
