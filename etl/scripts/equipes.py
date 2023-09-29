@@ -95,7 +95,7 @@ class TransformarEquipesCnes:
 
         df[ColunasSds.ANO.nome] = df[EquipeColunas.COMPETEN.nome].str.slice(stop=4).astype(int)
         # Filtrar as linhas com anos entre 2013 e 2022
-        df = df[df[ColunasSds.ANO.nome].between(2013, 2023)]
+        df = df[df[ColunasSds.ANO.nome].between(2013, 2099)]
 
         # Criar coluna mes com ultimos digitos de COMPETEN
         df[ColunasSds.MES.nome] = df[EquipeColunas.COMPETEN.nome].str.slice(start=4)
