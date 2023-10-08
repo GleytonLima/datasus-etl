@@ -1,0 +1,50 @@
+{
+  "ufs": [
+    "AM"
+  ],
+  "anos": [
+    2018
+  ],
+  "meses": [
+    12
+  ],
+  "urls": {
+    "CNES": "ftp://ftp.datasus.gov.br/dissemin/publicos/CNES/200508_/Dados/",
+    "CNES_RAW": "ftp://ftp.datasus.gov.br/cnes/BASE_DE_DADOS_CNES_{}{}.ZIP",
+    "IBGE_UF": "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Previa_da_Populacao/POP2022_Brasil_e_UFs.xls",
+    "IBGE_MUNICIPIO": "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Previa_da_Populacao/POP2022_Municipios_20230622.xls",
+    "SAGE_REGIOES_SAUDE": "https://sage.saude.gov.br/paineis/regiaoSaude/lista.php?output=jsonbt&&order=asc",
+    "CIDS": "http://www2.datasus.gov.br/cid10/V2008/downloads/CID10CSV.zip",
+    "GITHUB_MUNICIPIOS": "https://raw.githubusercontent.com/kelvins/Municipios-Brasileiros/main/csv/municipios.csv",
+    "GITHUB_ESTADOS": "https://raw.githubusercontent.com/kelvins/Municipios-Brasileiros/main/csv/estados.csv"
+  },
+  "system_config": {
+    "CNES": {
+      "LT": {
+        "description": "Leitos - A partir de Out/2005",
+        "start_month": 10,
+        "start_year": 2005
+      },
+      "ST": {
+        "description": "Estabelecimentos - A partir de Ago/2005",
+        "start_month": 8,
+        "start_year": 2005
+      },
+      "SR": {
+        "description": "Serviço Especializado - A partir de Ago/2005",
+        "start_month": 8,
+        "start_year": 2005
+      },
+      "EP": {
+        "description": "Equipes - A partir de Abr/2007",
+        "start_month": 5,
+        "start_year": 2007
+      }
+    },
+    "CNES_RAW": {
+      "description": "Equipes - Dados crus a partir de 2018",
+      "start_month": 12,
+      "start_year": 2018
+    }
+  }
+}

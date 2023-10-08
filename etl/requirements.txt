@@ -2,3 +2,4 @@ pandas
 pyarrow
 requests
 xlrd
+urllib3

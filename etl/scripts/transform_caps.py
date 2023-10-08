@@ -1,15 +1,19 @@
-from caps import EstabelecimentoSubtipo, Estabelecimento, EstabelecimentoColuna, Subtipo, Combinado, \
+from caps import EstabelecimentoSubtipo, Estabelecimento, Subtipo, Combinado, \
     CombinadoEnriquecido, DatamartIndicadorCapsMunicipio, DatamartIndicadorCapsEstado, DatamartIndicadorCapsRegiaoSaude, \
     criar_arquivo_lista_tipo_caps, criar_arquivo_lista_anos, criar_arquivo_lista_anos_leitos
+from extract.config import LoadConfig
 
+config = LoadConfig().get_config()
 
-ANOS_CONSIDERADOS = [2022]
+print("Iniciando processo " + str(config))
 
-PREFIXO_NOME_ANOS = f'{ANOS_CONSIDERADOS[0]}-{ANOS_CONSIDERADOS[-1]}'
+ANOS_CONSIDERADOS = config.anos
 
-ANOS_LEITOS_CONSIDERADOS = [2022]
+PREFIXO_NOME_ANOS = f"{ANOS_CONSIDERADOS[0]}-{ANOS_CONSIDERADOS[-1]}"
 
-MES_COMPETENCIA_CONSIDERADO = "12"
+ANOS_LEITOS_CONSIDERADOS = config.anos
+
+MES_COMPETENCIA_CONSIDERADO = str(config.meses[0])
 
 criar_arquivo_lista_tipo_caps()
 criar_arquivo_lista_anos(anos=ANOS_CONSIDERADOS)
@@ -50,16 +54,19 @@ datamart_indicador_caps_municipio = DatamartIndicadorCapsMunicipio(
     anos=ANOS_CONSIDERADOS,
     mes=MES_COMPETENCIA_CONSIDERADO
 )
-datamart_indicador_caps_municipio.criar_datamart_com_indices_cobertura_caps_por_municipio(combinado_enriquecido=combinado_enriquecido)
+datamart_indicador_caps_municipio.criar_datamart_com_indices_cobertura_caps_por_municipio(
+    combinado_enriquecido=combinado_enriquecido)
 
 datamart_indicador_caps_estado = DatamartIndicadorCapsEstado(
     anos=ANOS_CONSIDERADOS,
     mes=MES_COMPETENCIA_CONSIDERADO
 )
-datamart_indicador_caps_estado.criar_datamart_com_indices_cobertura_caps_por_estados(combinado_enriquecido=combinado_enriquecido)
+datamart_indicador_caps_estado.criar_datamart_com_indices_cobertura_caps_por_estados(
+    combinado_enriquecido=combinado_enriquecido)
 
 datamart_indicador_caps_regiao_saude = DatamartIndicadorCapsRegiaoSaude(
     anos=ANOS_CONSIDERADOS,
     mes=MES_COMPETENCIA_CONSIDERADO
 )
-datamart_indicador_caps_regiao_saude.criar_datamart_com_indices_cobertura_caps_por_regiao_saude(combinado_enriquecido=combinado_enriquecido)
+datamart_indicador_caps_regiao_saude.criar_datamart_com_indices_cobertura_caps_por_regiao_saude(
+    combinado_enriquecido=combinado_enriquecido)

@@ -523,10 +523,10 @@ MUNICIPIO_CODIGO;MUNICIPIO_NOME;latitude;longitude;capital;ESTADO_CODIGO;siafi_i
 510025;Alta Floresta;-9.86674;-56.0867;0;51;8987;66;America/Porto_Velho;MT;51001;Alto Tapajós;Mato Grosso;56461;59;2019;12;0;ECR
 510025;Alta Floresta;-9.86674;-56.0867;0;51;8987;66;America/Porto_Velho;MT;51001;Alto Tapajós;Mato Grosso;56461;60;2019;12;0;ECR
 510025;Alta Floresta;-9.86674;-56.0867;0;51;8987;66;America/Porto_Velho;MT;51001;Alto Tapajós;Mato Grosso;56461;75;2019;12;0;ECR
-110001;Alta Floresta D'Oeste;-11.9283;-61.9953;0;11;33;69;America/Porto_Velho;RO;11005;Zona da Mata;Rondônia;21558;58;2019;12;0;ECR
-110001;Alta Floresta D'Oeste;-11.9283;-61.9953;0;11;33;69;America/Porto_Velho;RO;11005;Zona da Mata;Rondônia;21558;59;2019;12;0;ECR
-110001;Alta Floresta D'Oeste;-11.9283;-61.9953;0;11;33;69;America/Porto_Velho;RO;11005;Zona da Mata;Rondônia;21558;60;2019;12;0;ECR
-110001;Alta Floresta D'Oeste;-11.9283;-61.9953;0;11;33;69;America/Porto_Velho;RO;11005;Zona da Mata;Rondônia;21558;75;2019;12;0;ECR
+110001;Alta Floresta D"Oeste;-11.9283;-61.9953;0;11;33;69;America/Porto_Velho;RO;11005;Zona da Mata;Rondônia;21558;58;2019;12;0;ECR
+110001;Alta Floresta D"Oeste;-11.9283;-61.9953;0;11;33;69;America/Porto_Velho;RO;11005;Zona da Mata;Rondônia;21558;59;2019;12;0;ECR
+110001;Alta Floresta D"Oeste;-11.9283;-61.9953;0;11;33;69;America/Porto_Velho;RO;11005;Zona da Mata;Rondônia;21558;60;2019;12;0;ECR
+110001;Alta Floresta D"Oeste;-11.9283;-61.9953;0;11;33;69;America/Porto_Velho;RO;11005;Zona da Mata;Rondônia;21558;75;2019;12;0;ECR
 350090;Altair;-20.5242;-49.0571;0;35;6117;17;America/Sao_Paulo;SP;35051;Norte - Barretos;São Paulo;3383;58;2019;12;0;ECR
 350090;Altair;-20.5242;-49.0571;0;35;6117;17;America/Sao_Paulo;SP;35051;Norte - Barretos;São Paulo;3383;59;2019;12;0;ECR
 350090;Altair;-20.5242;-49.0571;0;35;6117;17;America/Sao_Paulo;SP;35051;Norte - Barretos;São Paulo;3383;60;2019;12;0;ECR
@@ -715,10 +715,10 @@ MUNICIPIO_CODIGO;MUNICIPIO_NOME;latitude;longitude;capital;ESTADO_CODIGO;siafi_i
 430060;Alvorada;-29.9914;-51.0809;0;43;8511;51;America/Sao_Paulo;RS;43010;Região 10 - Capital e Vale do Gravataí;Rio Grande do Sul;185921;59;2019;12;0;ECR
 430060;Alvorada;-29.9914;-51.0809;0;43;8511;51;America/Sao_Paulo;RS;43010;Região 10 - Capital e Vale do Gravataí;Rio Grande do Sul;185921;60;2019;12;0;ECR
 430060;Alvorada;-29.9914;-51.0809;0;43;8511;51;America/Sao_Paulo;RS;43010;Região 10 - Capital e Vale do Gravataí;Rio Grande do Sul;185921;75;2019;12;0;ECR
-110034;Alvorada D'Oeste;-11.3463;-62.2847;0;11;35;69;America/Porto_Velho;RO;11003;Central;Rondônia;13092;58;2019;12;0;ECR
-110034;Alvorada D'Oeste;-11.3463;-62.2847;0;11;35;69;America/Porto_Velho;RO;11003;Central;Rondônia;13092;59;2019;12;0;ECR
-110034;Alvorada D'Oeste;-11.3463;-62.2847;0;11;35;69;America/Porto_Velho;RO;11003;Central;Rondônia;13092;60;2019;12;0;ECR
-110034;Alvorada D'Oeste;-11.3463;-62.2847;0;11;35;69;America/Porto_Velho;RO;11003;Central;Rondônia;13092;75;2019;12;0;ECR
+110034;Alvorada D"Oeste;-11.3463;-62.2847;0;11;35;69;America/Porto_Velho;RO;11003;Central;Rondônia;13092;58;2019;12;0;ECR
+110034;Alvorada D"Oeste;-11.3463;-62.2847;0;11;35;69;America/Porto_Velho;RO;11003;Central;Rondônia;13092;59;2019;12;0;ECR
+110034;Alvorada D"Oeste;-11.3463;-62.2847;0;11;35;69;America/Porto_Velho;RO;11003;Central;Rondônia;13092;60;2019;12;0;ECR
+110034;Alvorada D"Oeste;-11.3463;-62.2847;0;11;35;69;America/Porto_Velho;RO;11003;Central;Rondônia;13092;75;2019;12;0;ECR
 310240;Alvorada de Minas;-18.7334;-43.3638;0;31;4047;31;America/Sao_Paulo;MG;31095;Serro;Minas Gerais;4065;58;2019;12;0;ECR
 310240;Alvorada de Minas;-18.7334;-43.3638;0;31;4047;31;America/Sao_Paulo;MG;31095;Serro;Minas Gerais;4065;59;2019;12;0;ECR
 310240;Alvorada de Minas;-18.7334;-43.3638;0;31;4047;31;America/Sao_Paulo;MG;31095;Serro;Minas Gerais;4065;60;2019;12;0;ECR
@@ -1079,10 +1079,10 @@ MUNICIPIO_CODIGO;MUNICIPIO_NOME;latitude;longitude;capital;ESTADO_CODIGO;siafi_i
 350250;Aparecida;-22.8495;-45.2325;0;35;6149;12;America/Sao_Paulo;SP;35172;Circuito da Fé e Vale Histórico;São Paulo;32927;59;2019;12;0;ECR
 350250;Aparecida;-22.8495;-45.2325;0;35;6149;12;America/Sao_Paulo;SP;35172;Circuito da Fé e Vale Histórico;São Paulo;32927;60;2019;12;0;ECR
 350250;Aparecida;-22.8495;-45.2325;0;35;6149;12;America/Sao_Paulo;SP;35172;Circuito da Fé e Vale Histórico;São Paulo;32927;75;2019;12;0;ECR
-350260;Aparecida d'Oeste;-20.4487;-50.8835;0;35;6151;17;America/Sao_Paulo;SP;35153;Jales;São Paulo;4030;58;2019;12;0;ECR
-350260;Aparecida d'Oeste;-20.4487;-50.8835;0;35;6151;17;America/Sao_Paulo;SP;35153;Jales;São Paulo;4030;59;2019;12;0;ECR
-350260;Aparecida d'Oeste;-20.4487;-50.8835;0;35;6151;17;America/Sao_Paulo;SP;35153;Jales;São Paulo;4030;60;2019;12;0;ECR
-350260;Aparecida d'Oeste;-20.4487;-50.8835;0;35;6151;17;America/Sao_Paulo;SP;35153;Jales;São Paulo;4030;75;2019;12;0;ECR
+350260;Aparecida d"Oeste;-20.4487;-50.8835;0;35;6151;17;America/Sao_Paulo;SP;35153;Jales;São Paulo;4030;58;2019;12;0;ECR
+350260;Aparecida d"Oeste;-20.4487;-50.8835;0;35;6151;17;America/Sao_Paulo;SP;35153;Jales;São Paulo;4030;59;2019;12;0;ECR
+350260;Aparecida d"Oeste;-20.4487;-50.8835;0;35;6151;17;America/Sao_Paulo;SP;35153;Jales;São Paulo;4030;60;2019;12;0;ECR
+350260;Aparecida d"Oeste;-20.4487;-50.8835;0;35;6151;17;America/Sao_Paulo;SP;35153;Jales;São Paulo;4030;75;2019;12;0;ECR
 520140;Aparecida de Goiânia;-16.8198;-49.2469;0;52;9227;62;America/Sao_Paulo;GO;52002;Centro Sul;Goiás;500760;58;2019;12;0;ECR
 520140;Aparecida de Goiânia;-16.8198;-49.2469;0;52;9227;62;America/Sao_Paulo;GO;52002;Centro Sul;Goiás;500760;59;2019;12;0;ECR
 520140;Aparecida de Goiânia;-16.8198;-49.2469;0;52;9227;62;America/Sao_Paulo;GO;52002;Centro Sul;Goiás;500760;60;2019;12;0;ECR
@@ -2031,10 +2031,10 @@ MUNICIPIO_CODIGO;MUNICIPIO_NOME;latitude;longitude;capital;ESTADO_CODIGO;siafi_i
 350530;Barra Bonita;-22.4909;-48.5583;0;35;6205;14;America/Sao_Paulo;SP;35064;Jaú;São Paulo;34430;59;2019;12;0;ECR
 350530;Barra Bonita;-22.4909;-48.5583;0;35;6205;14;America/Sao_Paulo;SP;35064;Jaú;São Paulo;34430;60;2019;12;0;ECR
 350530;Barra Bonita;-22.4909;-48.5583;0;35;6205;14;America/Sao_Paulo;SP;35064;Jaú;São Paulo;34430;75;2019;12;0;ECR
-220117;Barra D'Alcântara;-6.51645;-42.1146;0;22;272;89;America/Sao_Paulo;PI;22010;Vale do Sambito;Piauí;3998;58;2019;12;0;ECR
-220117;Barra D'Alcântara;-6.51645;-42.1146;0;22;272;89;America/Sao_Paulo;PI;22010;Vale do Sambito;Piauí;3998;59;2019;12;0;ECR
-220117;Barra D'Alcântara;-6.51645;-42.1146;0;22;272;89;America/Sao_Paulo;PI;22010;Vale do Sambito;Piauí;3998;60;2019;12;0;ECR
-220117;Barra D'Alcântara;-6.51645;-42.1146;0;22;272;89;America/Sao_Paulo;PI;22010;Vale do Sambito;Piauí;3998;75;2019;12;0;ECR
+220117;Barra D"Alcântara;-6.51645;-42.1146;0;22;272;89;America/Sao_Paulo;PI;22010;Vale do Sambito;Piauí;3998;58;2019;12;0;ECR
+220117;Barra D"Alcântara;-6.51645;-42.1146;0;22;272;89;America/Sao_Paulo;PI;22010;Vale do Sambito;Piauí;3998;59;2019;12;0;ECR
+220117;Barra D"Alcântara;-6.51645;-42.1146;0;22;272;89;America/Sao_Paulo;PI;22010;Vale do Sambito;Piauí;3998;60;2019;12;0;ECR
+220117;Barra D"Alcântara;-6.51645;-42.1146;0;22;272;89;America/Sao_Paulo;PI;22010;Vale do Sambito;Piauí;3998;75;2019;12;0;ECR
 290280;Barra da Estiva;-13.6237;-41.3347;0;29;3355;77;America/Sao_Paulo;BA;29003;Brumado;Bahia;26031;58;2019;12;0;ECR
 290280;Barra da Estiva;-13.6237;-41.3347;0;29;3355;77;America/Sao_Paulo;BA;29003;Brumado;Bahia;26031;59;2019;12;0;ECR
 290280;Barra da Estiva;-13.6237;-41.3347;0;29;3355;77;America/Sao_Paulo;BA;29003;Brumado;Bahia;26031;60;2019;12;0;ECR
@@ -5451,10 +5451,10 @@ MUNICIPIO_CODIGO;MUNICIPIO_NOME;latitude;longitude;capital;ESTADO_CODIGO;siafi_i
 311820;Conquista;-19.9312;-47.5492;0;31;4363;34;America/Sao_Paulo;MG;31072;Uberaba;Minas Gerais;6679;59;2019;12;0;ECR
 311820;Conquista;-19.9312;-47.5492;0;31;4363;34;America/Sao_Paulo;MG;31072;Uberaba;Minas Gerais;6679;60;2019;12;0;ECR
 311820;Conquista;-19.9312;-47.5492;0;31;4363;34;America/Sao_Paulo;MG;31072;Uberaba;Minas Gerais;6679;75;2019;12;0;ECR
-510336;Conquista D'Oeste;-14.5381;-59.5444;0;51;1082;65;America/Porto_Velho;MT;51012;Sudoeste Matogrossense;Mato Grosso;3687;58;2019;12;0;ECR
-510336;Conquista D'Oeste;-14.5381;-59.5444;0;51;1082;65;America/Porto_Velho;MT;51012;Sudoeste Matogrossense;Mato Grosso;3687;59;2019;12;0;ECR
-510336;Conquista D'Oeste;-14.5381;-59.5444;0;51;1082;65;America/Porto_Velho;MT;51012;Sudoeste Matogrossense;Mato Grosso;3687;60;2019;12;0;ECR
-510336;Conquista D'Oeste;-14.5381;-59.5444;0;51;1082;65;America/Porto_Velho;MT;51012;Sudoeste Matogrossense;Mato Grosso;3687;75;2019;12;0;ECR
+510336;Conquista D"Oeste;-14.5381;-59.5444;0;51;1082;65;America/Porto_Velho;MT;51012;Sudoeste Matogrossense;Mato Grosso;3687;58;2019;12;0;ECR
+510336;Conquista D"Oeste;-14.5381;-59.5444;0;51;1082;65;America/Porto_Velho;MT;51012;Sudoeste Matogrossense;Mato Grosso;3687;59;2019;12;0;ECR
+510336;Conquista D"Oeste;-14.5381;-59.5444;0;51;1082;65;America/Porto_Velho;MT;51012;Sudoeste Matogrossense;Mato Grosso;3687;60;2019;12;0;ECR
+510336;Conquista D"Oeste;-14.5381;-59.5444;0;51;1082;65;America/Porto_Velho;MT;51012;Sudoeste Matogrossense;Mato Grosso;3687;75;2019;12;0;ECR
 311830;Conselheiro Lafaiete;-20.6634;-43.7846;0;31;4365;31;America/Sao_Paulo;MG;31079;Conselheiro Lafaiete;Minas Gerais;134537;58;2019;12;0;ECR
 311830;Conselheiro Lafaiete;-20.6634;-43.7846;0;31;4365;31;America/Sao_Paulo;MG;31079;Conselheiro Lafaiete;Minas Gerais;134537;59;2019;12;0;ECR
 311830;Conselheiro Lafaiete;-20.6634;-43.7846;0;31;4365;31;America/Sao_Paulo;MG;31079;Conselheiro Lafaiete;Minas Gerais;134537;60;2019;12;0;ECR
@@ -6207,10 +6207,10 @@ MUNICIPIO_CODIGO;MUNICIPIO_NOME;latitude;longitude;capital;ESTADO_CODIGO;siafi_i
 250560;Diamante;-7.41738;-38.2615;0;25;2013;83;America/Sao_Paulo;PB;25007;7ª Região;Paraíba;6291;59;2019;12;0;ECR
 250560;Diamante;-7.41738;-38.2615;0;25;2013;83;America/Sao_Paulo;PB;25007;7ª Região;Paraíba;6291;60;2019;12;0;ECR
 250560;Diamante;-7.41738;-38.2615;0;25;2013;83;America/Sao_Paulo;PB;25007;7ª Região;Paraíba;6291;75;2019;12;0;ECR
-410715;Diamante D'Oeste;-24.9419;-54.1052;0;41;9915;45;America/Sao_Paulo;PR;41020;20ª RS Toledo;Paraná;5106;58;2019;12;0;ECR
-410715;Diamante D'Oeste;-24.9419;-54.1052;0;41;9915;45;America/Sao_Paulo;PR;41020;20ª RS Toledo;Paraná;5106;59;2019;12;0;ECR
-410715;Diamante D'Oeste;-24.9419;-54.1052;0;41;9915;45;America/Sao_Paulo;PR;41020;20ª RS Toledo;Paraná;5106;60;2019;12;0;ECR
-410715;Diamante D'Oeste;-24.9419;-54.1052;0;41;9915;45;America/Sao_Paulo;PR;41020;20ª RS Toledo;Paraná;5106;75;2019;12;0;ECR
+410715;Diamante D"Oeste;-24.9419;-54.1052;0;41;9915;45;America/Sao_Paulo;PR;41020;20ª RS Toledo;Paraná;5106;58;2019;12;0;ECR
+410715;Diamante D"Oeste;-24.9419;-54.1052;0;41;9915;45;America/Sao_Paulo;PR;41020;20ª RS Toledo;Paraná;5106;59;2019;12;0;ECR
+410715;Diamante D"Oeste;-24.9419;-54.1052;0;41;9915;45;America/Sao_Paulo;PR;41020;20ª RS Toledo;Paraná;5106;60;2019;12;0;ECR
+410715;Diamante D"Oeste;-24.9419;-54.1052;0;41;9915;45;America/Sao_Paulo;PR;41020;20ª RS Toledo;Paraná;5106;75;2019;12;0;ECR
 410710;Diamante do Norte;-22.655;-52.8617;0;41;7539;44;America/Sao_Paulo;PR;41014;14ª RS Paranavaí;Paraná;5151;58;2019;12;0;ECR
 410710;Diamante do Norte;-22.655;-52.8617;0;41;7539;44;America/Sao_Paulo;PR;41014;14ª RS Paranavaí;Paraná;5151;59;2019;12;0;ECR
 410710;Diamante do Norte;-22.655;-52.8617;0;41;7539;44;America/Sao_Paulo;PR;41014;14ª RS Paranavaí;Paraná;5151;60;2019;12;0;ECR
@@ -6231,10 +6231,10 @@ MUNICIPIO_CODIGO;MUNICIPIO_NOME;latitude;longitude;capital;ESTADO_CODIGO;siafi_i
 170700;Dianópolis;-11.624;-46.8198;0;17;9341;63;America/Sao_Paulo;TO;17003;Sudeste;Tocantins;17658;59;2019;12;0;ECR
 170700;Dianópolis;-11.624;-46.8198;0;17;9341;63;America/Sao_Paulo;TO;17003;Sudeste;Tocantins;17658;60;2019;12;0;ECR
 170700;Dianópolis;-11.624;-46.8198;0;17;9341;63;America/Sao_Paulo;TO;17003;Sudeste;Tocantins;17658;75;2019;12;0;ECR
-291005;Dias d'Ávila;-12.6187;-38.2926;0;29;3087;71;America/Sao_Paulo;BA;29004;Camaçari;Bahia;69211;58;2019;12;0;ECR
-291005;Dias d'Ávila;-12.6187;-38.2926;0;29;3087;71;America/Sao_Paulo;BA;29004;Camaçari;Bahia;69211;59;2019;12;0;ECR
-291005;Dias d'Ávila;-12.6187;-38.2926;0;29;3087;71;America/Sao_Paulo;BA;29004;Camaçari;Bahia;69211;60;2019;12;0;ECR
-291005;Dias d'Ávila;-12.6187;-38.2926;0;29;3087;71;America/Sao_Paulo;BA;29004;Camaçari;Bahia;69211;75;2019;12;0;ECR
+291005;Dias d"Ávila;-12.6187;-38.2926;0;29;3087;71;America/Sao_Paulo;BA;29004;Camaçari;Bahia;69211;58;2019;12;0;ECR
+291005;Dias d"Ávila;-12.6187;-38.2926;0;29;3087;71;America/Sao_Paulo;BA;29004;Camaçari;Bahia;69211;59;2019;12;0;ECR
+291005;Dias d"Ávila;-12.6187;-38.2926;0;29;3087;71;America/Sao_Paulo;BA;29004;Camaçari;Bahia;69211;60;2019;12;0;ECR
+291005;Dias d"Ávila;-12.6187;-38.2926;0;29;3087;71;America/Sao_Paulo;BA;29004;Camaçari;Bahia;69211;75;2019;12;0;ECR
 430637;Dilermando de Aguiar;-29.7054;-54.2122;0;43;974;55;America/Sao_Paulo;RS;43001;Região 01 - Verdes Campos;Rio Grande do Sul;2806;58;2019;12;0;ECR
 430637;Dilermando de Aguiar;-29.7054;-54.2122;0;43;974;55;America/Sao_Paulo;RS;43001;Região 01 - Verdes Campos;Rio Grande do Sul;2806;59;2019;12;0;ECR
 430637;Dilermando de Aguiar;-29.7054;-54.2122;0;43;974;55;America/Sao_Paulo;RS;43001;Região 01 - Verdes Campos;Rio Grande do Sul;2806;60;2019;12;0;ECR
@@ -6799,10 +6799,10 @@ MUNICIPIO_CODIGO;MUNICIPIO_NOME;latitude;longitude;capital;ESTADO_CODIGO;siafi_i
 410754;Espigão Alto do Iguaçu;-25.4216;-52.8348;0;41;852;46;America/Sao_Paulo;PR;41010;10ª RS Cascavel;Paraná;5915;59;2019;12;0;ECR
 410754;Espigão Alto do Iguaçu;-25.4216;-52.8348;0;41;852;46;America/Sao_Paulo;PR;41010;10ª RS Cascavel;Paraná;5915;60;2019;12;0;ECR
 410754;Espigão Alto do Iguaçu;-25.4216;-52.8348;0;41;852;46;America/Sao_Paulo;PR;41010;10ª RS Cascavel;Paraná;5915;75;2019;12;0;ECR
-110009;Espigão D'Oeste;-11.5266;-61.0252;0;11;25;69;America/Porto_Velho;RO;11002;Café;Rondônia;29722;58;2019;12;0;ECR
-110009;Espigão D'Oeste;-11.5266;-61.0252;0;11;25;69;America/Porto_Velho;RO;11002;Café;Rondônia;29722;59;2019;12;0;ECR
-110009;Espigão D'Oeste;-11.5266;-61.0252;0;11;25;69;America/Porto_Velho;RO;11002;Café;Rondônia;29722;60;2019;12;0;ECR
-110009;Espigão D'Oeste;-11.5266;-61.0252;0;11;25;69;America/Porto_Velho;RO;11002;Café;Rondônia;29722;75;2019;12;0;ECR
+110009;Espigão D"Oeste;-11.5266;-61.0252;0;11;25;69;America/Porto_Velho;RO;11002;Café;Rondônia;29722;58;2019;12;0;ECR
+110009;Espigão D"Oeste;-11.5266;-61.0252;0;11;25;69;America/Porto_Velho;RO;11002;Café;Rondônia;29722;59;2019;12;0;ECR
+110009;Espigão D"Oeste;-11.5266;-61.0252;0;11;25;69;America/Porto_Velho;RO;11002;Café;Rondônia;29722;60;2019;12;0;ECR
+110009;Espigão D"Oeste;-11.5266;-61.0252;0;11;25;69;America/Porto_Velho;RO;11002;Café;Rondônia;29722;75;2019;12;0;ECR
 312430;Espinosa;-14.9249;-42.809;0;31;4485;38;America/Sao_Paulo;MG;31052;Janaúba/Monte Azul;Minas Gerais;29650;58;2019;12;0;ECR
 312430;Espinosa;-14.9249;-42.809;0;31;4485;38;America/Sao_Paulo;MG;31052;Janaúba/Monte Azul;Minas Gerais;29650;59;2019;12;0;ECR
 312430;Espinosa;-14.9249;-42.809;0;31;4485;38;America/Sao_Paulo;MG;31052;Janaúba/Monte Azul;Minas Gerais;29650;60;2019;12;0;ECR
@@ -6863,10 +6863,10 @@ MUNICIPIO_CODIGO;MUNICIPIO_NOME;latitude;longitude;capital;ESTADO_CODIGO;siafi_i
 430780;Estrela;-29.5002;-51.9495;0;43;8653;51;America/Sao_Paulo;RS;43030;Região 30 - Vale da Luz;Rio Grande do Sul;31909;59;2019;12;0;ECR
 430780;Estrela;-29.5002;-51.9495;0;43;8653;51;America/Sao_Paulo;RS;43030;Região 30 - Vale da Luz;Rio Grande do Sul;31909;60;2019;12;0;ECR
 430780;Estrela;-29.5002;-51.9495;0;43;8653;51;America/Sao_Paulo;RS;43030;Região 30 - Vale da Luz;Rio Grande do Sul;31909;75;2019;12;0;ECR
-351520;Estrela d'Oeste;-20.2875;-50.4049;0;35;6405;17;America/Sao_Paulo;SP;35154;Fernandópolis;São Paulo;9405;58;2019;12;0;ECR
-351520;Estrela d'Oeste;-20.2875;-50.4049;0;35;6405;17;America/Sao_Paulo;SP;35154;Fernandópolis;São Paulo;9405;59;2019;12;0;ECR
-351520;Estrela d'Oeste;-20.2875;-50.4049;0;35;6405;17;America/Sao_Paulo;SP;35154;Fernandópolis;São Paulo;9405;60;2019;12;0;ECR
-351520;Estrela d'Oeste;-20.2875;-50.4049;0;35;6405;17;America/Sao_Paulo;SP;35154;Fernandópolis;São Paulo;9405;75;2019;12;0;ECR
+351520;Estrela d"Oeste;-20.2875;-50.4049;0;35;6405;17;America/Sao_Paulo;SP;35154;Fernandópolis;São Paulo;9405;58;2019;12;0;ECR
+351520;Estrela d"Oeste;-20.2875;-50.4049;0;35;6405;17;America/Sao_Paulo;SP;35154;Fernandópolis;São Paulo;9405;59;2019;12;0;ECR
+351520;Estrela d"Oeste;-20.2875;-50.4049;0;35;6405;17;America/Sao_Paulo;SP;35154;Fernandópolis;São Paulo;9405;60;2019;12;0;ECR
+351520;Estrela d"Oeste;-20.2875;-50.4049;0;35;6405;17;America/Sao_Paulo;SP;35154;Fernandópolis;São Paulo;9405;75;2019;12;0;ECR
 312460;Estrela Dalva;-21.7412;-42.4574;0;31;4491;32;America/Sao_Paulo;MG;31041;Além  Paraíba;Minas Gerais;2142;58;2019;12;0;ECR
 312460;Estrela Dalva;-21.7412;-42.4574;0;31;4491;32;America/Sao_Paulo;MG;31041;Além  Paraíba;Minas Gerais;2142;59;2019;12;0;ECR
 312460;Estrela Dalva;-21.7412;-42.4574;0;31;4491;32;America/Sao_Paulo;MG;31041;Além  Paraíba;Minas Gerais;2142;60;2019;12;0;ECR
@@ -7143,10 +7143,10 @@ MUNICIPIO_CODIGO;MUNICIPIO_NOME;latitude;longitude;capital;ESTADO_CODIGO;siafi_i
 170765;Figueirópolis;-12.1312;-49.1748;0;17;9667;63;America/Sao_Paulo;TO;17005;Ilha do Bananal;Tocantins;5185;59;2019;12;0;ECR
 170765;Figueirópolis;-12.1312;-49.1748;0;17;9667;63;America/Sao_Paulo;TO;17005;Ilha do Bananal;Tocantins;5185;60;2019;12;0;ECR
 170765;Figueirópolis;-12.1312;-49.1748;0;17;9667;63;America/Sao_Paulo;TO;17005;Ilha do Bananal;Tocantins;5185;75;2019;12;0;ECR
-510380;Figueirópolis D'Oeste;-15.4439;-58.7391;0;51;9881;65;America/Porto_Velho;MT;51012;Sudoeste Matogrossense;Mato Grosso;3159;58;2019;12;0;ECR
-510380;Figueirópolis D'Oeste;-15.4439;-58.7391;0;51;9881;65;America/Porto_Velho;MT;51012;Sudoeste Matogrossense;Mato Grosso;3159;59;2019;12;0;ECR
-510380;Figueirópolis D'Oeste;-15.4439;-58.7391;0;51;9881;65;America/Porto_Velho;MT;51012;Sudoeste Matogrossense;Mato Grosso;3159;60;2019;12;0;ECR
-510380;Figueirópolis D'Oeste;-15.4439;-58.7391;0;51;9881;65;America/Porto_Velho;MT;51012;Sudoeste Matogrossense;Mato Grosso;3159;75;2019;12;0;ECR
+510380;Figueirópolis D"Oeste;-15.4439;-58.7391;0;51;9881;65;America/Porto_Velho;MT;51012;Sudoeste Matogrossense;Mato Grosso;3159;58;2019;12;0;ECR
+510380;Figueirópolis D"Oeste;-15.4439;-58.7391;0;51;9881;65;America/Porto_Velho;MT;51012;Sudoeste Matogrossense;Mato Grosso;3159;59;2019;12;0;ECR
+510380;Figueirópolis D"Oeste;-15.4439;-58.7391;0;51;9881;65;America/Porto_Velho;MT;51012;Sudoeste Matogrossense;Mato Grosso;3159;60;2019;12;0;ECR
+510380;Figueirópolis D"Oeste;-15.4439;-58.7391;0;51;9881;65;America/Porto_Velho;MT;51012;Sudoeste Matogrossense;Mato Grosso;3159;75;2019;12;0;ECR
 170770;Filadélfia;-7.33501;-47.4954;0;17;9355;63;America/Sao_Paulo;TO;17001;Médio Norte Araguaia;Tocantins;10590;58;2019;12;0;ECR
 170770;Filadélfia;-7.33501;-47.4954;0;17;9355;63;America/Sao_Paulo;TO;17001;Médio Norte Araguaia;Tocantins;10590;59;2019;12;0;ECR
 170770;Filadélfia;-7.33501;-47.4954;0;17;9355;63;America/Sao_Paulo;TO;17001;Médio Norte Araguaia;Tocantins;10590;60;2019;12;0;ECR
@@ -7651,10 +7651,10 @@ MUNICIPIO_CODIGO;MUNICIPIO_NOME;latitude;longitude;capital;ESTADO_CODIGO;siafi_i
 291140;Glória;-9.34382;-38.2544;0;29;3527;75;America/Sao_Paulo;BA;29017;Paulo Afonso;Bahia;16698;59;2019;12;0;ECR
 291140;Glória;-9.34382;-38.2544;0;29;3527;75;America/Sao_Paulo;BA;29017;Paulo Afonso;Bahia;16698;60;2019;12;0;ECR
 291140;Glória;-9.34382;-38.2544;0;29;3527;75;America/Sao_Paulo;BA;29017;Paulo Afonso;Bahia;16698;75;2019;12;0;ECR
-510395;Glória D'Oeste;-15.768;-58.3108;0;51;135;65;America/Porto_Velho;MT;51011;Oeste Matogrossense;Mato Grosso;3247;58;2019;12;0;ECR
-510395;Glória D'Oeste;-15.768;-58.3108;0;51;135;65;America/Porto_Velho;MT;51011;Oeste Matogrossense;Mato Grosso;3247;59;2019;12;0;ECR
-510395;Glória D'Oeste;-15.768;-58.3108;0;51;135;65;America/Porto_Velho;MT;51011;Oeste Matogrossense;Mato Grosso;3247;60;2019;12;0;ECR
-510395;Glória D'Oeste;-15.768;-58.3108;0;51;135;65;America/Porto_Velho;MT;51011;Oeste Matogrossense;Mato Grosso;3247;75;2019;12;0;ECR
+510395;Glória D"Oeste;-15.768;-58.3108;0;51;135;65;America/Porto_Velho;MT;51011;Oeste Matogrossense;Mato Grosso;3247;58;2019;12;0;ECR
+510395;Glória D"Oeste;-15.768;-58.3108;0;51;135;65;America/Porto_Velho;MT;51011;Oeste Matogrossense;Mato Grosso;3247;59;2019;12;0;ECR
+510395;Glória D"Oeste;-15.768;-58.3108;0;51;135;65;America/Porto_Velho;MT;51011;Oeste Matogrossense;Mato Grosso;3247;60;2019;12;0;ECR
+510395;Glória D"Oeste;-15.768;-58.3108;0;51;135;65;America/Porto_Velho;MT;51011;Oeste Matogrossense;Mato Grosso;3247;75;2019;12;0;ECR
 500400;Glória de Dourados;-22.4136;-54.2335;0;50;9079;67;America/Porto_Velho;MS;50003;Dourados;Mato Grosso do Sul;9998;58;2019;12;0;ECR
 500400;Glória de Dourados;-22.4136;-54.2335;0;50;9079;67;America/Porto_Velho;MS;50003;Dourados;Mato Grosso do Sul;9998;59;2019;12;0;ECR
 500400;Glória de Dourados;-22.4136;-54.2335;0;50;9079;67;America/Porto_Velho;MS;50003;Dourados;Mato Grosso do Sul;9998;60;2019;12;0;ECR
@@ -8051,10 +8051,10 @@ MUNICIPIO_CODIGO;MUNICIPIO_NOME;latitude;longitude;capital;ESTADO_CODIGO;siafi_i
 312840;Guarani;-21.3563;-43.0328;0;31;4567;32;America/Sao_Paulo;MG;31048;Ubá;Minas Gerais;7487;59;2019;12;0;ECR
 312840;Guarani;-21.3563;-43.0328;0;31;4567;32;America/Sao_Paulo;MG;31048;Ubá;Minas Gerais;7487;60;2019;12;0;ECR
 312840;Guarani;-21.3563;-43.0328;0;31;4567;32;America/Sao_Paulo;MG;31048;Ubá;Minas Gerais;7487;75;2019;12;0;ECR
-351800;Guarani d'Oeste;-20.0746;-50.3411;0;35;6461;17;America/Sao_Paulo;SP;35154;Fernandópolis;São Paulo;1948;58;2019;12;0;ECR
-351800;Guarani d'Oeste;-20.0746;-50.3411;0;35;6461;17;America/Sao_Paulo;SP;35154;Fernandópolis;São Paulo;1948;59;2019;12;0;ECR
-351800;Guarani d'Oeste;-20.0746;-50.3411;0;35;6461;17;America/Sao_Paulo;SP;35154;Fernandópolis;São Paulo;1948;60;2019;12;0;ECR
-351800;Guarani d'Oeste;-20.0746;-50.3411;0;35;6461;17;America/Sao_Paulo;SP;35154;Fernandópolis;São Paulo;1948;75;2019;12;0;ECR
+351800;Guarani d"Oeste;-20.0746;-50.3411;0;35;6461;17;America/Sao_Paulo;SP;35154;Fernandópolis;São Paulo;1948;58;2019;12;0;ECR
+351800;Guarani d"Oeste;-20.0746;-50.3411;0;35;6461;17;America/Sao_Paulo;SP;35154;Fernandópolis;São Paulo;1948;59;2019;12;0;ECR
+351800;Guarani d"Oeste;-20.0746;-50.3411;0;35;6461;17;America/Sao_Paulo;SP;35154;Fernandópolis;São Paulo;1948;60;2019;12;0;ECR
+351800;Guarani d"Oeste;-20.0746;-50.3411;0;35;6461;17;America/Sao_Paulo;SP;35154;Fernandópolis;São Paulo;1948;75;2019;12;0;ECR
 430950;Guarani das Missões;-28.1491;-54.5629;0;43;8689;55;America/Sao_Paulo;RS;43011;Região 11 - Sete Povos das Missões;Rio Grande do Sul;7554;58;2019;12;0;ECR
 430950;Guarani das Missões;-28.1491;-54.5629;0;43;8689;55;America/Sao_Paulo;RS;43011;Região 11 - Sete Povos das Missões;Rio Grande do Sul;7554;59;2019;12;0;ECR
 430950;Guarani das Missões;-28.1491;-54.5629;0;43;8689;55;America/Sao_Paulo;RS;43011;Região 11 - Sete Povos das Missões;Rio Grande do Sul;7554;60;2019;12;0;ECR
@@ -8227,10 +8227,10 @@ MUNICIPIO_CODIGO;MUNICIPIO_NOME;latitude;longitude;capital;ESTADO_CODIGO;siafi_i
 430710;Herval;-32.024;-53.3944;0;43;8639;53;America/Sao_Paulo;RS;43021;Região 21 - Sul;Rio Grande do Sul;6380;59;2019;12;0;ECR
 430710;Herval;-32.024;-53.3944;0;43;8639;53;America/Sao_Paulo;RS;43021;Região 21 - Sul;Rio Grande do Sul;6380;60;2019;12;0;ECR
 430710;Herval;-32.024;-53.3944;0;43;8639;53;America/Sao_Paulo;RS;43021;Região 21 - Sul;Rio Grande do Sul;6380;75;2019;12;0;ECR
-420670;Herval d'Oeste;-27.1903;-51.4917;0;42;8131;49;America/Sao_Paulo;SC;42008;Meio Oeste;Santa Catarina;21339;58;2019;12;0;ECR
-420670;Herval d'Oeste;-27.1903;-51.4917;0;42;8131;49;America/Sao_Paulo;SC;42008;Meio Oeste;Santa Catarina;21339;59;2019;12;0;ECR
-420670;Herval d'Oeste;-27.1903;-51.4917;0;42;8131;49;America/Sao_Paulo;SC;42008;Meio Oeste;Santa Catarina;21339;60;2019;12;0;ECR
-420670;Herval d'Oeste;-27.1903;-51.4917;0;42;8131;49;America/Sao_Paulo;SC;42008;Meio Oeste;Santa Catarina;21339;75;2019;12;0;ECR
+420670;Herval d"Oeste;-27.1903;-51.4917;0;42;8131;49;America/Sao_Paulo;SC;42008;Meio Oeste;Santa Catarina;21339;58;2019;12;0;ECR
+420670;Herval d"Oeste;-27.1903;-51.4917;0;42;8131;49;America/Sao_Paulo;SC;42008;Meio Oeste;Santa Catarina;21339;59;2019;12;0;ECR
+420670;Herval d"Oeste;-27.1903;-51.4917;0;42;8131;49;America/Sao_Paulo;SC;42008;Meio Oeste;Santa Catarina;21339;60;2019;12;0;ECR
+420670;Herval d"Oeste;-27.1903;-51.4917;0;42;8131;49;America/Sao_Paulo;SC;42008;Meio Oeste;Santa Catarina;21339;75;2019;12;0;ECR
 430957;Herveiras;-29.4552;-52.6553;0;43;988;51;America/Sao_Paulo;RS;43028;Região 28 - Vinte e Oito;Rio Grande do Sul;2559;58;2019;12;0;ECR
 430957;Herveiras;-29.4552;-52.6553;0;43;988;51;America/Sao_Paulo;RS;43028;Região 28 - Vinte e Oito;Rio Grande do Sul;2559;59;2019;12;0;ECR
 430957;Herveiras;-29.4552;-52.6553;0;43;988;51;America/Sao_Paulo;RS;43028;Região 28 - Vinte e Oito;Rio Grande do Sul;2559;60;2019;12;0;ECR
@@ -9455,7 +9455,7 @@ MUNICIPIO_CODIGO;MUNICIPIO_NOME;latitude;longitude;capital;ESTADO_CODIGO;siafi_i
 210540;Itapecuru Mirim;-3.40202;-44.3508;0;21;807;98;America/Sao_Paulo;MA;21009;Itapecuru Mirim;Maranhão;65721;59;2019;12;0;ECR
 210540;Itapecuru Mirim;-3.40202;-44.3508;0;21;807;98;America/Sao_Paulo;MA;21009;Itapecuru Mirim;Maranhão;65721;60;2019;12;0;ECR
 210540;Itapecuru Mirim;-3.40202;-44.3508;0;21;807;98;America/Sao_Paulo;MA;21009;Itapecuru Mirim;Maranhão;65721;75;2019;12;0;ECR
-411120;Itapejara d'Oeste;-25.9619;-52.8152;0;41;7617;46;America/Sao_Paulo;PR;41007;7ª RS Pato Branco;Paraná;13177;58;2019;12;0;ECR
+411120;Itapejara d"Oeste;-25.9619;-52.8152;0;41;7617;46;America/Sao_Paulo;PR;41007;7ª RS Pato Branco;Paraná;13177;58;2019;12;0;ECR
 411120;Itapejara d'Oeste;-25.9619;-52.8152;0;41;7617;46;America/Sao_Paulo;PR;41007;7ª RS Pato Branco;Paraná;13177;59;2019;12;0;ECR
 411120;Itapejara d'Oeste;-25.9619;-52.8152;0;41;7617;46;America/Sao_Paulo;PR;41007;7ª RS Pato Branco;Paraná;13177;60;2019;12;0;ECR
 411120;Itapejara d'Oeste;-25.9619;-52.8152;0;41;7617;46;America/Sao_Paulo;PR;41007;7ª RS Pato Branco;Paraná;13177;75;2019;12;0;ECR

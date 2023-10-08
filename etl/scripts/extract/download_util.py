@@ -2,6 +2,7 @@ import dataclasses
 import glob
 import io
 import os
+import ssl
 import subprocess
 import time
 import urllib.request
@@ -10,7 +11,7 @@ from ftplib import FTP
 
 import pandas as pd
 import requests
-
+import urllib3
 
 def path(path):
     if not os.path.exists(path):
@@ -74,7 +75,7 @@ class DowloadDataSusFtp:
         print("iniciando conversao dbc em csv")
         try:
             subprocess.run(
-                f"Rscript /app/scripts/extract/dbc_to_csv.R /tmp {self.gerar_path_arquivos_saida()}",
+                f"Rscript /app/scripts/dbc_to_csv.R /tmp {self.gerar_path_arquivos_saida()}",
                 check=True, shell=True)
         except subprocess.CalledProcessError as e:
             print(f"Erro ao executar o script R: {e}")
@@ -196,6 +197,18 @@ class DowloadDataSusCnesRawFtp:
         print(f"Conteúdo dos arquivos .csv datasus cnes raw foi extraído com sucesso!")
 
 
+class CustomHttpAdapter (requests.adapters.HTTPAdapter):
+    '''Transport adapter" that allows us to use custom ssl_context.'''
+
+    def __init__(self, ssl_context=None, **kwargs):
+        self.ssl_context = ssl_context
+        super().__init__(**kwargs)
+
+    def init_poolmanager(self, connections, maxsize, block=False):
+        self.poolmanager = urllib3.poolmanager.PoolManager(
+            num_pools=connections, maxsize=maxsize,
+            block=block, ssl_context=self.ssl_context)
+
 @dataclasses.dataclass
 class DownloadIBGEFtp:
     def __post_init__(self):
@@ -210,14 +223,32 @@ class DownloadIBGEFtp:
 
     def download_populacao_municipio(self, url):
         try:
-            urllib.request.urlretrieve(url, self.arquivo_populacao_municipio())
+            print(f"Iniciando download do arquivo {url}")
+            session = requests.session()
+            ctx = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
+            ctx.options |= 0x4
+            session.mount('https://', CustomHttpAdapter(ctx))
+            response = session.get(url)
+            if response.status_code == 200:
+                with open(self.arquivo_populacao_municipio(), 'wb') as arquivo:
+                    arquivo.write(response.content)
+                print(f'O arquivo foi baixado e salvo em {self.arquivo_populacao_municipio()}')
             print(f"Arquivo {self.arquivo_populacao_municipio()} baixado com sucesso!")
         except Exception as e:
             print(f"Erro ao baixar o arquivo de populacao municipios: {e}")
 
     def download_populacao_estado(self, url):
         try:
-            urllib.request.urlretrieve(url, self.arquivo_populacao_estado())
+            print(f"Iniciando download do arquivo {url}")
+            session = requests.session()
+            ctx = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
+            ctx.options |= 0x4
+            session.mount('https://', CustomHttpAdapter(ctx))
+            response = session.get(url)
+            if response.status_code == 200:
+                with open(self.arquivo_populacao_estado(), 'wb') as arquivo:
+                    arquivo.write(response.content)
+                print(f'O arquivo foi baixado e salvo em { self.arquivo_populacao_estado()}')
             print(f"Arquivo {self.arquivo_populacao_estado()} baixado com sucesso!")
         except Exception as e:
             print(f"Erro ao baixar o arquivo de populacao estado: {e}")

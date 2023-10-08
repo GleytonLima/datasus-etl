@@ -1,8 +1,11 @@
 from download_util import DowloadDataSusFtp, DonwloadDataSusConfig
+from config import LoadConfig
 
-ufs = ["AM"]
-years = [2022]
-months = [12]
+config = LoadConfig().get_config()
+
+ufs = config.ufs
+years = config.anos
+months = config.meses
 
 config = DonwloadDataSusConfig(
     system="CNES",
