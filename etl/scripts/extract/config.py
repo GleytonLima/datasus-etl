@@ -34,3 +34,4 @@ if __name__ == "__main__":
     config = LoadConfig()
     print(config.get_config().meses)
     print(config.get_config().anos)
+    print(config.get_config())

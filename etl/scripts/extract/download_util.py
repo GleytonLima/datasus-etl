@@ -13,32 +13,20 @@ import pandas as pd
 import requests
 import urllib3
 
+from config import LoadConfig
+
+
 def path(path):
     if not os.path.exists(path):
         os.makedirs(path)
     return path
 
 
-urls = {
-    "CNES": "ftp://ftp.datasus.gov.br/dissemin/publicos/CNES/200508_/Dados/",
-    "CNES_RAW": "ftp://ftp.datasus.gov.br/cnes/BASE_DE_DADOS_CNES_{}{}.ZIP",
-    "IBGE_UF": "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Previa_da_Populacao/POP2022_Brasil_e_UFs.xls",
-    "IBGE_MUNICIPIO": "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Previa_da_Populacao/POP2022_Municipios_20230622.xls",
-    "SAGE_REGIOES_SAUDE": "https://sage.saude.gov.br/paineis/regiaoSaude/lista.php?output=jsonbt&&order=asc",
-    "CIDS": "http://www2.datasus.gov.br/cid10/V2008/downloads/CID10CSV.zip",
-    "GITHUB_MUNICIPIOS": "https://raw.githubusercontent.com/kelvins/Municipios-Brasileiros/main/csv/municipios.csv",
-    "GITHUB_ESTADOS": "https://raw.githubusercontent.com/kelvins/Municipios-Brasileiros/main/csv/estados.csv"
-}
+config = LoadConfig().get_config()
 
-system_config = {
-    "CNES": {
-        'LT': {"description": 'Leitos - A partir de Out/2005', "start_month": 10, "start_year": 2005},
-        'ST': {"description": 'Estabelecimentos - A partir de Ago/2005', "start_month": 8, "start_year": 2005},
-        'SR': {"description": 'Serviço Especializado - A partir de Ago/2005', "start_month": 8, "start_year": 2005},
-        'EP': {"description": 'Equipes - A partir de Abr/2007', "start_month": 5, "start_year": 2007}
-    },
-    "CNES_RAW": {"description": 'Equipes - Dados crus a partir de 2018', "start_month": 12, "start_year": 2018}
-}
+urls = config.urls
+
+system_config = config.system_config
 
 
 @dataclasses.dataclass
@@ -197,7 +185,7 @@ class DowloadDataSusCnesRawFtp:
         print(f"Conteúdo dos arquivos .csv datasus cnes raw foi extraído com sucesso!")
 
 
-class CustomHttpAdapter (requests.adapters.HTTPAdapter):
+class CustomHttpAdapter(requests.adapters.HTTPAdapter):
     '''Transport adapter" that allows us to use custom ssl_context.'''
 
     def __init__(self, ssl_context=None, **kwargs):
@@ -208,6 +196,7 @@ class CustomHttpAdapter (requests.adapters.HTTPAdapter):
         self.poolmanager = urllib3.poolmanager.PoolManager(
             num_pools=connections, maxsize=maxsize,
             block=block, ssl_context=self.ssl_context)
+
 
 @dataclasses.dataclass
 class DownloadIBGEFtp:
@@ -248,7 +237,7 @@ class DownloadIBGEFtp:
             if response.status_code == 200:
                 with open(self.arquivo_populacao_estado(), 'wb') as arquivo:
                     arquivo.write(response.content)
-                print(f'O arquivo foi baixado e salvo em { self.arquivo_populacao_estado()}')
+                print(f'O arquivo foi baixado e salvo em {self.arquivo_populacao_estado()}')
             print(f"Arquivo {self.arquivo_populacao_estado()} baixado com sucesso!")
         except Exception as e:
             print(f"Erro ao baixar o arquivo de populacao estado: {e}")

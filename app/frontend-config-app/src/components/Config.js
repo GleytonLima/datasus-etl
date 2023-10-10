@@ -1,11 +1,13 @@
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { JsonEditor as Editor } from 'jsoneditor-react';
 import React, { useEffect, useState } from 'react';
-
+import { Button, Col, Container, Row } from 'react-bootstrap';
 
 function Config({ token }) {
   const [configData, setConfigData] = useState({});
   const [newData, setNewData] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -13,9 +15,17 @@ function Config({ token }) {
         const response = await axios.get(`${'http://localhost:3001'}/api/config`, {
           headers: { Authorization: token },
         });
+        console.log(response.data);
         setConfigData(response.data);
+        setIsLoading(false);
       } catch (error) {
-        console.error('Erro ao carregar os dados:', error);
+        if (error.response.status === 401) {
+          console.error('Token de autenticação inválido.');
+          localStorage.removeItem('token');
+          window.location.reload();
+        } else {
+          console.error('Erro ao carregar os dados:', error);
+        }
       }
     };
 
@@ -26,49 +36,46 @@ function Config({ token }) {
     try {
       const response = await axios.put(
         `${'http://localhost:3001'}/api/config`,
-        { anos: [...configData.anos, newData] },
+        { ...configData, ...newData },
         { headers: { Authorization: token } }
       );
       console.log(response.data.message);
+      alert("Atualizado com sucesso");
     } catch (error) {
+      alert("Erro ao atualizar, tente novamente");
       console.error('Erro ao atualizar os dados:', error);
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token'); // Limpa o token da localStorage
+    window.location.reload(); // Recarrega a página para que o usuário seja redirecionado para a página de login
+  };
+
   return (
-    <div className="container mt-4">
-      <h2>Configurações</h2>
-      <div className="card mt-3">
-        <div className="card-body">
-          <h3 className="card-title">Lista de anos:</h3>
-          <ul className="list-group">
-            {configData.anos &&
-              configData.anos.map((ano, i) => (
-                <li key={i} className="list-group-item">
-                  {ano}
-                </li>
-              ))}
-          </ul>
-          <div className="input-group mt-3">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Novo ano"
-              value={newData}
-              onChange={(e) => setNewData(e.target.value)}
-            />
-            <div className="input-group-append">
-              <button
-                className="btn btn-primary"
-                onClick={handleUpdate}
-              >
-                Adicionar ano
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Container>
+      <br/>
+      <Row className="mb-4">
+        <Col>
+          <h1>Gerenciar Configuração de ETL</h1>
+        </Col>
+        <Col className="text-end">
+          <Button variant="danger" onClick={handleLogout}>Logout</Button>
+        </Col>
+      </Row>
+      {isLoading ? (
+        <p>Carregando...</p>
+      ) : (
+        <Row className="mb-4">
+          <Editor
+            value={configData}
+            onChange={setNewData}
+          />
+        </Row>
+      )}
+      <br/>
+      <Button variant="primary" onClick={handleUpdate}>Salvar</Button>
+    </Container>
   );
 }
 

@@ -10,16 +10,15 @@ const corsOptions = {
 
 const app = express();
 app.use(cors(corsOptions));
+
 const port = process.env.PORT || 3001;
-const secretKey = 'secretpassword'; // Troque isso por uma chave secreta mais segura
+const secretKey = process.env.SECRET_KEY || 'secretpassword';
 
 // Middleware para analisar JSON no corpo das solicitações
 app.use(bodyParser.json());
 
 // Simulação de dados do arquivo config.json
-let configData = {
-  anos: [2020, 2021, 2022],
-};
+let configFilePath = '../../etl/scripts/extract/config.json';
 
 // Middleware de autenticação
 function authenticate(req, res, next) {
@@ -45,18 +44,17 @@ function authenticate(req, res, next) {
 app.post('/api/login', (req, res) => {
   const { username, password } = req.body;
 
-  // Verifique se o usuário e a senha correspondem (substitua por lógica de autenticação real)
-  if (username === 'teste' && password === 'teste') {
+  if (username === process.env.USER && password === process.env.TOKEN) {
     const token = jwt.sign({ user: username }, secretKey, { expiresIn: '1h' });
     return res.status(200).json({ token });
-  } else {
-    return res.status(401).json({ message: 'Credenciais de login inválidas.' });
   }
+  
+  return res.status(401).json({ message: 'Credenciais de login inválidas.' });
 });
 
 // Endpoint para ler dados do arquivo config.json
 app.get('/api/config', authenticate, (req, res) => {
-  fs.readFile('config.json', 'utf8', (err, data) => {
+  fs.readFile(configFilePath, 'utf8', (err, data) => {
     if (err) {
       return res.status(500).json({ message: 'Erro ao ler os dados.' });
     }    
@@ -71,19 +69,39 @@ app.get('/api/config', authenticate, (req, res) => {
 
 // Endpoint para atualizar dados no arquivo config.json
 app.put('/api/config', authenticate, (req, res) => {
-  const newData = req.body;
+  if (!req.body || typeof req.body !== 'object') {
+    return res.status(400).json({ message: 'Dados inválidos.' });
+  }
+  // validar campo anos
+  if (!req.body.anos || !Array.isArray(req.body.anos)) {
+    return res.status(400).json({ message: 'O campo nome é obrigatório e deve ser uma lista' });
+  }
+  if (req.body.anos.length === 0) {
+    return res.status(400).json({ message: 'É necessário pelo menos um ano.' });
+  }
+  // validar campo ufs
+  if (!req.body.ufs || !Array.isArray(req.body.ufs)) {
+    return res.status(400).json({ message: 'O campo ufs é obrigatório e deve ser uma lista' });
+  }
+  if (req.body.ufs.length === 0) {
+    return res.status(400).json({ message: 'É necessário pelo menos uma uf.' });
+  }
+  // validar campo meses
+  if (!req.body.meses || !Array.isArray(req.body.meses)) {
+    return res.status(400).json({ message: 'O campo meses é obrigatório e deve ser uma lista' });
+  }
+  if (req.body.meses.length === 0) {
+    return res.status(400).json({ message: 'É necessário pelo menos um mês.' });
+  }
 
-  // Atualize os dados no arquivo config.json (substitua por lógica real)
-  configData = newData;
-
-  // Salve os dados no arquivo
-  fs.writeFile('config.json', JSON.stringify(configData, null, 2), (err) => {
+  fs.writeFile(configFilePath, JSON.stringify(req.body, null, 2), (err) => {
     if (err) {
       return res.status(500).json({ message: 'Erro ao salvar os dados.' });
     }
     return res.status(200).json({ message: 'Dados atualizados com sucesso.' });
   });
 });
+
 
 // Iniciar o servidor
 app.listen(port, () => {
