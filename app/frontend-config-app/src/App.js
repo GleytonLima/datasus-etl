@@ -3,6 +3,7 @@ import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-d
 import './App.css';
 import Config from './components/Config';
 import Login from './components/Login';
+import Logs from './components/Logs';
 
 function App() {
   const [token, setToken] = useState('');
@@ -25,6 +26,10 @@ function App() {
         <Route
           path="/config"
           element={token ? <Config token={token} /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/logs"
+          element={token ? <Logs token={token} /> : <Navigate to="/login" />}
         />
       </Routes>
     </Router>

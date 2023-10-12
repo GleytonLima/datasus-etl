@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { JsonEditor as Editor } from 'jsoneditor-react';
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 function Config({ token }) {
   const [configData, setConfigData] = useState({});
@@ -60,6 +61,10 @@ function Config({ token }) {
           <h1>Gerenciar Configuração de ETL</h1>
         </Col>
         <Col className="text-end">
+          <Link to="/logs">
+            <Button variant="info">Logs</Button>
+          </Link>
+          <span> </span>
           <Button variant="danger" onClick={handleLogout}>Logout</Button>
         </Col>
       </Row>
