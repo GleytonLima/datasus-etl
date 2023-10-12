@@ -1,0 +1,11 @@
+# 1. CNES-ST
+version: '3.3'
+services:
+  datasusftp:
+    container_name: datasus-etl
+    volumes:
+      - '../scripts/extract:/app/scripts'
+      - '../data:/data'
+    environment:
+      - SCRIPT_NAME=download_cnes_st.py
+    image: gleytonlima/datasusftp

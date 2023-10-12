@@ -1,0 +1,11 @@
+# 4. CNES-EP
+version: '3.3'
+services:
+  datasusftp:
+    container_name: datasus-etl
+    volumes:
+      - '../scripts/extract:/app/scripts'
+      - '../data:/data'
+    environment:
+      - SCRIPT_NAME=download_cnes_ep.py
+    image: gleytonlima/datasusftp

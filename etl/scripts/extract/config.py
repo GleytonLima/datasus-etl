@@ -7,6 +7,7 @@ BASE_PATH = os.path.abspath(os.path.dirname(__file__))
 
 @dataclasses.dataclass
 class Config:
+    agendamento_cron: str
     urls: dict
     system_config: dict
     ufs: list

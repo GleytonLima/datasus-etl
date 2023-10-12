@@ -1,0 +1,11 @@
+# 8. CID
+version: '3.3'
+services:
+  datasusftp:
+    container_name: datasus-etl
+    volumes:
+      - '../scripts/extract:/app/scripts'
+      - '../data:/data'
+    environment:
+      - SCRIPT_NAME=download_cid.py
+    image: gleytonlima/datasusftp

@@ -1,7 +1,9 @@
 {
+  "agendamento_cron": "18 * * * *",
   "ufs": [
     "AM",
-    "DF"
+    "DF",
+    "SP"
   ],
   "anos": [
     2018,

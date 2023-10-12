@@ -1,0 +1,11 @@
+# 7. SAGE - Regióes de Saúde e Municípios
+version: '3.3'
+services:
+  datasusftp:
+    container_name: datasus-etl
+    volumes:
+      - '../scripts/extract:/app/scripts'
+      - '../data:/data'
+    environment:
+      - SCRIPT_NAME=download_regioes_saude_municipios.py
+    image: gleytonlima/datasusftp

@@ -1,0 +1,11 @@
+# FICHA #13
+version: '3.3'
+services:
+  datasusftp:
+    container_name: datasus-etl
+    volumes:
+      - '../scripts:/app/scripts'
+      - '../data:/data'
+    environment:
+      - SCRIPT_NAME=transform_cnes_sr_shsm.py
+    image: gleytonlima/datasusftp

@@ -8,8 +8,13 @@ import pandas as pd
 from base import ColunasSds, Municipio
 from caps import Coluna
 from extract.download_util import DowloadDataSusFtp, DonwloadDataSusConfig
+from extract.config import LoadConfig
+config = LoadConfig().get_config()
+
+urls = config.urls
 
 pd.options.display.max_columns = None
+
 
 def path(path):
     if not os.path.exists(path):
@@ -67,7 +72,7 @@ class TransformarEquipesCnes:
     download_cnes_ep = DowloadDataSusFtp(config=DonwloadDataSusConfig(
         system="CNES",
         subsystem="EP"
-    ))
+    ), urls=urls)
 
     def gerar_nome_arquivo_saida_silver(self):
         return f'{path("/data/silver/datasus/cnes")}/{self.nome_arquivo_saida}'

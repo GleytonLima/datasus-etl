@@ -4,6 +4,10 @@ import os
 import pandas as pd
 
 from extract.download_util import DownloadGithubIbge, DownloadIBGEFtp, DownloadSageSaudeHttp
+from extract.config import LoadConfig
+config = LoadConfig().get_config()
+
+urls = config.urls
 
 
 def path(path):
@@ -85,7 +89,7 @@ class ColunasSds:
 @dataclasses.dataclass
 class RegiaoSaude:
     def arquivo_bronze(self):
-        return DownloadSageSaudeHttp().arquivo_municipios_com_regiao_saude()
+        return DownloadSageSaudeHttp(urls=urls).arquivo_municipios_com_regiao_saude()
 
     def gerar_nome_arquivo_saida_regioes_saude_enriquecida(self):
         return "/data/gold/sds/regioes-saude-enriquecido.csv"
@@ -119,13 +123,13 @@ class RegiaoSaude:
 class Populacao:
 
     def gerar_nome_arquivo_populacao_estado_entrada(self):
-        return DownloadIBGEFtp().arquivo_populacao_estado()
+        return DownloadIBGEFtp(urls=urls).arquivo_populacao_estado()
 
     def gerar_nome_arquivo_populacao_estado_saida(self):
         return f'{path("/data/silver/ibge/censo")}/POP2022_Brasil_e_UFs.csv'
 
     def gerar_nome_arquivo_populacao_municipio_entrada(self):
-        return DownloadIBGEFtp().arquivo_populacao_municipio()
+        return DownloadIBGEFtp(urls=urls).arquivo_populacao_municipio()
 
     def gerar_nome_arquivo_populacao_municipio_saida(self):
         return f'{path("/data/silver/ibge/censo")}/POP2022_Municipios.csv'
@@ -211,7 +215,7 @@ class Populacao:
 
 class Estado:
     def gerar_nome_arquivo_entrada(self):
-        return DownloadGithubIbge().gerar_arquivo_saida_estados()
+        return DownloadGithubIbge(urls=urls).gerar_arquivo_saida_estados()
 
     def gerar_nome_arquivo_saida(self):
         return f'{path("/data/gold/sds")}/estados.csv'
@@ -243,7 +247,7 @@ class RegiaoAdministrativaDF:
 
 class Municipio:
     def gerar_nome_arquivo_entrada(self):
-        return DownloadGithubIbge().gerar_arquivo_saida_municipios()
+        return DownloadGithubIbge(urls=urls).gerar_arquivo_saida_municipios()
 
     def gerar_nome_arquivo_saida(self):
         return f'{path("/data/gold/sds")}/municipios.csv'

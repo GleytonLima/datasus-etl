@@ -13,20 +13,11 @@ import pandas as pd
 import requests
 import urllib3
 
-from config import LoadConfig
-
 
 def path(path):
     if not os.path.exists(path):
         os.makedirs(path)
     return path
-
-
-config = LoadConfig().get_config()
-
-urls = config.urls
-
-system_config = config.system_config
 
 
 @dataclasses.dataclass
@@ -38,9 +29,10 @@ class DonwloadDataSusConfig:
 @dataclasses.dataclass
 class DowloadDataSusFtp:
     config: DonwloadDataSusConfig
+    urls: dict
 
     def __post_init__(self):
-        self.base_url = f"{urls[self.config.system]}{self.config.subsystem}/"
+        self.base_url = f"{self.urls[self.config.system]}{self.config.subsystem}/"
 
     def download_file(self, url, file_name, destination_path="."):
         try:
@@ -65,6 +57,7 @@ class DowloadDataSusFtp:
             subprocess.run(
                 f"Rscript /app/scripts/dbc_to_csv.R /tmp {self.gerar_path_arquivos_saida()}",
                 check=True, shell=True)
+            print(f"Conversão de arquivos .dbc para .csv concluída com sucesso! {self.gerar_path_arquivos_saida()}")
         except subprocess.CalledProcessError as e:
             print(f"Erro ao executar o script R: {e}")
 
@@ -200,9 +193,10 @@ class CustomHttpAdapter(requests.adapters.HTTPAdapter):
 
 @dataclasses.dataclass
 class DownloadIBGEFtp:
+    urls: dict
     def __post_init__(self):
-        self.base_url_uf = urls["IBGE_UF"]
-        self.base_url_municipio = urls["IBGE_MUNICIPIO"]
+        self.base_url_uf = self.urls["IBGE_UF"]
+        self.base_url_municipio = self.urls["IBGE_MUNICIPIO"]
 
     def arquivo_populacao_estado(self):
         return f'{path("/data/bronze/ibge/censo")}/POP2022_Brasil_e_UFs.xls'
@@ -249,8 +243,10 @@ class DownloadIBGEFtp:
 
 @dataclasses.dataclass
 class DownloadSageSaudeHttp:
+    urls: dict
+
     def __post_init__(self):
-        self.url = urls["SAGE_REGIOES_SAUDE"]
+        self.url = self.urls["SAGE_REGIOES_SAUDE"]
 
     def arquivo_municipios_com_regiao_saude(self):
         return f'{path("/data/bronze/sagesaude")}/municipios-com-nome-regiao-saude.csv'
@@ -278,8 +274,10 @@ class DownloadSageSaudeHttp:
 
 @dataclasses.dataclass
 class DownloadDataSusCids:
+    urls: dict
+
     def __post_init__(self):
-        self.base_url = urls["CIDS"]
+        self.base_url = self.urls["CIDS"]
 
     def tabelas_cid_path(self):
         return "/data/bronze/datasus/cids"
@@ -323,9 +321,11 @@ class DownloadDataSusCids:
 
 @dataclasses.dataclass
 class DownloadGithubIbge:
+    urls: dict
+
     def __post_init__(self):
-        self.url_estados = urls["GITHUB_ESTADOS"]
-        self.url_municipios = urls["GITHUB_MUNICIPIOS"]
+        self.url_estados = self.urls["GITHUB_ESTADOS"]
+        self.url_municipios = self.urls["GITHUB_MUNICIPIOS"]
         self.destination_path = "/data/bronze/github/ibge"
 
     def gerar_arquivo_saida_municipios(self):

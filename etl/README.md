@@ -36,31 +36,31 @@ Esse comando:
 
 Outros exemplos:
 
-CNES-ST
+1. CNES-ST
 
 ```commandline
 docker run --rm --name datasus-etl -v $pwd/scripts/extract:/app/scripts -v $pwd/data:/data -e SCRIPT_NAME=download_cnes_st.py gleytonlima/datasusftp
 ```
 
-CNES-LT
+2. CNES-LT
 
 ```commandline
 docker run --rm --name datasus-etl -v $pwd/scripts/extract:/app/scripts -v $pwd/data:/data -e SCRIPT_NAME=download_cnes_lt.py gleytonlima/datasusftp
 ```
 
-CNES-SR
+3. CNES-SR
 
 ```commandline
 docker run --rm --name datasus-etl -v $pwd/scripts/extract:/app/scripts -v $pwd/data:/data -e SCRIPT_NAME=download_cnes_sr.py gleytonlima/datasusftp
 ```
 
-CNES-EP
+4. CNES-EP
 
 ```commandline
 docker run --rm --name datasus-etl -v $pwd/scripts/extract:/app/scripts -v $pwd/data:/data -e SCRIPT_NAME=download_cnes_ep.py gleytonlima/datasusftp
 ```
 
-CNES-RAW
+5. CNES-RAW
 
 Dados brutos do CNES. Útil para extrair dados que não estão nos arquivos padrão disponibilizados
 pelo DATASUS
@@ -69,25 +69,25 @@ pelo DATASUS
 docker run --rm --name datasus-etl -v $pwd/scripts/extract:/app/scripts -v $pwd/data:/data -e SCRIPT_NAME=download_cnes_raw.py gleytonlima/datasusftp
 ```
 
-IBGE - Previa Senso 2022
+6. IBGE - Previa Senso 2022
 
 ```commandline
 docker run --rm --name datasus-etl -v $pwd/scripts/extract:/app/scripts -v $pwd/data:/data -e SCRIPT_NAME=download_censo.py gleytonlima/datasusftp
 ```
 
-SAGE - Regióes de Saúde e Municípios
+7. SAGE - Regióes de Saúde e Municípios
 
 ```commandline
 docker run --rm --name datasus-etl -v $pwd/scripts/extract:/app/scripts -v $pwd/data:/data -e SCRIPT_NAME=download_regioes_saude_municipios.py gleytonlima/datasusftp
 ```
 
-CID
+8. CID
 
 ```commandline
 docker run --rm --name datasus-etl -v $pwd/scripts/extract:/app/scripts -v $pwd/data:/data -e SCRIPT_NAME=download_cid.py gleytonlima/datasusftp
 ```
 
-IBGE - Github - Lista de Municipios e Estados
+9. IBGE - Github - Lista de Municipios e Estados
 
 ```commandline
 docker run --rm --name datasus-etl -v $pwd/scripts/extract:/app/scripts -v $pwd/data:/data -e SCRIPT_NAME=download_ibge_github.py gleytonlima/datasusftp
@@ -139,10 +139,6 @@ FICHA #10
 ```commandline
 docker run --rm --name datasus-etl -v $pwd/scripts:/app/scripts -v $pwd/data:/data -e SCRIPT_NAME=transform_cnes_ep_emaesm.py gleytonlima/datasusftp
 ```
-
-FICHA #11
-
-Manual
 
 FICHA #11
 
