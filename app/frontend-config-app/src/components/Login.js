@@ -1,22 +1,26 @@
-import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { useState } from 'react';
-import { Button, Container, Form } from 'react-bootstrap';
+import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
+import React, { useState } from "react";
+import { Button, Container, Form } from "react-bootstrap";
 
 function Login({ setToken }) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
-      const response = await axios.post(`${'http://localhost:3001'}/api/login`, { username, password });
+      const response = await axios.post(
+        `${"http://localhost:3001"}/api/login`,
+        { username, password }
+      );
       const { token } = response.data;
-      localStorage.setItem('token', token);
+      localStorage.setItem("token", token);
       setToken(token);
     } catch (error) {
-      console.error('Erro de login:', error);
+      console.error("Erro de login:", error);
+      alert("Erro de login");
     }
   };
 
@@ -45,7 +49,7 @@ function Login({ setToken }) {
           />
         </Form.Group>
 
-        <br/>
+        <br />
         <Button variant="primary" type="submit">
           Login
         </Button>
