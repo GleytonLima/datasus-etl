@@ -7,7 +7,7 @@ import pandas as pd
 
 from base import ColunasSds, Municipio
 from caps import Coluna
-from extract.download_util import DowloadDataSusFtp, DonwloadDataSusConfig
+from extract.download_util import DowloadDataSusFtp, DonwloadDataSusConfig, DownloadCepAbertoHttp
 from extract.config import LoadConfig
 config = LoadConfig().get_config()
 
@@ -117,7 +117,34 @@ class TransformarEquipesCnes:
         # Excluir a coluna COMPETEN original
         df.drop(EquipeColunas.COMPETEN.nome, axis=1, inplace=True)
 
+        # para o DF eh preciso converter o codigo do municipio pelo CEP
+        # enriquecendo DF com codigos de municipios ficticios dado que o IBGE nao mapea as areas
+        # administrativas de la precisamos tratar as areas de saude do df
+        df_cep_municipio_regiao_saude = pd.read_csv(DownloadCepAbertoHttp().arquivo_cep_municipio_df(), sep=";")
+        print(df.head())
+        print(df_cep_municipio_regiao_saude.head())
+        # Converta a coluna 'COD_CEP' para int64
+        df['COD_CEP'] = df['COD_CEP'].astype('int64')
+
+        # fazendo o merge dos dataframes com base na coluna CO_CEP
+        df = pd.merge(df, df_cep_municipio_regiao_saude[
+            ['CO_CEP', 'CO_MUNICIPIO_GESTOR']], left_on='COD_CEP', right_on='CO_CEP',
+                             how='left')
+
+        print(df.columns)
+        # Preenche valores nulos nas colunas do lado direito com os valores originais nas colunas do lado esquerdo
+        df['CO_MUNICIPIO_GESTOR'].fillna(df['CODUFMUN'], inplace=True)
+
+        df['CODUFMUN'] = df['CO_MUNICIPIO_GESTOR'].astype(int)
+
+        # Apagar a colunas auxiliares
+        df.drop(columns=['CO_MUNICIPIO_GESTOR'], inplace=True)
+        df.drop(columns=['CO_CEP'], inplace=True)
+        # fim conversao de codigo de municipio para codigos convertidos por CEP
+
         df = df.rename(columns={EquipeColunas.CODUFMUN.nome: ColunasSds.MUNICIPIO_CODIGO.nome})
+
+        print(df[df["MUNICIPIO_CODIGO"] == 53].head())
 
         result = df.groupby([ColunasSds.MUNICIPIO_CODIGO.nome, ColunasSds.ANO.nome, ColunasSds.MES.nome,
                              EquipeColunas.TIPO_EQP.nome]).size().reset_index(
