@@ -1,2 +1,4 @@
 dbfread
 pandas
+requests
+urllib3

@@ -84,7 +84,13 @@ class TransformarEquipesCnes:
         all_files = glob.glob(f"{self.download_cnes_ep.gerar_path_arquivos_saida()}/*.csv")
         dfs = []
         for filename in all_files:
-            df = pd.read_csv(filename, sep=';')
+            df = pd.read_csv(filename, delimiter=';', quotechar=None, quoting=3, low_memory=False).applymap(
+                lambda x: x.replace('"', '') if isinstance(x, str) else x)
+
+            df.columns = df.columns.str.replace('"', '')
+            df[EquipeColunas.TIPO_EQP.nome] = df[EquipeColunas.TIPO_EQP.nome].astype(int)
+
+            df = df.infer_objects()
             dfs.append(df)
 
         df = pd.concat(dfs, ignore_index=True)
