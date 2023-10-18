@@ -45,6 +45,7 @@ class TransformarCnesSR:
 
             df['SERV_ESP'] = df['SERV_ESP'].astype(int)
             df['CLASS_SR'] = df['CLASS_SR'].astype(int)
+            df['TP_UNID'] = df['TP_UNID'].astype(int)
 
             df_filtrado = df
             if self.codigos_servico_especializado:
