@@ -79,7 +79,8 @@ class TransformarCnesSR:
 
         contagem.to_csv(self.gerar_caminho_arquivo_saida(), sep=';', index=False)
 
-    def gerar_arquivo_auxiliar_servico_especializado(self):
+    @staticmethod
+    def gerar_arquivo_auxiliar_servico_especializado():
         # Dados do DataFrame
         data = {
             'SERVICO_ESPECIALIZADO_CODIGO': [115],
@@ -88,11 +89,13 @@ class TransformarCnesSR:
         # Cria o DataFrame
         df_servico_especializado = pd.DataFrame(data)
         # Define o caminho do arquivo de saída
-        caminho_saida = 'gold/servico_especializado.csv'
+        caminho_saida = f'{path("/data/gold/sds")}/servico_especializado.csv'
         # Salva o DataFrame em um arquivo CSV
         df_servico_especializado.to_csv(caminho_saida, sep=';', index=False)
+        print(f"Arquivo {caminho_saida} gerado com sucesso!")
 
-    def gerar_arquivo_auxiliar_classificacao_srt(self):
+    @staticmethod
+    def gerar_arquivo_auxiliar_classificacao_srt():
         # Dados do DataFrame
         data = {
             'SERVICO_ESPECIALIZADO_CLASSIFICACAO_CODIGO': [2, 3, 4, 5, 6, 7],
@@ -107,6 +110,7 @@ class TransformarCnesSR:
         # Cria o DataFrame
         df_classificacao_servico_especializado = pd.DataFrame(data)
         # Define o caminho do arquivo de saída
-        caminho_saida_classificacao = 'gold/classificacao_servico_especializado.csv'
+        caminho_saida_classificacao = f'{path("/data/gold/sds")}/classificacao_servico_especializado.csv'
         # Salva o DataFrame em um arquivo CSV
         df_classificacao_servico_especializado.to_csv(caminho_saida_classificacao, sep=';', index=False)
+        print(f"Arquivo {caminho_saida_classificacao} gerado com sucesso!")

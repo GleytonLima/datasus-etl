@@ -1,0 +1,4 @@
+from servico_especializado import TransformarCnesSR
+
+TransformarCnesSR.gerar_arquivo_auxiliar_servico_especializado()
+TransformarCnesSR.gerar_arquivo_auxiliar_classificacao_srt()
