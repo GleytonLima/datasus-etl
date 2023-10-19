@@ -41,6 +41,8 @@
   ],
   "urls": {
     "CNES": "ftp://ftp.datasus.gov.br/dissemin/publicos/CNES/200508_/Dados/",
+    "SIM": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIM/CID10/DORES/",
+    "SIM_PRELIMINAR": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIM/PRELIM/DORES/",
     "CNES_RAW": "ftp://ftp.datasus.gov.br/cnes/BASE_DE_DADOS_CNES_{}{}.ZIP",
     "IBGE_UF": "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Previa_da_Populacao/POP2022_Brasil_e_UFs.xls",
     "IBGE_MUNICIPIO": "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Previa_da_Populacao/POP2022_Municipios_20230622.xls",

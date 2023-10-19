@@ -64,6 +64,48 @@ class DowloadDataSusFtp:
     def gerar_path_arquivos_saida(self):
         return f"/data/bronze/datasus/{self.config.system}/{self.config.subsystem}"
 
+@dataclasses.dataclass
+class DowloadDataSusFtpSim:
+    config: DonwloadDataSusConfig
+    urls: dict
+
+    def __post_init__(self):
+        self.base_url = f"{self.urls[self.config.system]}"
+        self.base_url_preliminar = f"{self.urls[self.config.system + '_PRELIMINAR']}"
+
+    def download_file(self, url, file_name, destination_path="."):
+        print(f"iniciando downaload do arquivo {url} {file_name} {destination_path}")
+        full_file_path = os.path.join(destination_path, file_name)
+        urllib.request.urlretrieve(url, full_file_path)
+        print(f"Arquivo {file_name} baixado com sucesso!")
+
+    def download_files_by_range(self, ufs, years):
+        for uf in ufs:
+            for year in years:
+                file_name = f"{self.config.subsystem}{uf}{str(year)}.dbc"
+                url = self.base_url + file_name
+                try:
+                    self.download_file(url, file_name, "/tmp")
+                except Exception as e:
+                    print(f"Erro ao baixar o arquivo {file_name}: {e}. Tentando baixar arquivo preliminar")
+                    url = self.base_url_preliminar + file_name
+                    try:
+                        self.download_file(url, file_name, "/tmp")
+                    except Exception as e:
+                        print(f"Erro ao baixar o arquivo preliminar {file_name}: {e}")
+    def convert_dbc_to_csv_with(self):
+        print("iniciando conversao dbc em csv")
+        try:
+            subprocess.run(
+                f"Rscript /app/scripts/dbc_to_csv.R /tmp {self.gerar_path_arquivos_saida()}",
+                check=True, shell=True)
+            print(f"Conversão de arquivos .dbc para .csv concluída com sucesso! {self.gerar_path_arquivos_saida()}")
+        except subprocess.CalledProcessError as e:
+            print(f"Erro ao executar o script R: {e}")
+
+    def gerar_path_arquivos_saida(self):
+        return f"/data/bronze/datasus/{self.config.system}/{self.config.subsystem}"
+
 
 @dataclasses.dataclass
 class DowloadDataSusCnesRawFtp:
