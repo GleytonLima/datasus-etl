@@ -9,8 +9,6 @@ print("Iniciando processo " + str(config))
 
 ANOS_CONSIDERADOS = config.anos
 
-PREFIXO_NOME_ANOS = f"{ANOS_CONSIDERADOS[0]}-{ANOS_CONSIDERADOS[-1]}"
-
 ANOS_LEITOS_CONSIDERADOS = config.anos
 
 MES_COMPETENCIA_CONSIDERADO = str(config.meses[0])

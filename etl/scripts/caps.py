@@ -395,7 +395,6 @@ class Combinado:
 @dataclass
 class CombinadoEnriquecido:
     def __init__(self, anos, mes, combinado: Combinado):
-        self.prefixo_nome_anos = f'{anos[0]}-{anos[-1]}'
         self.anos = anos
         self.mes = mes
         self.combinado = combinado
@@ -404,7 +403,7 @@ class CombinadoEnriquecido:
         return f'{path("/data/gold/caps")}'
 
     def gerar_nome_arquivo_saida(self):
-        return f'{self.gerar_path_saida()}/{self.prefixo_nome_anos}-cnes-enriquecido.csv'
+        return f'{self.gerar_path_saida()}/cnes-enriquecido.csv'
 
     def gerar_nome_arquivo_saida_regioes_saude_enriquecida(self):
         return f"{self.gerar_path_saida()}/regioes-saude-enriquecido.csv"
@@ -494,7 +493,6 @@ multiplicador = {
 
 class DatamartIndicadorCapsMunicipio:
     def __init__(self, anos, mes):
-        self.prefixo_nome_anos = f'{anos[0]}-{anos[-1]}'
         self.anos = anos
         self.mes = mes
 
@@ -605,13 +603,12 @@ class DatamartIndicadorCapsMunicipio:
         # Resetar o índice do DataFrame resultante
         df_grouped = df_grouped.reset_index(drop=True)
 
-        df_grouped.to_csv(f'{self.gerar_path_saida()}/{self.prefixo_nome_anos}-caps-agrupados-por-tipo.csv', sep=';',
+        df_grouped.to_csv(f'{self.gerar_path_saida()}/caps-agrupados-por-tipo.csv', sep=';',
                           index=False, decimal=',')
 
 
 class DatamartIndicadorCapsEstado:
     def __init__(self, anos, mes):
-        self.prefixo_nome_anos = f'{anos[0]}-{anos[-1]}'
         self.anos = anos
         self.mes = mes
 
@@ -646,7 +643,7 @@ class DatamartIndicadorCapsEstado:
         df_grouped['ESTADO_IC'] = df_grouped.apply(self.calcular_valor_estado, axis=1)
 
         print(df_grouped)
-        df_grouped.to_csv(f'{self.gerar_path_saida()}/{self.prefixo_nome_anos}-caps-agrupados-por-tipo-por-uf.csv',
+        df_grouped.to_csv(f'{self.gerar_path_saida()}/caps-agrupados-por-tipo-por-uf.csv',
                           sep=';',
                           index=False,
                           decimal=',')
@@ -654,7 +651,6 @@ class DatamartIndicadorCapsEstado:
 
 class DatamartIndicadorCapsRegiaoSaude:
     def __init__(self, anos, mes):
-        self.prefixo_nome_anos = f'{anos[0]}-{anos[-1]}'
         self.anos = anos
         self.mes = mes
 
@@ -754,7 +750,7 @@ class DatamartIndicadorCapsRegiaoSaude:
         df_grouped = df_grouped.reset_index(drop=True)
 
         df_grouped.to_csv(
-            f'{self.gerar_path_saida()}/{self.prefixo_nome_anos}-caps-agrupados-por-tipo-por-regiao-saude.csv', sep=';',
+            f'{self.gerar_path_saida()}/caps-agrupados-por-tipo-por-regiao-saude.csv', sep=';',
             index=False,
             decimal=',')
 
