@@ -104,7 +104,8 @@ class Estabelecimento:
         ]
 
     def gerar_nome_original(self, ano):
-        return f'{DowloadDataSusCnesRawFtp().arquivo_cnes_raw_path()}/{self.gerar_nome_base(ano, self.mes)}.csv'
+        mes_formatado = self.mes.zfill(2)
+        return f'{DowloadDataSusCnesRawFtp().arquivo_cnes_raw_path()}/{self.gerar_nome_base(ano, mes_formatado)}.csv'
 
     def gerar_nome_saida(self, ano):
         return f'{path("/data/silver/datasus/CNES/raw")}/{self.gerar_nome_base(ano, self.mes)}_caps.csv'
@@ -163,7 +164,8 @@ class Subtipo:
         return f"{self.nome}{ano}{mes}"
 
     def gerar_nome_original(self, ano):
-        return f'{DowloadDataSusCnesRawFtp().arquivo_cnes_raw_path()}/{self.gerar_nome_base(ano, self.mes)}.csv'
+        mes_formatado = self.mes.zfill(2)
+        return f'{DowloadDataSusCnesRawFtp().arquivo_cnes_raw_path()}/{self.gerar_nome_base(ano, mes_formatado)}.csv'
 
     def gerar_nome_saida(self, ano):
         return f'{path("/data/silver/datasus/CNES/raw")}/{ano}_caps.csv'
@@ -222,13 +224,15 @@ class EstabelecimentoSubtipo:
         return f"{self.nome}{ano}{mes}"
 
     def gerar_nome_original(self, ano):
-        return f'{DowloadDataSusCnesRawFtp().arquivo_cnes_raw_path()}/{self.gerar_nome_base(ano, self.mes)}.csv'
+        mes_formatado = self.mes.zfill(2)
+        return f'{DowloadDataSusCnesRawFtp().arquivo_cnes_raw_path()}/{self.gerar_nome_base(ano, mes_formatado)}.csv'
 
     def gerar_nome_saida(self, ano):
         return f'{path("/data/silver/datasus/CNES/raw")}/{self.gerar_nome_base(ano, self.mes)}_caps.csv'
 
     def filtrar_caps(self):
         for ano in self.anos:
+            print(f"Processando ano {ano} e mes {self.mes} com nome {self.gerar_nome_original(ano)}")
             df = pd.read_csv(self.gerar_nome_original(ano),
                              dtype=self.gerar_dtype(),
                              sep=";")

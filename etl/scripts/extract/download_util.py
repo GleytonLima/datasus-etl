@@ -64,6 +64,7 @@ class DowloadDataSusFtp:
     def gerar_path_arquivos_saida(self):
         return f"/data/bronze/datasus/{self.config.system}/{self.config.subsystem}"
 
+
 @dataclasses.dataclass
 class DowloadDataSusFtpSim:
     config: DonwloadDataSusConfig
@@ -93,6 +94,7 @@ class DowloadDataSusFtpSim:
                         self.download_file(url, file_name, "/tmp")
                     except Exception as e:
                         print(f"Erro ao baixar o arquivo preliminar {file_name}: {e}")
+
     def convert_dbc_to_csv_with(self):
         print("iniciando conversao dbc em csv")
         try:
@@ -156,6 +158,8 @@ class DowloadDataSusCnesRawFtp:
         # Fechar a conexão FTP
         ftp.quit()
 
+    # como o arquivo original é muito pesado, foi feito o download manualmente e salvo no bucket s3
+    # o arquivo é baixado direto do ftp, aberto no libreoffice e salvo como csv para remoção das aspas e formatação como utf8
     def download_from_bucket_s3(self):
         # URL pública do arquivo ZIP no bucket S3
         s3_public_url = 'https://datasus-etl.s3.amazonaws.com/bronze/datasus/raw/cnes_raw.zip'
@@ -203,8 +207,7 @@ class DowloadDataSusCnesRawFtp:
 
         # Função para verificar se o arquivo .csv atende às condições desejadas
         def atende_condicoes(nome_arquivo):
-            return (nome_arquivo.startswith(('rlEstabSubTipo', 'tbEstabelecimento', 'tbSubTipo'))
-                    and nome_arquivo.endswith('12.csv'))
+            return nome_arquivo.startswith(('rlEstabSubTipo', 'tbEstabelecimento', 'tbSubTipo'))
 
         # Extrair o conteúdo dos arquivos .zip que atendem às condições
         for arquivo_zip in arquivos_zip_encontrados:
@@ -236,6 +239,7 @@ class CustomHttpAdapter(requests.adapters.HTTPAdapter):
 @dataclasses.dataclass
 class DownloadIBGEFtp:
     urls: dict
+
     def __post_init__(self):
         self.base_url_uf = self.urls["IBGE_UF"]
         self.base_url_municipio = self.urls["IBGE_MUNICIPIO"]
