@@ -33,6 +33,7 @@ const etlFunction = async () => {
     logger.info("executando scripts de extração...");
 
     // obtem a lista de arquivos .yaml dentro da pasta docker-compose-files
+    // com  .filter((file) => file.startsWith("docker-compose-transform"));
     const list_of_files = fs
       .readdirSync("./docker-compose-files")
       .filter((file) => file.endsWith(".yaml"));
